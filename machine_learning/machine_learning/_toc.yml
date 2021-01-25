@@ -1,0 +1,12 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+- file: intro
+- file: introML
+- file: regression
+  sections:
+    - file: regression_01
+    - file: regression-02
+- file: classification
+  sections:
+    - file: classification_01
+    - file: classification_02
