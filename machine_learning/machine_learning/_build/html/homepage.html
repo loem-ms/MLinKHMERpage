@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>សេចក្តីផ្តើមអំពី Machine Learning &#8212; Machine Learning</title>
+    <title>ទៅកាន់ទំព័រដើម Mengsay LOEM &#8212; Machine Learning</title>
     
   <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
 
@@ -57,8 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="អំពីចំណោទតម្រែតម្រង់ Regression" href="regression.html" />
-    <link rel="prev" title="អំពីវគ្គសិក្សា" href="intro.html" />
+    <link rel="prev" title="ចំណាត់ថ្នាក់ច្រើនក្រុម (Multiclass Classification)" href="classification_02.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -96,18 +95,18 @@
  </li>
 </ul>
 <ul class="current nav sidenav_l1">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html">
    សេចក្តីផ្តើមអំពី Machine Learning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#supervised-learning">
+  <a class="reference internal" href="introML.html#supervised-learning">
    Supervised Learning
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="#unsuperivsed-learning">
+  <a class="reference internal" href="introML.html#unsuperivsed-learning">
    Unsuperivsed Learning
   </a>
  </li>
@@ -149,8 +148,8 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="homepage.html">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
    ទៅកាន់ទំព័រដើម Mengsay LOEM
   </a>
  </li>
@@ -194,7 +193,7 @@
         <!-- ipynb file if we had a myst markdown file -->
         
         <!-- Download raw file -->
-        <a class="dropdown-buttons" href="_sources/introML.md"><button type="button"
+        <a class="dropdown-buttons" href="_sources/homepage.md"><button type="button"
                 class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
                 data-placement="left">.md</button></a>
         <!-- Download PDF via print -->
@@ -219,30 +218,6 @@
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
         
-        <div class="tocsection onthispage pt-5 pb-3">
-            <i class="fas fa-list"></i> Contents
-        </div>
-        <nav id="bd-toc-nav">
-            <ul class="nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   សេចក្តីផ្តើមអំពី Machine Learning
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#supervised-learning">
-   Supervised Learning
-  </a>
- </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#unsuperivsed-learning">
-   Unsuperivsed Learning
-  </a>
- </li>
-</ul>
-
-        </nav>
-        
     </div>
 </div>
     <div id="main-content" class="row">
@@ -250,59 +225,8 @@
         
               <div>
                 
-  <div class="section" id="machine-learning">
-<h1>សេចក្តីផ្តើមអំពី Machine Learning<a class="headerlink" href="#machine-learning" title="Permalink to this headline">¶</a></h1>
-<p>Machine Learning គឺសំដៅដល់បច្ចេកវិទ្យាដែលមានគោលដៅផ្តល់ឱ្យម៉ាស៊ីន(កុំព្យូទ័រ)នូវសមត្ថភាពដោះស្រាយបញ្ហាបានដោយខ្លួនឯង ពោលគឺមនុស្សមិនផ្តល់នូវបែបបទជាក់លាក់អំពីរបៀបដោះស្រាយណាមួយឡើយ។ ការរៀនពីរបៀបដោះស្រាយបញ្ហាក្នុងMachine Learningគឺធ្វើឡើងតាមរយៈការវិភាគលើទិន្នន័យជាគម្រូដែលផ្តល់ឱ្យដោយមនុស្ស។
-បើធ្វើចំណាត់ថ្នាក់ក្រុមដោយផ្អែកលើប្រភេទគម្រូដែលផ្តល់ឱ្យម៉ាស៊ីនដើម្បីសង្កេត នោះគេអាចបែងចែកជា Supervised learning និង Unsupervised learning។ ចំពោះ Supervised learning ទិន្នន័យដែលផ្តល់ឱ្យម៉ាស៊ីនមានធាតុចូល(input)និងចម្លើយនៃបញ្ហាភ្ជាប់ជាមួយ។ ករណីនេះប្រៀបដូចជាករណីគ្រូផ្តល់លំហាត់និងដំណោះស្រាយជាមួយគ្នាឱ្យសិស្សរៀន។ផ្ទុយទៅវិញ Unsupervised learning ទិន្នន័យដែលផ្តល់ឱ្យម៉ាស៊ីនមានតែធាតុចូល(input)។ ករណីនេះអាចប្រៀបដូចជាករណីគ្រូផ្តល់តែលំហាត់ឱ្យសិស្សរៀនដោះស្រាយ សង្កេតដោយខ្លួនឯង។</p>
-</div>
-<div class="section" id="supervised-learning">
-<h1>Supervised Learning<a class="headerlink" href="#supervised-learning" title="Permalink to this headline">¶</a></h1>
-<p>ចំពោះSupervised Learning, គម្រូនៃធាតុចូល <span class="math notranslate nohighlight">\(x\)</span> និង ចម្លើយនៃបញ្ហា <span class="math notranslate nohighlight">\(y\)</span> ជាច្រើន <span class="math notranslate nohighlight">\(\left\{(x_i,y_i )\right\}_{i=1}^n \)</span>
-ត្រូវបានផ្តល់ឱ្យ។អ្វីដែលMachine Learningធ្វើគឺចង់កំណត់នូវទំនាក់ទំនងរវាង <span class="math notranslate nohighlight">\(x\)</span> និង <span class="math notranslate nohighlight">\(y\)</span> ។ ដោយផ្អែកលើប្រភេទនៃតម្លៃyនោះគេអាចបែងចែកជា</p>
-<ul class="simple">
-<li><p><strong>ចំណោទតម្រែតម្រង់ Regression problem</strong></p></li>
-</ul>
-<blockquote>
-<div><p>ក្នុងករណីនេះ <span class="math notranslate nohighlight">\(y\)</span> ជាអថេរជាប់  ចំនួនពិត</p>
-</div></blockquote>
-<blockquote>
-<div><p>Ex: ប៉ាន់ស្មានតម្លៃអចលនទ្រព្យ <span class="math notranslate nohighlight">\(y=120000, 498302.25…\)</span></p>
-</div></blockquote>
-<ul class="simple">
-<li><p><strong>ចំណោទចំណាត់ថ្នាក់ទិន្នន័យDiscrimination problem/ Classification</strong></p></li>
-</ul>
-<blockquote>
-<div><p>ក្នុងករណីនេះ <span class="math notranslate nohighlight">\(y\)</span> ជាអថេរដាច់</p>
-</div></blockquote>
-<blockquote>
-<div><p>Ex: ចំណាត់ថ្នាក់ប្រភេទសារ spam(<span class="math notranslate nohighlight">\(y=1\)</span>) , not spam(<span class="math notranslate nohighlight">\(y=0\)</span>)  (input x:mail text)</p>
-</div></blockquote>
-<blockquote>
-<div><p>Ex: កំណត់លេខសរសេរដៃ <span class="math notranslate nohighlight">\(y=0,1,2,…,9\)</span>. (input <span class="math notranslate nohighlight">\(x\)</span>: រូបភាព)</p>
-</div></blockquote>
-</div>
-<div class="section" id="unsuperivsed-learning">
-<h1>Unsuperivsed Learning<a class="headerlink" href="#unsuperivsed-learning" title="Permalink to this headline">¶</a></h1>
-<p>ចំពោះUnupervised Learning, គម្រូនៃធាតុចូល <span class="math notranslate nohighlight">\(x\)</span> ជាច្រើន<span class="math notranslate nohighlight">\(\left\{x_i\right\}_{i=1}^n\)</span> ត្រូវបានផ្តល់ឱ្យដោយគ្មានគូចម្លើយនៃបញ្ហា <span class="math notranslate nohighlight">\(y\)</span> ។
-អ្វីដែលMachine Learningធ្វើគឺចង់ទាញរកនូវលក្ខណៈឬទម្រង់ពិសេសពីទិន្នន័យ <span class="math notranslate nohighlight">\(x\)</span> ។ បើនិយាយពីMachine learningបែបស្ថិតិវិទ្យា បញ្ហាប្រភេទនេះមានដូចជា</p>
-<ul class="simple">
-<li><p>Dimensionality reduction</p></li>
-</ul>
-<blockquote>
-<div><p>ការបង្ហាញទិន្នន័យដែលមានវិមាត្រខ្ពស់មកជាវិមាត្រទាបដោយរក្សាលក្ខណៈពិសេសនៃទិន្នន័យ</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>Feature selection</p></li>
-</ul>
-<blockquote>
-<div><p>ការកំណត់នូវធាតុសំខាន់ដែលមានឥទ្ធិពលលើការប៉ាន់ស្មានអ្វីមួយ</p>
-</div></blockquote>
-<ul class="simple">
-<li><p>Clustering</p></li>
-</ul>
-<blockquote>
-<div><p>ការធ្វើចំណាត់ក្រុមដោយស្វ័យប្រវត្តិដោយផ្អែកលើលក្ខណៈនៃទិន្នន័យដែលមាន</p>
-</div></blockquote>
+  <div class="section" id="mengsay-loem">
+<h1><a class="reference external" href="https://loem-ms.github.io/loem-ms/">ទៅកាន់ទំព័រដើម Mengsay LOEM</a><a class="headerlink" href="#mengsay-loem" title="Permalink to this headline">¶</a></h1>
 </div>
 
     <script type="text/x-thebe-config">
@@ -333,8 +257,7 @@
     
     <div class='prev-next-bottom'>
         
-    <a class='left-prev' id="prev-link" href="intro.html" title="previous page">អំពីវគ្គសិក្សា</a>
-    <a class='right-next' id="next-link" href="regression.html" title="next page">អំពីចំណោទតម្រែតម្រង់ Regression</a>
+    <a class='left-prev' id="prev-link" href="classification_02.html" title="previous page">ចំណាត់ថ្នាក់ច្រើនក្រុម (Multiclass Classification)</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
