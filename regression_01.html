@@ -1,0 +1,546 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១) &#8212; Machine Learning</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)" href="regression-02.html" />
+    <link rel="prev" title="អំពីចំណោទតម្រែតម្រង់ Regression" href="regression.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/logo.jpg" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   អំពីវគ្គសិក្សា
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html">
+   សេចក្តីផ្តើមអំពី Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#supervised-learning">
+   Supervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#unsuperivsed-learning">
+   Unsuperivsed Learning
+  </a>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="regression.html">
+   អំពីចំណោទតម្រែតម្រង់ Regression
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression-02.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="classification.html">
+   អំពីចំណោទចំណាត់ថ្នាក់ក្រុម Classification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_01.html">
+     ចំណាត់ថ្នាក់២ក្រុម (Binary Classification)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_02.html">
+     ចំណាត់ថ្នាក់ច្រើនក្រុម (Multiclass Classification)
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/regression_01.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/regression_01.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   ការសិក្សាលើទំនាក់ទំនងរវាង២អថេរ
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#least-square-error">
+   ការប៉ាន់ស្មានតម្លៃប៉ារ៉ាម៉ែត្រដោយLeast Square Error
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#independence-of-errors">
+   ឯករាជភាពនៃតម្លៃលម្អៀង Independence of errors
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#coefficient-of-determination-pmb-r-mathbf-2">
+   Coefficient of determination
+   <span class="math notranslate nohighlight">
+    \((\pmb{R}^\mathbf{2})\)
+   </span>
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="id1">
+<h1>ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>ការសិក្សាលើម៉ូឌែលនៃបាតុភូត អាចឱ្យគេរកឃើញពីមូលហេតុឬកត្តាទាក់ទងនៃបាតុភូតនោះបាន។លើសពីនេះគេក៏អាចប្រើប្រាស់ម៉ូឌែលនោះសម្រាប់ការទស្សន៍ទាយសម្រាប់អនាគតឬការប៉ាន់ស្មានលើទិន្នន័យដែលមិនមានក្នុងដៃ។</p>
+<p>ជាទូទៅម៉ូឌែលដែលសិក្សាអំពីទំនាក់ទំនងរវាងលទ្ធផលនៃបាតុភូតមួយនិងកត្តាដែលអាចគិតបានថាជាកត្តាជះឥទ្ធិពលលើលទ្ធផលនោះ ហៅថា ម៉ូឌែលតម្រែតម្រង់ (Regression Model)។</p>
+<p>ក្នុងផ្នែកនេះយើងនឹងសិក្សាអំពីម៉ូឌែលមានទម្រង់ជាលីនេអ៊ែរដែលជាមូលដ្ឋាននៃម៉ូឌែលតម្រែតម្រង់។</p>
+<div class="section" id="id2">
+<h2>ការសិក្សាលើទំនាក់ទំនងរវាង២អថេរ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>ជាឧទាហរណ៍យើងលើកយកការសិក្សារវាងទំនាក់ទំនងរវាងកម្ពស់(cm)និងម៉ាស(kg)តាមរយៈម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ។</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><br>កម្ពស់(cm)</p></th>
+<th class="head"><p><br>152</p></th>
+<th class="head"><p><br>157</p></th>
+<th class="head"><p><br>160</p></th>
+<th class="head"><p><br>163</p></th>
+<th class="head"><p><br>150</p></th>
+<th class="head"><p><br>147</p></th>
+<th class="head"><p><br>165</p></th>
+<th class="head"><p><br>168</p></th>
+<th class="head"><p><br>178</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><br>ម៉ាស(kg)</p></td>
+<td><p><br>54.48</p></td>
+<td><p><br>55.84</p></td>
+<td><p><br>57.20</p></td>
+<td><p><br>58.57</p></td>
+<td><p><br>53.12</p></td>
+<td><p><br>52.21</p></td>
+<td><p><br>59.93</p></td>
+<td><p><br>61.29</p></td>
+<td><p><br>69.92</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ion</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">152</span><span class="p">,</span><span class="mi">157</span><span class="p">,</span><span class="mi">160</span><span class="p">,</span><span class="mi">163</span><span class="p">,</span><span class="mi">150</span><span class="p">,</span><span class="mi">147</span><span class="p">,</span><span class="mi">165</span><span class="p">,</span><span class="mi">168</span><span class="p">,</span><span class="mi">170</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.48</span><span class="p">,</span><span class="mf">55.84</span><span class="p">,</span><span class="mf">57.20</span><span class="p">,</span><span class="mf">56.57</span><span class="p">,</span><span class="mf">53.12</span><span class="p">,</span><span class="mf">52.21</span><span class="p">,</span><span class="mf">59.93</span><span class="p">,</span><span class="mf">61.29</span><span class="p">,</span><span class="mf">67.92</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span><span class="mi">70</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;height(cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;mass(kg)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regression_01_4_0.png" src="_images/regression_01_4_0.png" />
+</div>
+</div>
+<p>ក្នុងតារាងខាងលើ ទិន្ន័យអំពីកម្ពស់គិតជាសង់ទីម៉ែត្រ(cm)និងម៉ាសគិតជាគីឡូក្រាម(kg)របស់មនុស្ស៩នាក់។ ពីទិន្នន័យនេះ យើងចង់សិក្សាពីទំនាក់ទំនងរវាងកម្ពស់(x)និងម៉ាស(y)។
+នៅទីនេះយើងសន្មតថា តម្លៃម៉ាស(<span class="math notranslate nohighlight">\(y\)</span>)គឺជាអនុគមន៍នៃតម្លៃកម្ពស់(<span class="math notranslate nohighlight">\(x\)</span>): <span class="math notranslate nohighlight">\(y=f(x)\)</span>។</p>
+<p>ដើម្បីងាយស្រួល ជាដំបូងយើងឧបមាថាទំនាក់ទំនងដើមរវាង <span class="math notranslate nohighlight">\(x,y\)</span> កំណត់ដោយអនុគមន៍ដូចខាងក្រោមដែលយើងហៅថា ម៉ូឌែលលីនេអ៊ែរ (Linear Model)។</p>
+<div class="math notranslate nohighlight">
+\[ y=f(x)=\beta_0+\beta_1 x \]</div>
+<p>ក្រោមឧបមានេះទិន្នន័យដែលមានក្នុងតារាងត្រូវផ្ទៀងផ្ទាត់ទំនាក់ទំនងខាងលើនេះ។
+ប៉ុន្តែក្នុងដំណើរការវាស់វែង ឬ ស្រង់ទិន្នន័យលម្អៀងឬគម្លាតរវាងតម្លៃតាមម៉ូឌែលដែលឧបមាខាងលើនិងតម្លៃទិន្នន័យជាក់ស្តែងតែងតែកើតឡើង។
+ហេតុនេះ យើងសិក្សាករណីដូចខាងក្រោមដែល<span class="math notranslate nohighlight">\(\epsilon\)</span>ជាកម្រិតលម្អៀង។</p>
+<div class="math notranslate nohighlight">
+\[ y=\beta_0+\beta_1 x+\epsilon \]</div>
+<p>ក្នុងពេលនេះទិន្នន័យដែលមានអាចសរសេរជាទំនាក់ទំនងដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[ 54.58=\beta_0+\beta_1×152+\epsilon , \cdots \cdots \]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">22</span><span class="p">,</span><span class="mf">0.50</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">xa</span><span class="p">,</span><span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span><span class="mi">70</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;height(cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;mass(kg)&#39;</span><span class="p">)</span>
+<span class="n">y_legend</span> <span class="o">=</span> <span class="s2">&quot;y=b+ax&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">y_legend</span><span class="p">,</span><span class="s2">&quot;observed-data&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regression_01_6_0.png" src="_images/regression_01_6_0.png" />
+</div>
+</div>
+<p>ជាទូទៅចំពោះទិន្នន័យចំនួន <span class="math notranslate nohighlight">\(N: \{(x_i,y_i )\}_{i=1}^N\)</span> ទិន្នន័យនិមួយៗអាចបង្ហាញដោយទំនាក់ទំនងដូចខាងក្រោម។</p>
+<p><span class="math notranslate nohighlight">\(y_i=\beta_0+\beta_1 x_i+\epsilon_i   (i=1,2,…,N)\)</span></p>
+<p>នៅទីនេះ <span class="math notranslate nohighlight">\(\beta_0  ,\beta_1\)</span> ហៅថាមេគុណតម្រែតម្រង់(regression coefficient) <span class="math notranslate nohighlight">\(\epsilon\)</span> គឺតម្លៃលម្អៀងរវាងទិន្នន័យពីការវាស់វែងនិងតម្លៃតាមម៉ូឌែល។
+តម្លៃនៃម៉ាស <span class="math notranslate nohighlight">\(y\)</span> ហៅថា អថេរគោលដៅ(subjective variable)  <span class="math notranslate nohighlight">\(x\)</span> ហៅថា អថេរពន្យល់ឬអថេរឯករាជ្យ(explanatory variable)។</p>
+<p>គោលដៅរបស់យើងនៅទីនេះគឺការកំណត់តម្លៃនៃមេគុណតម្រែតម្រង់ ដែលធ្វើអោយម៉ូឌែលដែលសន្មតខាងលើអាចបង្ហាញទំនាក់ទំនងរវាងអថេរពន្យល់និងអថេរគោលដៅបានល្អប្រសើរ។
+មានវិធីជាច្រើនដែលអាចឱ្យយើងកំណត់តម្លៃនៃមេគុណតម្រែតម្រង់ដែលល្អប្រសើរសម្រាប់ទិន្នន័យដែលមាន។ នៅក្នុងអត្ថបទនេះ យើងនឹងណែនាំអំពីវិធីសាស្រ្តងាយនិងពេញនិយម Least Square Error ។</p>
+</div>
+<div class="section" id="least-square-error">
+<h2>ការប៉ាន់ស្មានតម្លៃប៉ារ៉ាម៉ែត្រដោយLeast Square Error<a class="headerlink" href="#least-square-error" title="Permalink to this headline">¶</a></h2>
+<p>តាមការសន្មតនៃម៉ូឌែលខាងលើ តម្លៃនៃលម្អៀងរវាងទិន្នន័យនិមួយៗនិងតម្លៃពិតតាមម៉ូឌែលអាច
+កំណត់បានដូចខាងក្រោម។</p>
+<p><span class="math notranslate nohighlight">\(\epsilon_i=y_i-(\beta_0+\beta_1 x_i )   ,(i=1,2,…,N)\)</span></p>
+<p>ក្នុងវិធីសាស្រ្តLeast Square Error យើងសិក្សាលើផលបូកនៃការេរបស់តម្លៃលម្អៀងទាំងអស់របស់ទិន្នន័យដែលមាន ពោលគឺ <span class="math notranslate nohighlight">\(\epsilon_1^2+\epsilon_2^2+⋯+\epsilon_N^2\)</span>។ គំនិតក្នុងវិធីសាស្រ្តនេះគឺងាយស្រួល។ម៉ូឌែលដែលអាចពន្យល់ទំនាក់ទំនងរវាងអថេរទាំង២បានល្អប្រសើរ អាចត្រូវបាននិយាយបានថាជាម៉ូឌែលដែលមានតម្លៃនៃកម្រិតលម្អៀងតូចបំផុត។
+ហេតុនេះ យើងនឹងធ្វើការកំណត់តម្លៃមេគុណតម្រែតម្រង់(ប៉ារ៉ាម៉ែត្រ)ណាដែលធ្វើឱ្យតម្លៃនៃផលបូកនៃការេរបស់តម្លៃលម្អៀងទាំងអស់របស់ទិន្នន័យ <span class="math notranslate nohighlight">\(E(\beta_0,\beta_1 )\)</span>មានតម្លៃតូចបំផុត។</p>
+<div class="math notranslate nohighlight">
+\[ E(\beta_0,\beta_1 )=\sum_{i=1}^{N}{\epsilon_i^2}=\sum_{i=1}^{N}{\left\{y_i-(\beta_0+\beta_1 x)\right\}^2} \]</div>
+<p>អ្នកដែលបានសិក្សាគណិតវិទ្យា អាចមើលឃើញយ៉ាងងាយថា ពេលនេះវាបានក្លាយជាបញ្ហាបរមាកម្ម លើតម្លៃ <span class="math notranslate nohighlight">\(E(\beta_0,\beta_1 )\)</span> ដោយយក<span class="math notranslate nohighlight">\(\beta_0,\beta_1\)</span> ជាអថេរ។
+យើងអាចដោះស្រាយបញ្ហានេះបានដោយងាយដោយប្រើចំណេះដឹងផ្នែកវិភាគមូលដ្ឋានដូចជាដេរីវេដោយផ្នែក។</p>
+<p>នៅទីនេះ ដើម្បីមានភាពងាយស្រួលក្នុងការសិក្សាលើករណីច្រើនអថេរពន្យល់ យើងនឹងណែនាំការដោះស្រាយបញ្ហាខាងលើដោយប្រើវ៉ិចទ័រនិងម៉ាទ្រីស។
+យើងកំណត់សរសេរម៉ាទ្រីសនិងវ៉ិចទ័រដូចខាងក្រោម។ <span class="math notranslate nohighlight">\(X\)</span> ពេលខ្លះត្រូវបានហៅថាម៉ាទ្រីសផែនការ។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+X=\begin{pmatrix}
+1 &amp; x_1\\ 
+\vdots  &amp; \vdots\\ 
+1 &amp; x_N
+\end{pmatrix}\in \mathbb{R}^{N\times 2},
+\pmb{y}=\begin{pmatrix}
+y_1\\ 
+\vdots\\ 
+y_N
+\end{pmatrix}\in \mathbb{R}^{N},
+\pmb{\epsilon}=\begin{pmatrix}
+\epsilon_1\\ 
+\vdots\\ 
+\epsilon_N
+\end{pmatrix}\in \mathbb{R}^{N},
+\pmb{\beta}=\begin{pmatrix}
+\beta_0\\ 
+\beta_1
+\end{pmatrix}\in \mathbb{R}^{2}
+\end{split}\]</div>
+<p>ពេលនេះម៉ូឌែលនិងផលបូកតម្លៃការេនៃលម្អៀងខាងលើអាចសរសេរដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[ \pmb{y}=X\pmb{\beta}+\pmb{\epsilon} \]</div>
+<div class="math notranslate nohighlight">
+\[ E(\pmb{\beta})=\sum_{i=1}^{N}{\epsilon_i^2}=(\pmb{y}-X\pmb{\beta})^{\top}(\pmb{y}-X\pmb{\beta}) \]</div>
+<p>ត្រលប់ទៅកាន់បញ្ហារបស់យើងវិញ។ គោលដៅរបស់យើងគឺកំណត់តម្លៃ<span class="math notranslate nohighlight">\(\pmb{\beta}\)</span>ដែលធ្វើឱ្យតម្លៃនៃ <span class="math notranslate nohighlight">\(E(\pmb{\beta})\)</span> តូចបំផុត។
+នៅទីនេះដូចដែលបានឃើញស្រាប់ អនុគមន៍ <span class="math notranslate nohighlight">\(E(\pmb{\beta})\)</span> ជាអនុគមន៍ប៉ោង ហេតុនេះយើងអាចកំណត់តម្លៃអប្បបរមារបស់វាបានងាយដោយគ្រាន់តែគណនាដេរីវេធៀបនឹងប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{\beta}\)</span>ដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[ E(\pmb{\beta})=(\pmb{y}-X\pmb{\beta})^\top\ (\pmb{y}-X\pmb{\beta})=\pmb{y}^\top\ \pmb{y}-2\pmb{y}^\top\ X\pmb{\beta}+\pmb{\beta}^\top\ X^\top\ X\pmb{\beta} \]</div>
+<p>ដោយដោះស្រាយសមីការ <span class="math notranslate nohighlight">\(\partial/\partial\pmb{\beta}\ E(\pmb{\beta})=-\mathbf{2}X^\top\ \pmb{y}-\mathbf{2}X^\top\ X\pmb{\beta}\)</span> យើងបាន</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\pmb{\beta}}=(X^\top X)^{-1} X^T \pmb{y} \]</div>
+<p>ដោយជំនួសតម្លៃដែលគណនាបាននេះទៅក្នុងម៉ូឌែលដើម យើងអាចគណនាតម្លៃទស្សន៍ទាយនៃអថេរគោលដៅ <span class="math notranslate nohighlight">\(y\)</span> នៅពេលស្គាល់តម្លៃអថេរពន្យល់ x បានដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[ \hat{\pmb{y}}=\pmb{x\hat{\beta}} \]</div>
+<p>ក្នុងករណីទិន្នន័យក្នុងតារាងទី១ខាងលើ យើងអាចទទួលបានតម្លៃនៃមេគុណតម្រែតម្រង់និងបន្ទាត់តាងម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរដូចខាងក្រោម។</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+  <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+  <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@X_</span><span class="p">)</span><span class="nd">@X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@y</span>
+  <span class="k">return</span> <span class="n">w</span>
+
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+  <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+  <span class="k">return</span> <span class="n">X_</span><span class="nd">@w</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span><span class="mi">70</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;height(cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;mass(kg)&#39;</span><span class="p">)</span>
+<span class="n">y_legend</span> <span class="o">=</span> <span class="s2">&quot;y=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;+&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;x&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">y_legend</span><span class="p">,</span><span class="s2">&quot;observed-data&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regression_01_10_0.png" src="_images/regression_01_10_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="independence-of-errors">
+<h2>ឯករាជភាពនៃតម្លៃលម្អៀង Independence of errors<a class="headerlink" href="#independence-of-errors" title="Permalink to this headline">¶</a></h2>
+<p>យើងពិនិត្យលើទំនាក់ទំនងរវាងតម្លៃនៃលម្អៀងនិងអថេរគោលដៅនិងអថេរពន្យល់។
+បើសង្កេតលើតម្លៃនៃកូវ៉ារ្យង់រវាងតម្លៃលម្អៀង<span class="math notranslate nohighlight">\(\epsilon\ \)</span>និងតម្លៃទស្សន៍ទាយនៃអថេរគោលដៅ<span class="math notranslate nohighlight">\(\hat{y} \)</span>
+ឬ តម្លៃនៃកូវ៉ារ្យង់រវាងតម្លៃលម្អៀង<span class="math notranslate nohighlight">\(\epsilon\$ និងតម្លៃទស្សន៍ទាយនៃអថេរពន្យល់\)</span>x$យើងបានលទ្ធផលដូចខាងក្រោម។</p>
+<p>(សម្រាយបញ្ជាក់ទុកជាលំហាត់សម្រាប់អ្នកអាន)</p>
+<div class="math notranslate nohighlight">
+\[Cov\left[\hat{y},\hat{\epsilon}\right]=Cov\left[x,\hat{\epsilon}\right]=0\]</div>
+<p>លទ្ធផលនេះបង្ហាញពីឯករាជភាពនៃតម្លៃលម្អៀងដែលបង្កើតដោយម៉ូឌែលនិងតម្លៃទស្សន៍ទាយនៃអថេរគោលដៅ ឬ អថេរពន្យល់។</p>
+</div>
+<div class="section" id="coefficient-of-determination-pmb-r-mathbf-2">
+<h2>Coefficient of determination <span class="math notranslate nohighlight">\((\pmb{R}^\mathbf{2})\)</span><a class="headerlink" href="#coefficient-of-determination-pmb-r-mathbf-2" title="Permalink to this headline">¶</a></h2>
+<p>ដើម្បីបង្ហាញពីកម្រិតនៃការពន្យល់របស់ម៉ូឌែលទៅលើទំនាក់ទំនងរវាងទិន្នន័យដែលមាន
+Coefficient of determination <span class="math notranslate nohighlight">\((\pmb{R}^\mathbf{2})\)</span> ត្រូវបានប្រើ។
+តម្លៃ <span class="math notranslate nohighlight">\(\pmb{R}^\mathbf{2}\)</span> កំណត់ដោយផលធៀបរវាង វ៉ារ្យង់នៃតម្លៃទស្សន៍ទាយរបស់អថេរគោលដៅ និង វ៉ារ្យង់នៃតម្លៃអថេរគោលដៅពិត។</p>
+<div class="math notranslate nohighlight">
+\[ R^2=\frac{Var\left[\hat{y}\right]}{Var\left[y\right]}=1-\frac{Var\left[\hat{\epsilon}\right]}{Var\left[y\right]} \]</div>
+<p>តម្លៃនេះយកតម្លៃលើចន្លោះ <span class="math notranslate nohighlight">\(\left[0,1\right]\)</span> ដែលតម្លៃខិតជិត១បង្ហាញពីភាពល្អប្រសើរនៃការពន្យល់របស់ម៉ូឌែលទៅលើទិន្នន័យ។</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="regression.html" title="previous page">អំពីចំណោទតម្រែតម្រង់ Regression</a>
+    <a class='right-next' id="next-link" href="regression-02.html" title="next page">ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mengsay LOEM<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
