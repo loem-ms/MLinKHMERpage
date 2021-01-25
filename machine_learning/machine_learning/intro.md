@@ -12,4 +12,3 @@
 [ទាញយកអត្ថបទបកស្រាយសង្ខេបជាPDF](https://github.com/loem-ms/MachineLearningINKHMER.git)
 
 
-[ទៅកាន់ទំព័រដើម Mengsay LOEM](https://loem-ms.github.io/loem-ms/)
