@@ -1,0 +1,613 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD &#8212; Machine Learning</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Regularization in Machine Learning" href="regularization.html" />
+    <link rel="prev" title="ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)" href="regression-02.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ml-icon.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   អំពីវគ្គសិក្សា
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html">
+   សេចក្តីផ្តើមអំពី Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#supervised-learning">
+   Supervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#unsuperivsed-learning">
+   Unsuperivsed Learning
+  </a>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="regression.html">
+   អំពីចំណោទតម្រែតម្រង់ Regression
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression_01.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression-02.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regularization.html">
+     Regularization in Machine Learning
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="classification.html">
+   អំពីចំណោទចំណាត់ថ្នាក់ក្រុម Classification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_01.html">
+     ចំណាត់ថ្នាក់២ក្រុម (Binary Classification)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_02.html">
+     ចំណាត់ថ្នាក់ច្រើនក្រុម (Multiclass Classification)
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="homepage.html">
+   ទៅកាន់ទំព័រដើម Mengsay LOEM
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/SGD.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/SGD.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#gradient-descent">
+   Gradient Descent
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stochastic-gradient-descent">
+   Stochastic Gradient Descent
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="sgd">
+<h1>វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD<a class="headerlink" href="#sgd" title="Permalink to this headline">¶</a></h1>
+<p>ក្នុងមេរៀនមុនយើងបានសិក្សាអំពីម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ ដែលត្រូវបានប្រើប្រាស់សម្រាប់សិក្សាពីការទំនាក់ទំនងរវាងអថេរពន្យល់និងអថេរគោលដៅ។ ក្នុងការកំណត់តម្លៃប៉ារ៉ាម៉ែត្រនៃម៉ូឌែល(មេគុណតម្រែតម្រង់) យើងបានដោះស្រាយតាមរយៈវិធីសាស្រ្តជាមូលដ្ឋាននៃគណិតវិទ្យាវិភាគ។</p>
+<p>ប៉ុន្តែក្នុងជីវភាពរស់នៅ ករណីភាគច្រើនចំនួននៃអថេរពន្យល់មានចំនួនច្រើនលើសលប់ ដែលធ្វើឱ្យវិមាត្រនៃម៉ាទ្រីសផែនការមានការកើនឡើងខ្ពស់។ ហេតុនេះ វាមានការលំបាកក្នុងការគណនាម៉ាទ្រីសច្រាស់ដូចក្នុងរបៀបខាងលើទោះបីប្រើប្រាស់ម៉ាស៊ីនកុំព្យូទ័រក្តី។</p>
+<p>ក្នុងអត្ថបទនេះ យើងនឹងណែនាំវិធីសាស្រ្តកំណត់តម្លៃប៉ាន់ស្មាននៃមេគុណតម្រែតម្រង់ដោយវិធីគណនាដដែលៗលើតម្លៃលេខតាមប្រមាណវិធីងាយៗគឺ Stochastic Gradient Descent (SGD) ។ ដើម្បីងាយស្រួលស្វែងយល់អំពីSGD ជាដំបូងយើងនឹងណែនាំអំពីគំនិត និងការគណនាក្នុងវិធីសាស្រ្ត Gradient Descent ជាមុន។</p>
+<div class="section" id="gradient-descent">
+<h2>Gradient Descent<a class="headerlink" href="#gradient-descent" title="Permalink to this headline">¶</a></h2>
+<p>ដូចដែលបានបង្ហាញក្នុងអត្ថបទមុន យើងចង់កំណត់យកមេគុណតម្រែតម្រង់ណាដែលធ្វើឱ្យតម្លៃផលបូកការេនៃកម្រិតលម្អៀងតូចបំផុត។ គោលគំនិតក្នុងGradient Descent គឺផ្លាស់ប្តូរតម្លៃនៃមេគុណតម្រែតម្រង់(ប៉ារ៉ាម៉ែត្រ) បន្តិចម្តងៗ ទៅតាមទិសដៅដែលធ្វើឱ្យតម្លៃផលបូកការេនៃកម្រិតលម្អៀងមានការថយចុះ។ អ្នកអាចប្រដូចវិធីនេះទៅនឹងការចុះជំរាលឬចុះពីទីភ្នំ ដោយរំកិលខ្លួនអ្នកបន្តិចម្តងៗ ទៅកាន់ទីដែលទាបជាងកន្លែងដែលអ្នកនៅ។ នៅពេលដែលអ្នករំកិលខ្លួនដល់ទីដែលលែងមានបម្រែបម្រួលនៃរយៈកម្ពស់ អ្នកអាចសន្និដ្ឋានបានថាអ្នកដល់ទីដែលទាបបំផុតហើយ។ ដូចគ្នានេះដែរ នៅក្នុងវិធីសាស្រ្តGradient Descent តាមលក្ខណៈគណិតវិទ្យានៃ gradient (តម្លៃដេរីវេនៃអនុគមន៍ត្រង់ចំនុចណាមួយ) តម្លៃgradientត្រង់ចំណុចណាមួយគឺជាតម្លៃមេគុណប្រាប់ទិសនៃខ្សែកោងត្រង់ចំណុចនោះហើយក៏ជាតម្លៃធំបំផុតនៃបម្រែបម្រួលតម្លៃអនុគមន៍ពេលអ្នកធ្វើបម្រែបម្រួលលើអថេរមិនអាស្រ័យ។</p>
+<p><img alt="idea-sgd" src="_images/idea-sgd.png" /></p>
+<p>រូបខាងលើនេះបង្ហាញអំពីគំនិតក្នុងវិធីសាស្រ្តធ្វើអប្បបរមាកម្មតាម Gradient Descent។ ដូចដែលអ្នកអាចធ្វើការកត់សម្គាល់បាន ពេលខ្លះអ្នកអាចនឹងធ្លាក់ចុះទៅក្នុងទីតាំងដែលជាបរមាធៀបតែមិនមែនជាកន្លែងអប្បបរមាពិតប្រាកដប្រសិនបើទីតាំងនៃការចាប់ផ្តើមរបស់អ្នកមិនប្រសើរ។ ប៉ុន្តែក្នុងករណីធ្វើបរមាកម្មតម្លៃផលបូកការេនៃកម្រិតលម្អៀងរបស់យើង ដោយសារអនុគមន៍ដែលត្រូវធ្វើបរមាកម្មគឺជាអនុគមន៍ដឺក្រេទី២ ហេតុនេះយើងមិនមានការព្រួយបារម្ភក្នុងករណីនេះឡើយ។</p>
+<p>ពេលនេះ យើងពិនិត្យលើការគណនាក្នុងវិធីសាស្រ្ត Gradient Descent។</p>
+<p>យើងសិក្សាលើអនុគមន៍ដែលយកតម្លៃស្កាលែ <span class="math notranslate nohighlight">\(f\left(\pmb{x}\right)\)</span> ដែល <span class="math notranslate nohighlight">\(\pmb{x}\in\mathbb{R}^d\)</span>។ សន្មតថាអនុគមន៍នេះយកតម្លៃអប្បបរមាត្រង់ចំណុច <span class="math notranslate nohighlight">\(\pmb{x}^\ast\)</span> ។ វិធីសាស្រ្ត Gradient Descent អាចឱ្យយើងគណនាតម្លៃ(ប្រហែល)នៃ <span class="math notranslate nohighlight">\(\pmb{x}^\ast\)</span> បានដោយចាប់ផ្តើមពីតម្លៃ<span class="math notranslate nohighlight">\(\ \pmb{x}^{\left(0\right)}\ \)</span>ណាមួយ រួចធ្វើការផ្លាស់ប្តូរតម្លៃនេះតាមការគណនាដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[\pmb{x}^{\left(t+1\right)}=\pmb{x}^{\left(t\right)}-\eta_t\left.\frac{\partial f\left(\pmb{x}\right)}{\partial\pmb{x}}\right|_{\pmb{x}=\pmb{x}^{\left(\pmb{t}\right)}}\]</div>
+<p>នៅទីនេះ<span class="math notranslate nohighlight">\(t=0,1,\ldots\)</span> គឺជាលេខរៀងនៃការផ្លាស់ប្តូរតម្លៃអថេរ<span class="math notranslate nohighlight">\(\pmb{x}\)</span>។ <span class="math notranslate nohighlight">\(\frac{\partial f\left(\pmb{x}\right)}{\partial\pmb{x}} \)</span> គឺជាដេរីវេដោយផ្នែកនៃអនុគមន៍<span class="math notranslate nohighlight">\(\ f \)</span>ធៀបនឹងអថេរ<span class="math notranslate nohighlight">\( \pmb{x} \)</span>ឬហៅថា gradient ។<span class="math notranslate nohighlight">\( \eta_t \)</span>គឺជាកម្រិតនៃការផ្លាស់ប្តូរតម្លៃអថេរដោយគ្រប់គ្រងលើឥទ្ធិពលនៃតម្លៃgradient។ នៅក្នុង Machine Learning វាត្រូវបានហៅថាជា អត្រារៀនឬ learning rate ។ ជាទូទៅតម្លៃនៃ<span class="math notranslate nohighlight">\(\eta_t\)</span> ត្រូវបានកំណត់យកចន្លោះ០និង១ដោយតម្លៃយ៉ាងតូច។ យើងអាចកំណត់លក្ខខណ្ឌសម្រាប់បញ្ចប់ការផ្លាស់ប្តូរតម្លៃនៃអថេរបាន ដោយយកពេលដែលតម្លៃដាច់ខាតនៃ gradient យកតម្លៃសូន្យឬក្បែរសូន្យ។</p>
+<p>ពិនិត្យលើករណីគម្រូងាយមួយ <span class="math notranslate nohighlight">\(f\left(x\right)=x^2-2x-3 \)</span>។ ករណីនេះយើងដឹងច្បាស់ថាតម្លៃអប្បបរមានៃអនុគមន៍គឺ <span class="math notranslate nohighlight">\(-4\)</span> នៅពេលដែល <span class="math notranslate nohighlight">\(x^\ast=1\)</span>។ យើងនឹងផ្ទៀងផ្ទាត់ជាមួយតម្លៃដែលគណនាតាមរយៈGradient Descent។</p>
+<p>ដំបូងយើងគណនាអនុគមន៍ដេរីវេ <span class="math notranslate nohighlight">\( \frac{df\left(x\right)}{dx}=2x-2 \)</span>និង កំណត់យកអត្រា<span class="math notranslate nohighlight">\(\ \eta=0.1 \)</span>ថេរ។ យើងចាប់ផ្តើមពីចំណុច<span class="math notranslate nohighlight">\( x^{\left(0\right)}=0\ \ ,\ f\left(x^{\left(0\right)}\right)=-3 \)</span>។ ដោយផ្លាស់ប្តូរតម្លៃអថេរតាមរយៈGradient Descent ខាងលើយើងបានបម្រែបម្រួលនៃតម្លៃអថេរនិងតម្លៃអនុគមន៍ដូចតារាងខាងក្រោម។</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="text-align:center head"><p><span class="math notranslate nohighlight">\(\pmb{t}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(x^{(t)}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\( \frac{df\left(x\right)}{dx}\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(f(x) \)</span></p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td class="text-align:center"><p>0</p></td>
+<td><p>0.00</p></td>
+<td><p>-2.00</p></td>
+<td><p>-3.00</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>1</p></td>
+<td><p>0.20</p></td>
+<td><p>-1.60</p></td>
+<td><p>-3.36</p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>2</p></td>
+<td><p>0.36</p></td>
+<td><p>-1.28</p></td>
+<td><p>-3.59</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\vdots\)</span></p></td>
+</tr>
+<tr class="row-even"><td class="text-align:center"><p>44</p></td>
+<td><p>0.999946</p></td>
+<td><p>-0.000109</p></td>
+<td><p>-4.00</p></td>
+</tr>
+<tr class="row-odd"><td class="text-align:center"><p>45</p></td>
+<td><p>0.999956</p></td>
+<td><p>-0.000087</p></td>
+<td><p>-4.00</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">f</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="n">x</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">x</span> <span class="o">-</span><span class="mi">3</span>
+
+<span class="k">def</span> <span class="nf">g</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mi">2</span><span class="o">*</span><span class="n">x</span> <span class="o">-</span> <span class="mi">2</span>
+
+<span class="k">def</span> <span class="nf">sd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="mf">0.</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.01</span><span class="p">,</span> <span class="n">eps</span><span class="o">=</span><span class="mf">1e-4</span><span class="p">):</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">H</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+        <span class="n">gx</span> <span class="o">=</span> <span class="n">g</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+        <span class="n">H</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">dict</span><span class="p">(</span><span class="n">t</span><span class="o">=</span><span class="n">t</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">,</span> <span class="n">fx</span><span class="o">=</span><span class="n">f</span><span class="p">(</span><span class="n">x</span><span class="p">),</span> <span class="n">gx</span><span class="o">=</span><span class="n">gx</span><span class="p">))</span>
+        <span class="k">if</span> <span class="o">-</span><span class="n">eps</span> <span class="o">&lt;</span> <span class="n">gx</span> <span class="o">&lt;</span> <span class="n">eps</span><span class="p">:</span>
+            <span class="k">break</span>
+        <span class="n">x</span> <span class="o">-=</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">gx</span>
+        <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">return</span> <span class="n">H</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">H</span> <span class="o">=</span> <span class="n">sd</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">g</span><span class="p">,</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">eta</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">H</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>{&#39;t&#39;: 46,
+ &#39;x&#39;: 0.9999564438570341,
+ &#39;fx&#39;: -3.9999999981028624,
+ &#39;gx&#39;: -8.711228593183407e-05}
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">)</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span>
+    <span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s1">&#39;t&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">H</span><span class="p">],</span>
+    <span class="p">[</span><span class="n">h</span><span class="p">[</span><span class="s1">&#39;fx&#39;</span><span class="p">]</span> <span class="k">for</span> <span class="n">h</span> <span class="ow">in</span> <span class="n">H</span><span class="p">],</span>
+    <span class="s1">&#39;x-&#39;</span>
+    <span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;$t$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;$f(x)$&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/SGD_8_0.png" src="_images/SGD_8_0.png" />
+</div>
+</div>
+<p>យើងត្រលប់ទៅកាន់ម៉ូឌែលតម្រែតម្រង់របស់យើងវិញ។ អនុគមន៍ដែលយើងចង់ធ្វើអប្បបរមាកម្មគឺ <span class="math notranslate nohighlight">\(E\left(\pmb{\beta}\right)\)</span> ដោយយក<span class="math notranslate nohighlight">\(\ \pmb{\beta} \)</span>ជាអថេរ។</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(\pmb{\beta}\right)=\sum_{i=1}^{N}\epsilon_i^2=\left(\pmb{y}-X\pmb{\beta}\right)^\top\left(\pmb{y}-X\pmb{\beta}\right)
+\]</div>
+<p>អនុគមន៍ដេរីវេ(gradient)របស់វាគឺ</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(\pmb{\beta}\right)=\left(\pmb{y}-X\pmb{\beta}\right)^\top\left(\pmb{y}-X\pmb{\beta}\right)=\pmb{y}^\top\pmb{y}-2\pmb{y}^\top X\pmb{\beta}+\pmb{\beta}^\top X^\top X\pmb{\beta}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial\pmb{\beta}}E\left(\pmb{\beta}\right)=-2X^\top\pmb{y}-2X^\top X\pmb{\beta}=2X^\top\left(X\pmb{\beta}-\pmb{y}\right)=2X^\top\left(\hat{\pmb{y}}-\pmb{y}\right)
+\]</div>
+<p>ហេតុនេះ កន្សោមសម្រាប់ការផ្លាស់ប្តូរតម្លៃអថេរគឺ</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{\beta}^{\left(t+1\right)}=\pmb{\beta}^{\left(t\right)}-\eta_t\left.\frac{\partial E\left(\pmb{\beta}\right)}{\partial\pmb{\beta}}\right|_{\pmb{\beta}=\pmb{\beta}^{\left(\pmb{t}\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[\pmb{\beta}^{\left(t+1\right)}=\pmb{\beta}^{\left(t\right)}-2\eta_tX^\top\left({\hat{\pmb{y}}}^{\left(t\right)}-\pmb{y}\right)\ \ \]</div>
+<p>ដែល<span class="math notranslate nohighlight">\(\hat{\pmb{y}}^{\left(t\right)}=X\pmb{\beta}^{\left(t\right)}\)</span>។</p>
+<p>យើងសាកល្បងគណនាតម្លៃប្រហែលនៃមេគុណតម្រែតម្រង់ដែលបានសិក្សាក្នុងអត្ថបទមុនដោយប្រើ gradient descent។ លើកនេះយើងយកតម្លៃកម្ពស់គិតជាម៉ែត្រដើម្បីបង្រួមតម្លៃលេខ។</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p><br>កម្ពស់(m)</p></th>
+<th class="head"><p><br>1.52</p></th>
+<th class="head"><p><br>1.57</p></th>
+<th class="head"><p><br>1.60</p></th>
+<th class="head"><p><br>1.63</p></th>
+<th class="head"><p><br>1.50</p></th>
+<th class="head"><p><br>1.47</p></th>
+<th class="head"><p><br>1.65</p></th>
+<th class="head"><p><br>1.68</p></th>
+<th class="head"><p><br>1.78</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><br>ម៉ាស(kg)</p></td>
+<td><p><br>54.48</p></td>
+<td><p><br>55.84</p></td>
+<td><p><br>57.20</p></td>
+<td><p><br>58.57</p></td>
+<td><p><br>53.12</p></td>
+<td><p><br>52.21</p></td>
+<td><p><br>59.93</p></td>
+<td><p><br>61.29</p></td>
+<td><p><br>69.92</p></td>
+</tr>
+</tbody>
+</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.52</span><span class="p">,</span><span class="mf">1.57</span><span class="p">,</span><span class="mf">1.60</span><span class="p">,</span><span class="mf">1.63</span><span class="p">,</span><span class="mf">1.50</span><span class="p">,</span><span class="mf">1.47</span><span class="p">,</span><span class="mf">1.65</span><span class="p">,</span><span class="mf">1.68</span><span class="p">,</span><span class="mf">1.70</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">54.48</span><span class="p">,</span><span class="mf">55.84</span><span class="p">,</span><span class="mf">57.20</span><span class="p">,</span><span class="mf">56.57</span><span class="p">,</span><span class="mf">53.12</span><span class="p">,</span><span class="mf">52.21</span><span class="p">,</span><span class="mf">59.93</span><span class="p">,</span><span class="mf">61.29</span><span class="p">,</span><span class="mf">67.92</span><span class="p">])</span>
+<span class="n">XP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">X</span><span class="p">),</span> <span class="n">X</span><span class="p">])</span><span class="o">.</span><span class="n">T</span>
+<span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">XP</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="n">XP</span> <span class="o">@</span> <span class="n">beta</span>
+    <span class="n">beta</span> <span class="o">-=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">XP</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">y_hat</span> <span class="o">-</span> <span class="n">y</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+  <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+  <span class="k">return</span> <span class="n">X_</span><span class="nd">@w</span>
+  
+<span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.45</span><span class="p">,</span><span class="mf">1.72</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;height(cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;mass(kg)&#39;</span><span class="p">)</span>
+<span class="n">y_legend</span> <span class="o">=</span> <span class="s2">&quot;y=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;+&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;x&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">y_legend</span><span class="p">,</span><span class="s2">&quot;observed-data&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Learning with Gradient Descent&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/SGD_13_0.png" src="_images/SGD_13_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="stochastic-gradient-descent">
+<h2>Stochastic Gradient Descent<a class="headerlink" href="#stochastic-gradient-descent" title="Permalink to this headline">¶</a></h2>
+<p>ការធ្វើបរមាកម្មលើតម្លៃអនុគមន៍ដោយប្រើ Gradient Descent អាចជួយយើងឱ្យធ្វើការគណនា
+បានយ៉ាងមានប្រសិទ្ធភាពទោះបីជាវិមាត្រឬចំនួននៃអថេរពន្យល់ច្រើនក៏ដោយ។ ប៉ុន្តែក្នុងវិធីសាស្រ្ត Gradient Descent ការគណនា gradient ត្រូវបានធ្វើឡើងដោយប្រើប្រាស់ទិន្នន័យទាំងអស់ដែលមានក្នុងដៃ។ ក្នុងករណីដែលចំនួនទិន្នន័យមានច្រើន វិធីនេះត្រូវបានគេដឹងថាមានភាពយឺតយ៉ាវក្នុងការរួមទៅរកតម្លៃបរមារបស់អនុគមន៍។</p>
+<p>ដើម្បីដោះស្រាយបញ្ហានេះ Stochastic Gradient Descent (SGD) ត្រូវបានប្រើប្រាស់ជំនួសវិញ។ ក្នុងករណីចំនួនទិន្នន័យដែលមាន(N) មានបរិមាណច្រើន ក្នុងវិធីSGD ទិន្នន័យម្តងមួយៗ ត្រូវបានជ្រើសយកដោយចៃដន្យដើម្បីគណនា gradient នៃអនុគមន៍ រួចធ្វើការផ្លាស់ប្តូរតម្លៃអថេរតែម្តង ដោយមិនចាំបាច់ធ្វើការបូកសរុបគ្រប់ទិន្នន័យដែលមាននោះឡើយ។</p>
+<p>ជាទូទៅ ដើម្បីអនុវត្តSGDបាន ចំពោះទិន្នន័យសរុបDដែលមានអនុគមន៍ដែលត្រូវធ្វើបរមាកម្ម ត្រូវតែអាចសរសេរជាផលបូកនៃអនុគមន៍ដែលយកករណីទិន្នន័យនិមួយៗជាធាតុចូលដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+E_D\left(\pmb{\beta}\right)=\sum_{\left(\pmb{x},y\right)\in D} e\left(\pmb{\beta}\right)
+\]</div>
+<p>ក្នុងករណីយើងកំពុងសិក្សានេះ ដោយសារ<span class="math notranslate nohighlight">\(E_D\left(\pmb{\beta}\right)\)</span>ត្រូវបានកំណត់ដោយផលបូកការេនៃកម្រិតលម្អៀងគ្រប់ទិន្នន័យទាំងអស់ <span class="math notranslate nohighlight">\(E_D\left(\pmb{\beta}\right)=\sum_{i=1}^{N}\epsilon_i^2\)</span> ហេតុនេះ លក្ខខណ្ឌខាងលើត្រូវបានផ្ទៀងផ្ទាត់។</p>
+<p>ចំពោះទិន្នន័យនិមួយៗ<span class="math notranslate nohighlight">\(\left(\pmb{x}_i,y_i\right)\)</span> gradient នៃអនុគមន៍ដែលត្រូវធ្វើបរមាកម្មអាចគណនាបានដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial e\left(\pmb{\beta}\right)}{\partial\pmb{\beta}}=\frac{\partial}{\partial\pmb{\beta}}\left(y_i-\pmb{x}_i^\top\pmb{\beta}\right)^2=-2\left(y_i-\pmb{x}_i^\top\pmb{\beta}\right)\pmb{x}_i^\top=2\left({\hat{y}}_i-y_i\right)\pmb{x}_i^\top
+\]</div>
+<p>កន្សោមសម្រាប់ធ្វើការផ្លាស់ប្តូរតម្លៃនៃអថេរតាម SGD គឺអាចបង្ហាញដូចទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{\beta}^{\left(t+1\right)}=\pmb{\beta}^{\left(t\right)}-\eta_t\left.\frac{\partial e\left(\pmb{\beta}\right)}{\partial\pmb{\beta}}\right|_{\pmb{\beta}=\pmb{\beta}^{\left(\pmb{t}\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\pmb{\beta}^{\left(t+1\right)}=\pmb{\beta}^{\left(t\right)}-2\eta_t\left({{\hat{y}}_i}^{\left(t\right)}-y\right)\pmb{x}_i^\top
+\pmb{\beta}^{\left(t+1\right)}=\pmb{\beta}^{\left(t\right)}-2\eta_t\pmb{\delta}_\pmb{i}
+\]</div>
+<p>ដែល <span class="math notranslate nohighlight">\(\pmb{\delta}_\pmb{i}=\left({{\hat{y}}_i}^{\left(t\right)}-y\right)\pmb{x}_i^\top\)</span>។</p>
+<p>ជាមួយPythonអ្នកអាចសរសេរCodeដូចខាងក្រោម។
+នៅទីនេះយើងកំណត់យកតម្លៃចាប់ផ្តើមនៃ <span class="math notranslate nohighlight">\(\pmb{\beta}^{\left(0\right)}=\mathbf{0}\ \)</span>  និង <span class="math notranslate nohighlight">\(\eta=0.001\)</span></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">d_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">X</span><span class="p">)))</span>
+
+<span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-3</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100000</span><span class="p">):</span>
+  <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">d_index</span><span class="p">)</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d_index</span> <span class="p">:</span>
+    <span class="n">XP</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">ones_like</span><span class="p">(</span><span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]),</span> <span class="n">X</span><span class="p">[</span><span class="n">i</span><span class="p">]])</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">y_hat</span> <span class="o">=</span> <span class="n">XP</span> <span class="o">@</span> <span class="n">beta</span>
+    <span class="n">beta</span> <span class="o">-=</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eta</span> <span class="o">*</span> <span class="n">XP</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="p">(</span><span class="n">y_hat</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">1.45</span><span class="p">,</span><span class="mf">1.72</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">beta</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;height(cm)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;mass(kg)&#39;</span><span class="p">)</span>
+<span class="n">y_legend</span> <span class="o">=</span> <span class="s2">&quot;y=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;+&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">beta</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;x&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">y_legend</span><span class="p">,</span><span class="s2">&quot;observed-data&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Learning with Gradient Descent&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/SGD_18_0.svg" src="_images/SGD_18_0.svg" /></div>
+</div>
+<p>បើយើងធ្វើការប្រៀបធៀបរវាង Gradient Descent និង SGD យើងអាចនិយាយបានថា SGD គឺជាវិធីសាស្រ្តដែលសន្មតយកតម្លៃ gradient ចំពោះគ្រប់ទិន្នន័យទាំងអស់ក្នុង Gradient Descent ដោយតម្លៃប្រហែល<br />
+<span class="math notranslate nohighlight">\(\pmb{\delta}_\pmb{i}=\left({{\hat{y}}_i}^{\left(t\right)}-y\right)\pmb{x}_i^\top\ \)</span> ពោលគឺ <span class="math notranslate nohighlight">\( \frac{\partial E_D\left(\pmb{\beta}\right)}{\partial\pmb{\beta}}\approx\frac{\partial e_{\pmb{x}_i,y_i}\left(\pmb{\beta}\right)}{\partial\pmb{\beta}}=\pmb{\delta}_\pmb{i}\)</span>។</p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="regression-02.html" title="previous page">ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)</a>
+    <a class='right-next' id="next-link" href="regularization.html" title="next page">Regularization in Machine Learning</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mengsay LOEM<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

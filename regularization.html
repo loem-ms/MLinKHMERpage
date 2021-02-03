@@ -1,0 +1,499 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regularization in Machine Learning &#8212; Machine Learning</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="អំពីចំណោទចំណាត់ថ្នាក់ក្រុម Classification" href="classification.html" />
+    <link rel="prev" title="វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD" href="SGD.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ml-icon.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   អំពីវគ្គសិក្សា
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html">
+   សេចក្តីផ្តើមអំពី Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#supervised-learning">
+   Supervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#unsuperivsed-learning">
+   Unsuperivsed Learning
+  </a>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="regression.html">
+   អំពីចំណោទតម្រែតម្រង់ Regression
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression_01.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression-02.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SGD.html">
+     វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Regularization in Machine Learning
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="classification.html">
+   អំពីចំណោទចំណាត់ថ្នាក់ក្រុម Classification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_01.html">
+     ចំណាត់ថ្នាក់២ក្រុម (Binary Classification)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_02.html">
+     ចំណាត់ថ្នាក់ច្រើនក្រុម (Multiclass Classification)
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="homepage.html">
+   ទៅកាន់ទំព័រដើម Mengsay LOEM
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/regularization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/regularization.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#regularization">
+   Regularization
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#ridge-regression-model">
+   Ridge Regression Model
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="regularization-in-machine-learning">
+<h1>Regularization in Machine Learning<a class="headerlink" href="#regularization-in-machine-learning" title="Permalink to this headline">¶</a></h1>
+<p>ក្នុងអត្ថបទមុនយើងបានស្វែងយល់អំពីម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរនិងវិធីសាស្រ្តក្នុងការកំណត់តម្លៃមេគុណតម្រែតម្រង់(ប៉ារ៉ាម៉ែត្រ)ដោយប្រើប្រាស់គណិតវិទ្យាវិភាគនិងវិធីសាស្រ្តប៉ាន់ស្មានតម្លៃតាមវិធីសាស្រ្តSGD។ ប៉ុន្តែបញ្ហាដែលនៅសល់គឺថាតើយើងគួរជ្រើសរើសយកម៉ូឌែលបែបណាទើបអាចឱ្យវាពណ៌នាទំនាក់ទំនងរវាងទិន្នន័យបានល្អប្រសើរ។ យើងពិនិត្យករណីខាងក្រោមជាឧទាហរណ៍។
+សន្មតថាយើងមានទិន្នន័យដូចរូប(លើ)។ យើងចង់បង្កើតម៉ូឌែលតម្រែតម្រង់ដើម្បីសិក្សាពីទំនាក់ទំនងរវាងអថេរពន្យល់និងអថេរគោលដៅ។ ដើម្បីសិក្សាពីភាពល្អប្រសើរនៃម៉ូឌែល យើងបែងចែកទិន្នន័យជាពីរផ្នែកគឺ training data ដែលប្រើសម្រាប់កំណត់ប៉ារ៉ាម៉ែត្រក្នុងម៉ូឌែលនិង test data សម្រាប់ធ្វើការវាយតម្លៃ។</p>
+<p>ក្នុងរូបខាងក្រោមបង្ហាញពីលទ្ធផលនៅពេលដែលយើងអនុវត្តម៉ូឌែលជាពហុធាដឺក្រេទី១(បន្ទាត់)និងពហុធាដឺក្រេខ្ពស់(ខែ្សកោង)។ យើងអាចពិនិត្យឃើញថា នៅពេលយើងជ្រើសយកម៉ូឌែលសាមញ្ញបំផុតពោលគឺបន្ទាត់ដឺក្រេទី១ នោះកម្រិតនៃការពណ៌នារបស់ម៉ូឌែលទៅលើទិន្នន័យ( Coefficient of determination: R^2)មានតម្លៃទាបដែលបង្ហាញថាមិនអាចពន្យល់បានល្អឡើយចំពោះទិន្នន័យដែលមាន។
+ផ្ទុយទៅវិញ នៅពេលដែលយើងតម្លើងដឺក្រេនៃម៉ូឌែលកាន់តែខ្ពស់ យើងពិនិត្យឃើញថាតម្លៃនៃ<span class="math notranslate nohighlight">\(R^2\)</span>មានការកើនឡើងខ្លះដែលអាចឱ្យយើងនិយាយបានថាវាពន្យល់លើទំនាក់ទំនងរបស់ទិន្នន័យ បានប្រសើរ។ ប៉ុន្តែតើការតម្លើងម៉ូឌែលឱ្យកាន់តែស្មុគសម្មាញ(តម្លើងដឺក្រេ)វាពិតជាផ្តល់ឱ្យយើងនូវម៉ូឌែលដែលល្អមែនឬ?</p>
+<p><img alt="reg1" src="_images/regular1.png" />
+<img alt="reg2" src="_images/regular2.png" /></p>
+<p>នៅក្នុងរូប(ក្រោម)បើយើងពិនិត្យលើទិន្នន័យដែលមិនត្រូវបានប្រើក្នុងការកំណត់តម្លៃមេគុណតម្រែតម្រង់(test data)នោះយើងឃើញថា ម៉ូឌែលដែលមានដឺក្រេលំដាប់ខ្ពស់ឬម៉ូឌែលដែលស្មុគស្មាញខ្លាំងមិនអាចប៉ាន់ស្មាន ឬពន្យល់ទំនាក់ទំនងរវាងអថេរពន្យល់និងអថេរគោលដៅបានល្អឡើយបើប្រៀបធៀបជាមួយម៉ូឌែលដែលមានដឺក្រេទាបជាងវា។
+ហេតុនេះ តើយើងគួរធ្វើបែបណាដើម្បីជ្រើសបានម៉ូឌែលដែលអាចពន្យល់បានល្អទាំងចំពោះ ទិន្នន័យដែលប្រើក្នុងដំណាក់កាលកំណត់ប៉ារ៉ាម៉ែត្រ(learning) trainig data និងទាំងចំពោះទិន្នន័យដែលមិនត្រូវបានប្រើនៅដំណាក់កាលlearning(test data)?</p>
+<div class="section" id="regularization">
+<h2>Regularization<a class="headerlink" href="#regularization" title="Permalink to this headline">¶</a></h2>
+<p>ដើម្បីដោះស្រាយបញ្ហានេះ Regularization ត្រូវបានប្រើប្រាស់។ ក្នុងវិធីសាស្រ្តនេះ ភាពស្មុគ
+ស្មាញនៃម៉ូឌែលត្រូវបានគិតគូររួមគ្នាជាមួយនិងតម្លៃនៃកម្រិតល្អៀងរបស់ម៉ូឌែល។ ឧទាហរណ៍ក្នុងករណីម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរដែលយើងបានសិក្សាកន្លងមកនេះ ការធ្វើបរមាកម្មលើតម្លៃលម្អៀងត្រូវបានផ្លាស់ប្តូរទៅជាទម្រង់<span class="math notranslate nohighlight">\(\ L\left(\pmb{\beta},\alpha\right)\)</span>ដូចខាងក្រោម ។ នៅទីនេះ ផ្នែក<span class="math notranslate nohighlight">\(\ R\left(\pmb{\beta}\right)\)</span> គឺជាផ្នែកដែលបង្ហាញពីកម្រិតនៃភាពស្មុគស្មាញរបស់ម៉ូឌែល ហើយ<span class="math notranslate nohighlight">\(\alpha \)</span>ជាមេគុណដែលប្រើដើម្បីកម្រិតឥទ្ធិពលនៃ<span class="math notranslate nohighlight">\(\ R\left(\pmb{\beta}\right) \)</span>ពេលធ្វើបរមាកម្ម។</p>
+<p>ម៉ូឌែល $<span class="math notranslate nohighlight">\(\pmb{y}=X\pmb{\beta}+\pmb{\epsilon}\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+L\left(\pmb{\beta},\alpha\right)=E\left(\pmb{\beta}\right)+\alpha R\left(\pmb{\beta}\right)
+\)</span>$</p>
+<p>ផ្នែក<span class="math notranslate nohighlight">\(\ R\left(\pmb{\beta}\right) \left(\pmb{\beta}=\left(\beta_1,\ldots,\beta_d\right)^\top\right) \)</span> ដែលបង្ហាញពីកម្រិតនៃភាពស្មុគស្មាញរបស់ម៉ូឌែលត្រូវបាន បង្ហាញជាទម្រង់នានាដូចជា
+$<span class="math notranslate nohighlight">\(
+Ridge\ penalty\left(L2\ regularization\right)∶\ R\left(\pmb{\beta}\right)=β2=β12+⋯+βd2
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[L1\ regularization∶\ R\left(\pmb{\beta}\right)=\left|\beta_1+\ldots+\beta_d\right|\]</div>
+<p>ក្នុងអត្ថបទនេះ យើងនឹងណែនាំអំពី L2 regularization ចំពោះម៉ូឌែលតម្រែតម្រង់ដែលហៅថា Ridge Regression Model។</p>
+</div>
+<div class="section" id="ridge-regression-model">
+<h2>Ridge Regression Model<a class="headerlink" href="#ridge-regression-model" title="Permalink to this headline">¶</a></h2>
+<p>នៅក្នុង Ridge Regression Model តម្លៃការេនៃណមរបស់វ៉ិចទ័រមេគុណតម្រែតម្រង់
+ត្រូវបានប្រើប្រាស់សម្រាប់បង្ហាញពីកម្រិតស្មុគស្មាញរបស់ម៉ូឌែល។ ក្នុងករណីនេះ ដើម្បីកំណត់តម្លៃមេគុណតម្រែតម្រង់ យើងនឹងធ្វើអប្បបរមាកម្មលើ អនុគមន៍ដែលកំណត់ដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[L\left(\pmb{\beta},\alpha\right)=E\left(\pmb{\beta}\right)+\alpha R\left(\pmb{\beta}\right)=y-Xβ^{\top}y-Xβ+αβ^2\]</div>
+<div class="math notranslate nohighlight">
+\[\hat{\pmb{\beta}} =\underset{\pmb{\beta}}{\arg\min}　{L\left(\pmb{\beta},\alpha\right)}\]</div>
+<p>តាមរយៈការធ្វើបរមាកម្មបែបនេះ យើងនឹងអាចកំណត់បាននូវម៉ូឌែលដែលមានកម្រិត លម្អៀងតូចព្រមទាំងទំហំ នៃមេគុណតម្រែតម្រង់ (ដែលយើងសន្មតថាជាកម្រិតភាពស្មុគស្មាញក្នុងករណីនេះ) បានព្រមគ្នា។នៅទីនេះដើម្បីធ្វើតុល្យកម្មរវាងកម្រិតលម្អៀងរបស់ម៉ូឌែលនិងភាពស្មុគស្មាញ(ទំហំនៃមេគុណតម្រែតម្រង់)យើងអាចកែសម្រួលតម្លៃនៃមេគុណ<span class="math notranslate nohighlight">\(\ \alpha \)</span>បាន។</p>
+<p>ដើម្បីដោះស្រាយបង្ហាញបរមាកម្មខាងលើ ដូចក្នុងអត្ថបទមុនៗដែរ យើងអាចដោះស្រាយតាមគណិតវិទ្យាវិភាគដោយធ្វើដេរីវេរួចរកតម្លៃនៃអថេរត្រង់ដេរីវេស្មើសូន្យ(ករណីអនុគមន៍ប៉ោង) ឬ ដោះស្រាយដោយប្រើវិធីសាស្រ្តSGD។</p>
+<p>ចំពោះចម្លើយតាមគណិតវិទ្យាវិភាគ ទម្រង់នៃមេគុណតម្រែតម្រង់ត្រូវបានគណនាដូចខាងក្រោម(ដំណោះស្រាយទុកជាកិច្ចការផ្ទះជូនមិត្តអ្នកអាន) ដែល <span class="math notranslate nohighlight">\(I_d \)</span> ជាម៉ាទ្រីសឯកតា។</p>
+<div class="math notranslate nohighlight">
+\[\hat{\pmb{\beta}}=\left(X^\top X+\alpha I_d\right)^{-1}X^T\pmb{y}\]</div>
+<p>ចំពោះចម្លើយតាមSGD ការផ្លាស់ប្តូរតម្លៃមេគុណតម្រែតម្រង់ត្រូវបានគណនាដូចខាងក្រោម(ដំណោះស្រាយទុកជាកិច្ចការផ្ទះជូនមិត្តអ្នកអាន) ដែល<span class="math notranslate nohighlight">\(N\)</span> ជាចំនួនtraining data និង\eta_t ជា learing rate ។
+$<span class="math notranslate nohighlight">\(
+\pmb{\beta}^{\left(t+1\right)}=\left(1-\frac{2\alpha\eta_t}{N}\right)\pmb{\beta}^{\left(t\right)}-2\eta_t\left({{\hat{y}}_i}^{\left(t\right)}-y\right)\pmb{x}_i^\top
+\)</span>$</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span> 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ridge_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
+  <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+  <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@X_</span><span class="o">+</span><span class="n">alpha</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span><span class="nd">@X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@y</span>
+  <span class="k">return</span> <span class="n">beta</span>
+
+<span class="c1"># learning with SGD</span>
+<span class="k">def</span> <span class="nf">ridge_sgd_fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">,</span><span class="n">alpha</span><span class="p">):</span>
+  <span class="n">beta</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">d_index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">)))</span>
+
+  <span class="n">eta</span> <span class="o">=</span> <span class="mf">1e-4</span>
+  <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">500000</span><span class="p">):</span>
+    <span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">d_index</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">d_index</span> <span class="p">:</span>
+      <span class="n">xi</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">)</span>
+      <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">xi</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span><span class="o">**</span><span class="n">j</span>
+      <span class="n">y_hat</span> <span class="o">=</span> <span class="n">xi</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">beta</span>
+      <span class="n">beta</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mi">2</span><span class="o">*</span><span class="n">alpha</span><span class="o">*</span><span class="n">eta</span><span class="o">/</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">))</span><span class="o">*</span><span class="n">beta</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">y_hat</span> <span class="o">-</span> <span class="n">y</span><span class="p">[</span><span class="n">i</span><span class="p">])</span> <span class="o">*</span> <span class="n">xi</span>
+  <span class="k">return</span> <span class="n">beta</span>
+
+<span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+  <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+  <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@X_</span><span class="p">)</span><span class="nd">@X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@y</span>
+  <span class="k">return</span> <span class="n">w</span>
+
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+    <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+        <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+    <span class="k">return</span> <span class="n">X_</span><span class="nd">@w</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">RandomState</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="c1"># Data: train</span>
+<span class="n">Xtrain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.</span>  <span class="p">,</span>  <span class="mf">0.11</span><span class="p">,</span>  <span class="mf">0.25</span><span class="p">,</span>  <span class="mf">0.29</span><span class="p">,</span>  <span class="mf">0.41</span><span class="p">,</span>  <span class="mf">0.42</span><span class="p">,</span>  <span class="mf">0.43</span><span class="p">,</span>  <span class="mf">0.8</span> <span class="p">,</span>  <span class="mf">0.81</span><span class="p">,</span> <span class="mf">1.</span><span class="p">])</span>
+<span class="n">Ytrain</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Xtrain</span><span class="p">)</span><span class="o">+</span><span class="mf">0.02</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">))</span>
+<span class="c1"># Data: test</span>
+<span class="n">Xtest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.654</span><span class="p">,</span><span class="mf">0.633</span><span class="p">,</span><span class="mf">0.48</span><span class="p">,</span><span class="mf">0.564</span><span class="p">])</span>
+<span class="n">Ytest</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="n">Xtest</span><span class="p">)</span><span class="o">+</span><span class="mf">0.02</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">randn</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">Xtest</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">markers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">]</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-9</span><span class="p">]</span>
+<span class="n">w_fit</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">Ytrain</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span><span class="n">Ytest</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">alpha</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alphas</span><span class="p">):</span>
+  <span class="n">w</span> <span class="o">=</span> <span class="n">ridge_fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">Ytrain</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
+  <span class="c1">#w = ridge_sgd_fit(Xtrain,Ytrain,d,alpha)</span>
+  <span class="n">w_fit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+  <span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+  <span class="n">ya</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">ya</span><span class="p">,</span><span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">Ytrain</span><span class="p">,</span><span class="n">d</span><span class="p">),</span><span class="n">d</span><span class="p">),</span><span class="s1">&#39;g-.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.6</span><span class="p">,</span><span class="mf">1.6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;Ridge Model with alpha=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;no regulization&#39;</span><span class="p">,</span><span class="s1">&#39;training data&#39;</span><span class="p">,</span><span class="s1">&#39;test data&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Linear Regression Model (Polynomial degree=9)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regularization_10_0.png" src="_images/regularization_10_0.png" />
+</div>
+</div>
+<p>រូបខាងលើបង្ហាញពីលទ្ធផលនៅពេល L2 regularization ត្រូវបានប្រើលើម៉ូឌែលតម្រែតម្រង់ជាទម្រង់ពហុធាដឺក្រេទី៩។ យើងពិនិត្យឃើញថា នៅពេល regularization ត្រូវបានប្រើ ម៉ូឌែលអាចពន្យល់បានល្អទំាងចំពោះ training data និង test data ព្រមគ្នា ផ្ទុយពីម៉ូឌែលដែលមិនប្រើ regularization។</p>
+<p>តាមពិតទៅយើងនៅសល់បញ្ហាមួយទៀតគឺការកំណត់តម្លៃនៃមេគុណ<span class="math notranslate nohighlight">\(\ \alpha\ \)</span>។ ដំណោះស្រាយក្នុងបញ្ហានេះអាចធ្វើបានតាមរយៈការសាកល្បងលើតម្លៃជាច្រើននៃ<span class="math notranslate nohighlight">\(\ \alpha\  \)</span>ចំពោះទិន្នន័យមួយផ្នែកដែលមិនមែនជាtest data , training data ដែលយើងហៅថា validation data ។ យើងអាចកំណត់តម្លៃ<span class="math notranslate nohighlight">\(\ \alpha\  \)</span>ដោយជ្រើសយកតម្លៃ<span class="math notranslate nohighlight">\(\ \alpha\ \)</span> ណាដែលធ្វើឲ្យស្ថានភាពនៃម៉ូឌែលល្អបំផុតចំពោះ validation data។ រូបខាងក្រោមបង្ហាញពីការប្រៀបធៀបចំពោះតម្លៃមួយចំនួននៃ<span class="math notranslate nohighlight">\(\ \alpha\ \)</span> ។</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">markers</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">,</span><span class="s1">&#39;-.&#39;</span><span class="p">,</span><span class="s1">&#39;-.&#39;</span><span class="p">]</span>
+<span class="n">alphas</span> <span class="o">=</span> <span class="p">[</span><span class="mf">1e-9</span><span class="p">,</span><span class="mf">1e-3</span><span class="p">,</span><span class="mf">1e-2</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">w_fit</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">d</span> <span class="o">=</span> <span class="mi">9</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">Ytrain</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span><span class="n">Ytest</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;red&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span><span class="n">alpha</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">alphas</span><span class="p">):</span>
+  <span class="n">w</span> <span class="o">=</span> <span class="n">ridge_fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">Ytrain</span><span class="p">,</span><span class="n">d</span><span class="p">,</span><span class="n">alpha</span><span class="p">)</span>
+  <span class="c1">#w = ridge_sgd_fit(Xtrain,Ytrain,d,alpha)</span>
+  <span class="n">w_fit</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+  <span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="nb">max</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">)</span><span class="o">+</span><span class="mf">0.1</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+  <span class="n">ya</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">d</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">ya</span><span class="p">,</span><span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">Ytrain</span><span class="p">,</span><span class="n">d</span><span class="p">),</span><span class="n">d</span><span class="p">),</span><span class="s1">&#39;g-.&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.6</span><span class="p">,</span><span class="mf">1.6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s1">&#39;alpha=&#39;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">alphas</span><span class="p">]</span><span class="o">+</span><span class="p">[</span><span class="s1">&#39;no regulization&#39;</span><span class="p">,</span><span class="s1">&#39;training data&#39;</span><span class="p">,</span><span class="s1">&#39;test data&#39;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;X&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;Y&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;Linear Regression Model (Polynomial degree=9)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regularization_13_0.png" src="_images/regularization_13_0.png" />
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="SGD.html" title="previous page">វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD</a>
+    <a class='right-next' id="next-link" href="classification.html" title="next page">អំពីចំណោទចំណាត់ថ្នាក់ក្រុម Classification</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mengsay LOEM<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

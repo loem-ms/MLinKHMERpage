@@ -77,7 +77,7 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="index.html">
   
-  <img src="_static/logo.jpg" class="logo" alt="logo">
+  <img src="_static/ml-icon.png" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Machine Learning</h1>
@@ -126,6 +126,16 @@
      ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SGD.html">
+     វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regularization.html">
+     Regularization in Machine Learning
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -148,6 +158,11 @@
   </ul>
   <i class="fas fa-chevron-down">
   </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="homepage.html">
+   ទៅកាន់ទំព័រដើម Mengsay LOEM
+  </a>
  </li>
 </ul>
 
@@ -339,30 +354,44 @@
 </div>
 </div>
 <p>ក្នុងតារាងខាងលើ ទិន្ន័យអំពីកម្ពស់គិតជាសង់ទីម៉ែត្រ(cm)និងម៉ាសគិតជាគីឡូក្រាម(kg)របស់មនុស្ស៩នាក់។ ពីទិន្នន័យនេះ យើងចង់សិក្សាពីទំនាក់ទំនងរវាងកម្ពស់(x)និងម៉ាស(y)។
-នៅទីនេះយើងសន្មតថា តម្លៃម៉ាស(<span class="math notranslate nohighlight">\(y\)</span>)គឺជាអនុគមន៍នៃតម្លៃកម្ពស់(<span class="math notranslate nohighlight">\(x\)</span>): <span class="math notranslate nohighlight">\(y=f(x)\)</span>។</p>
-<p>ដើម្បីងាយស្រួល ជាដំបូងយើងឧបមាថាទំនាក់ទំនងដើមរវាង <span class="math notranslate nohighlight">\(x,y\)</span> កំណត់ដោយអនុគមន៍ដូចខាងក្រោមដែលយើងហៅថា ម៉ូឌែលលីនេអ៊ែរ (Linear Model)។</p>
+នៅទីនេះយើងសន្មតថា តម្លៃម៉ាស(<span class="math notranslate nohighlight">\(y\)</span>)គឺជាអនុគមន៍នៃតម្លៃកម្ពស់(<span class="math notranslate nohighlight">\(x\)</span>): <span class="math notranslate nohighlight">\(y=f(x)\)</span>។ គោលដៅនៃចំណោទតម្រែតម្រង់គឺកំណត់អនុគមន៍ទំនាក់ទំនងនោះ។</p>
+<p>ដើម្បីងាយស្រួល ជាដំបូងយើងឧបមាថាទំនាក់ទំនងរវាង <span class="math notranslate nohighlight">\(x,y\)</span> កំណត់ដោយអនុគមន៍ដឺក្រេទីមួយដូចខាងក្រោមដែលយើងហៅថា ម៉ូឌែលលីនេអ៊ែរ (Linear Model)។</p>
 <div class="math notranslate nohighlight">
 \[ y=f(x)=\beta_0+\beta_1 x \]</div>
-<p>ក្រោមឧបមានេះទិន្នន័យដែលមានក្នុងតារាងត្រូវផ្ទៀងផ្ទាត់ទំនាក់ទំនងខាងលើនេះ។
+<p>ក្រោមសន្មតម៉ូឌែលបែបនេះទិន្នន័យដែលមានក្នុងតារាងត្រូវផ្ទៀងផ្ទាត់ទំនាក់ទំនងខាងលើនេះ។
 ប៉ុន្តែក្នុងដំណើរការវាស់វែង ឬ ស្រង់ទិន្នន័យលម្អៀងឬគម្លាតរវាងតម្លៃតាមម៉ូឌែលដែលឧបមាខាងលើនិងតម្លៃទិន្នន័យជាក់ស្តែងតែងតែកើតឡើង។
 ហេតុនេះ យើងសិក្សាករណីដូចខាងក្រោមដែល<span class="math notranslate nohighlight">\(\epsilon\)</span>ជាកម្រិតលម្អៀង។</p>
 <div class="math notranslate nohighlight">
-\[ y=\beta_0+\beta_1 x+\epsilon \]</div>
+\[ y_1 = \beta_0+\beta_1 x_1+\epsilon_1 \]</div>
+<div class="math notranslate nohighlight">
+\[ y_2 = \beta_0+\beta_1 x_2+\epsilon_2 \]</div>
+<div class="math notranslate nohighlight">
+\[ \vdots \]</div>
+<div class="math notranslate nohighlight">
+\[ y_N = \beta_0+\beta_1 x_N+\epsilon_N \]</div>
 <p>ក្នុងពេលនេះទិន្នន័យដែលមានអាចសរសេរជាទំនាក់ទំនងដូចខាងក្រោម។</p>
 <div class="math notranslate nohighlight">
-\[ 54.58=\beta_0+\beta_1×152+\epsilon , \cdots \cdots \]</div>
+\[ 54.58=\beta_0+\beta_1\times 152+\epsilon_1 \]</div>
+<div class="math notranslate nohighlight">
+\[ 55.84=\beta_0+\beta_1\times 157+\epsilon_2 \]</div>
+<div class="math notranslate nohighlight">
+\[ \vdots \]</div>
+<div class="math notranslate nohighlight">
+\[ 69.92 = \beta_0+\beta_1\times 178+\epsilon_9 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
-<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">22</span><span class="p">,</span><span class="mf">0.50</span><span class="p">])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mf">27.4</span><span class="p">,</span><span class="mf">0.53</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">xa</span><span class="p">,</span><span class="s1">&#39;g-&#39;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">idx</span><span class="p">,</span><span class="n">i</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">i</span><span class="p">,</span><span class="n">i</span><span class="p">],[</span><span class="n">y</span><span class="p">[</span><span class="n">idx</span><span class="p">],</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">*</span><span class="n">i</span><span class="p">],</span><span class="s1">&#39;-.&#39;</span><span class="p">,</span><span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;error&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span><span class="mi">70</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;height(cm)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;mass(kg)&#39;</span><span class="p">)</span>
 <span class="n">y_legend</span> <span class="o">=</span> <span class="s2">&quot;y=b+ax&quot;</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">y_legend</span><span class="p">,</span><span class="s2">&quot;observed-data&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">y_legend</span><span class="p">,</span><span class="s2">&quot;error&quot;</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -372,7 +401,8 @@
 </div>
 </div>
 <p>ជាទូទៅចំពោះទិន្នន័យចំនួន <span class="math notranslate nohighlight">\(N: \{(x_i,y_i )\}_{i=1}^N\)</span> ទិន្នន័យនិមួយៗអាចបង្ហាញដោយទំនាក់ទំនងដូចខាងក្រោម។</p>
-<p><span class="math notranslate nohighlight">\(y_i=\beta_0+\beta_1 x_i+\epsilon_i   (i=1,2,…,N)\)</span></p>
+<div class="math notranslate nohighlight">
+\[y_i=\beta_0+\beta_1 x_i+\epsilon_i   (i=1,2,…,N)\]</div>
 <p>នៅទីនេះ <span class="math notranslate nohighlight">\(\beta_0  ,\beta_1\)</span> ហៅថាមេគុណតម្រែតម្រង់(regression coefficient) <span class="math notranslate nohighlight">\(\epsilon\)</span> គឺតម្លៃលម្អៀងរវាងទិន្នន័យពីការវាស់វែងនិងតម្លៃតាមម៉ូឌែល។
 តម្លៃនៃម៉ាស <span class="math notranslate nohighlight">\(y\)</span> ហៅថា អថេរគោលដៅ(subjective variable)  <span class="math notranslate nohighlight">\(x\)</span> ហៅថា អថេរពន្យល់ឬអថេរឯករាជ្យ(explanatory variable)។</p>
 <p>គោលដៅរបស់យើងនៅទីនេះគឺការកំណត់តម្លៃនៃមេគុណតម្រែតម្រង់ ដែលធ្វើអោយម៉ូឌែលដែលសន្មតខាងលើអាចបង្ហាញទំនាក់ទំនងរវាងអថេរពន្យល់និងអថេរគោលដៅបានល្អប្រសើរ។
@@ -382,7 +412,8 @@
 <h2>ការប៉ាន់ស្មានតម្លៃប៉ារ៉ាម៉ែត្រដោយLeast Square Error<a class="headerlink" href="#least-square-error" title="Permalink to this headline">¶</a></h2>
 <p>តាមការសន្មតនៃម៉ូឌែលខាងលើ តម្លៃនៃលម្អៀងរវាងទិន្នន័យនិមួយៗនិងតម្លៃពិតតាមម៉ូឌែលអាច
 កំណត់បានដូចខាងក្រោម។</p>
-<p><span class="math notranslate nohighlight">\(\epsilon_i=y_i-(\beta_0+\beta_1 x_i )   ,(i=1,2,…,N)\)</span></p>
+<div class="math notranslate nohighlight">
+\[\epsilon_i=y_i-(\beta_0+\beta_1 x_i )   ,(i=1,2,…,N)\]</div>
 <p>ក្នុងវិធីសាស្រ្តLeast Square Error យើងសិក្សាលើផលបូកនៃការេរបស់តម្លៃលម្អៀងទាំងអស់របស់ទិន្នន័យដែលមាន ពោលគឺ <span class="math notranslate nohighlight">\(\epsilon_1^2+\epsilon_2^2+⋯+\epsilon_N^2\)</span>។ គំនិតក្នុងវិធីសាស្រ្តនេះគឺងាយស្រួល។ម៉ូឌែលដែលអាចពន្យល់ទំនាក់ទំនងរវាងអថេរទាំង២បានល្អប្រសើរ អាចត្រូវបាននិយាយបានថាជាម៉ូឌែលដែលមានតម្លៃនៃកម្រិតលម្អៀងតូចបំផុត។
 ហេតុនេះ យើងនឹងធ្វើការកំណត់តម្លៃមេគុណតម្រែតម្រង់(ប៉ារ៉ាម៉ែត្រ)ណាដែលធ្វើឱ្យតម្លៃនៃផលបូកនៃការេរបស់តម្លៃលម្អៀងទាំងអស់របស់ទិន្នន័យ <span class="math notranslate nohighlight">\(E(\beta_0,\beta_1 )\)</span>មានតម្លៃតូចបំផុត។</p>
 <div class="math notranslate nohighlight">
@@ -422,7 +453,7 @@ y_N
 នៅទីនេះដូចដែលបានឃើញស្រាប់ អនុគមន៍ <span class="math notranslate nohighlight">\(E(\pmb{\beta})\)</span> ជាអនុគមន៍ប៉ោង ហេតុនេះយើងអាចកំណត់តម្លៃអប្បបរមារបស់វាបានងាយដោយគ្រាន់តែគណនាដេរីវេធៀបនឹងប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{\beta}\)</span>ដូចខាងក្រោម។</p>
 <div class="math notranslate nohighlight">
 \[ E(\pmb{\beta})=(\pmb{y}-X\pmb{\beta})^\top\ (\pmb{y}-X\pmb{\beta})=\pmb{y}^\top\ \pmb{y}-2\pmb{y}^\top\ X\pmb{\beta}+\pmb{\beta}^\top\ X^\top\ X\pmb{\beta} \]</div>
-<p>ដោយដោះស្រាយសមីការ <span class="math notranslate nohighlight">\(\partial/\partial\pmb{\beta}\ E(\pmb{\beta})=-\mathbf{2}X^\top\ \pmb{y}-\mathbf{2}X^\top\ X\pmb{\beta}\)</span> យើងបាន</p>
+<p>ដោយដោះស្រាយសមីការ <span class="math notranslate nohighlight">\(\partial/\partial\pmb{\beta}\ E(\pmb{\beta})=-\mathbf{2}X^\top\ \pmb{y}-\mathbf{2}X^\top\ X\pmb{\beta}=\pmb{0}\)</span> យើងបាន</p>
 <div class="math notranslate nohighlight">
 \[ \hat{\pmb{\beta}}=(X^\top X)^{-1} X^T \pmb{y} \]</div>
 <p>ដោយជំនួសតម្លៃដែលគណនាបាននេះទៅក្នុងម៉ូឌែលដើម យើងអាចគណនាតម្លៃទស្សន៍ទាយនៃអថេរគោលដៅ <span class="math notranslate nohighlight">\(y\)</span> នៅពេលស្គាល់តម្លៃអថេរពន្យល់ x បានដូចខាងក្រោម។</p>
@@ -452,7 +483,7 @@ y_N
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">w</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
 <span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">,</span><span class="mi">50</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="mi">1</span><span class="p">),</span><span class="s1">&#39;g-&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">([</span><span class="mi">145</span><span class="p">,</span><span class="mi">172</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="mi">50</span><span class="p">,</span><span class="mi">70</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;height(cm)&#39;</span><span class="p">)</span>
@@ -471,8 +502,8 @@ y_N
 <div class="section" id="independence-of-errors">
 <h2>ឯករាជភាពនៃតម្លៃលម្អៀង Independence of errors<a class="headerlink" href="#independence-of-errors" title="Permalink to this headline">¶</a></h2>
 <p>យើងពិនិត្យលើទំនាក់ទំនងរវាងតម្លៃនៃលម្អៀងនិងអថេរគោលដៅនិងអថេរពន្យល់។
-បើសង្កេតលើតម្លៃនៃកូវ៉ារ្យង់រវាងតម្លៃលម្អៀង<span class="math notranslate nohighlight">\(\epsilon\ \)</span>និងតម្លៃទស្សន៍ទាយនៃអថេរគោលដៅ<span class="math notranslate nohighlight">\(\hat{y} \)</span>
-ឬ តម្លៃនៃកូវ៉ារ្យង់រវាងតម្លៃលម្អៀង<span class="math notranslate nohighlight">\(\epsilon\$ និងតម្លៃទស្សន៍ទាយនៃអថេរពន្យល់\)</span>x$យើងបានលទ្ធផលដូចខាងក្រោម។</p>
+បើសង្កេតលើតម្លៃនៃកូវ៉ារ្យង់រវាងតម្លៃលម្អៀង<span class="math notranslate nohighlight">\(\epsilon\)</span>និងតម្លៃទស្សន៍ទាយនៃអថេរគោលដៅ<span class="math notranslate nohighlight">\(\hat{y}\)</span>
+ឬ តម្លៃនៃកូវ៉ារ្យង់រវាងតម្លៃលម្អៀង<span class="math notranslate nohighlight">\(\epsilon\)</span> និងតម្លៃទស្សន៍ទាយនៃអថេរពន្យល់<span class="math notranslate nohighlight">\(x\)</span>យើងបានលទ្ធផលដូចខាងក្រោម។</p>
 <p>(សម្រាយបញ្ជាក់ទុកជាលំហាត់សម្រាប់អ្នកអាន)</p>
 <div class="math notranslate nohighlight">
 \[Cov\left[\hat{y},\hat{\epsilon}\right]=Cov\left[x,\hat{\epsilon}\right]=0\]</div>

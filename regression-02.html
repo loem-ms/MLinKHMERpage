@@ -57,7 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="អំពីចំណោទចំណាត់ថ្នាក់ក្រុម Classification" href="classification.html" />
+    <link rel="next" title="វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD" href="SGD.html" />
     <link rel="prev" title="ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)" href="regression_01.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -77,7 +77,7 @@
         <div class="navbar-brand-box">
 <a class="navbar-brand text-wrap" href="index.html">
   
-  <img src="_static/logo.jpg" class="logo" alt="logo">
+  <img src="_static/ml-icon.png" class="logo" alt="logo">
   
   
   <h1 class="site-logo" id="site-title">Machine Learning</h1>
@@ -126,6 +126,16 @@
      ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SGD.html">
+     វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regularization.html">
+     Regularization in Machine Learning
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -148,6 +158,11 @@
   </ul>
   <i class="fas fa-chevron-down">
   </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="homepage.html">
+   ទៅកាន់ទំព័រដើម Mengsay LOEM
+  </a>
  </li>
 </ul>
 
@@ -209,10 +224,41 @@
 
         <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/regression-02.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
     </div>
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   ការសិក្សាលើទំនាក់ទំនងរវាងច្រើនអថេរ
+  </a>
+ </li>
+</ul>
+
+        </nav>
         
     </div>
 </div>
@@ -223,7 +269,148 @@
                 
   <div class="section" id="id1">
 <h1>ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p>កំពុងរៀបចំ <span class="math notranslate nohighlight">\(\cdots\)</span></p>
+<div class="section" id="id2">
+<h2>ការសិក្សាលើទំនាក់ទំនងរវាងច្រើនអថេរ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>ក្នុងការសិក្សាលើទំនាក់ទំនងរវាងអថេរច្រើន ចំនួនអថេរពន្យល់អាចមានលើសពីមួយ។ ជាឧទាហរណ៍ បើក្នុងករណីក្នុងមេរៀនមុន អថេរពន្យល់អាចមានអថេរក្រៅពីកម្ពស់ដូចជាអាយុ ទំហំចង្កេះ ឬអថេរផ្សេងៗទៀត។</p>
+<p>ក្នុងករណីអថេរពន្យល់ច្រើនបែប នេះយើងសន្មតម៉ូឌែលដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[y=f(x)=\beta_0+\beta_1 x_1+\beta_2 x_2+\ldots+\beta_d x_d\]</div>
+<p>ទោះបីជាចំនួននៃអថេរពន្យល់មានការកើនឡើងក្តី ការវិភាគដោយប្រើម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរមិនមានអ្វីប្រែប្រួលជាធំដុំនោះឡើយ។ អ្នកអាចបង្ហាញម៉ូឌែលខាងលើជាទម្រង់វ៉ិចទ័រនិងម៉ាទ្រីសរួចសិក្សាដូចគ្នា។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X=\left(\begin{matrix}\begin{matrix}1&amp;x_{11}&amp;\cdots\\\vdots&amp;\vdots&amp;\cdots\\1&amp;x_{N1}&amp;\cdots\\\end{matrix}&amp;\begin{matrix}x_{1d}\\\vdots\\x_{Nd}\\\end{matrix}\\\end{matrix}\right)\in\mathbb{R}^{N\times\left(d+1\right)}\ ,\ \pmb{y}=\left(\begin{matrix}y_1\\\vdots\\y_N\\\end{matrix}\right)\in\mathbb{R}^N\ ,\ \pmb{\epsilon}=\left(\begin{matrix}\epsilon_1\\\vdots\\\epsilon_N\\\end{matrix}\right)\in\mathbb{R}^N\ ,\ \pmb{\beta}=\left(\begin{matrix}\beta_0\\\vdots\\\beta_d\\\end{matrix}\right)\in\mathbb{R}^{d+1}
+\end{split}\]</div>
+<p>ពេលនេះម៉ូឌែលនិងផលបូកតម្លៃការេនៃលម្អៀងខាងលើអាចសរសេរដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{y}=X\pmb{\beta}+\pmb{\epsilon}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+E\left(\pmb{\beta}\right)=\sum_{i=1}^{N}\epsilon_i^2=\left(\pmb{y}-X\pmb{\beta}\right)^\top\left(\pmb{y}-X\pmb{\beta}\right)
+\]</div>
+<p>ដោយប្រើវិធីសាស្រ្តLeast Square Error ដូចក្នុងមេរៀនមុនយើងបានលទ្ធផលដូចគ្នា។</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\pmb{\beta}}=\left(X^\top X\right)^{-1}X^T\pmb{y}
+\]</div>
+<p>ក្នុងករណីខ្លះការប្រើប្រាស់តម្លៃផ្ទាល់នៃអថេរពន្យល់មិនអាចពណ៌នាទំនាក់ទំនងរវាងអថេរគោលដៅនិងអថេរពន្យល់បានល្អឡើយដូចក្នុងករណីរូបខាងក្រោម។</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span> 
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.</span>  <span class="p">,</span>  <span class="mf">0.11</span><span class="p">,</span>  <span class="mf">0.25</span><span class="p">,</span>  <span class="mf">0.29</span><span class="p">,</span>  <span class="mf">0.41</span><span class="p">,</span>  <span class="mf">0.42</span><span class="p">,</span>  <span class="mf">0.43</span><span class="p">,</span>  <span class="mf">0.8</span> <span class="p">,</span>  <span class="mf">0.81</span><span class="p">,</span> <span class="mf">1.</span>  <span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.04</span><span class="p">,</span>  <span class="mf">0.75</span><span class="p">,</span>  <span class="mf">1.</span>  <span class="p">,</span>  <span class="mf">0.99</span><span class="p">,</span>  <span class="mf">0.31</span><span class="p">,</span>  <span class="mf">0.52</span><span class="p">,</span>  <span class="mf">0.38</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.99</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.</span>  <span class="p">])</span>
+<span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">,</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;observed-data&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Figure1&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/regression-02_3_0.png" src="_images/regression-02_3_0.png" />
+</div>
+</div>
+<p>ហេតុនេះការបម្លែងតម្លៃអថេរពន្យល់ត្រូវបានអនុវត្ត។ ជាឧទាហរណ៍ដូចជាការប្រើអនុគមន៍ដឺក្រេទី២ ឬខ្ពស់ជាងនេះ ឬការប្រើអនុគមន៍មិនមែនលីនេអ៊ែរជាដើម។ ក្នុងករណីនេះម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរអាចបង្ហាញដូចខាងក្រោម។នៅទីនេះទោះបីជាអនុគមន៍ <span class="math notranslate nohighlight">\(\phi_i\left(x\right)\)</span> ជាទម្រង់មិនលីនេអ៊ែរក្តី ការហៅថាម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ ព្រោះចង់សង្កត់ធ្ងន់លើផលបូកជាទម្រង់លីនេអ៊ែរនៃអនុគមន៍ទាំងអស់នោះ។</p>
+<div class="math notranslate nohighlight">
+\[
+y=f\left(x\right)=\beta_0\phi_0\left(x\right)+\beta_1\phi_1\left(x\right)+\ldots+\beta_d\phi_d\left(x\right)
+\]</div>
+<p>ករណីប្រើពហុធាដឺក្រេទី៣យើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+y=\beta_0+\beta_1x+\beta_2x^2+\beta_3x^3
+\]</div>
+<p>អ្នកអាចបង្ហាញម៉ូឌែលខាងលើជាទម្រង់វ៉ិចទ័រនិងម៉ាទ្រីសរួចសិក្សាដូចគ្នា។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+X=\left(\begin{matrix}\begin{matrix}1&amp;x_1&amp;x_1^2\\\vdots&amp;\vdots&amp;\cdots\\1&amp;x_N&amp;x_N^2\\\end{matrix}&amp;\begin{matrix}x_1^3\\\vdots\\x_N^3\\\end{matrix}\\\end{matrix}\right)\in\mathbb{R}^{N\times4}\ ,\ \pmb{y}=\left(\begin{matrix}y_1\\\vdots\\y_N\\\end{matrix}\right)\in\mathbb{R}^N\ ,\ \pmb{\epsilon}=\left(\begin{matrix}\epsilon_1\\\vdots\\\epsilon_N\\\end{matrix}\right)\in\mathbb{R}^N\ ,\ \pmb{\beta}=\left(\begin{matrix}\beta_0\\\vdots\\\beta_3\\\end{matrix}\right)\in\mathbb{R}^4\ 
+\end{split}\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">fit</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+  <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+  <span class="n">w</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">inv</span><span class="p">(</span><span class="n">X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@X_</span><span class="p">)</span><span class="nd">@X_</span><span class="o">.</span><span class="n">T</span><span class="nd">@y</span>
+  <span class="k">return</span> <span class="n">w</span>
+
+<span class="k">def</span> <span class="nf">predict</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="n">k</span><span class="p">):</span>
+  <span class="n">X_</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="nb">len</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">))</span>
+  <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">k</span><span class="o">+</span><span class="mi">1</span><span class="p">):</span>
+    <span class="n">X_</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="n">i</span>
+  <span class="k">return</span> <span class="n">X_</span><span class="nd">@w</span>
+
+<span class="n">w</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">w</span><span class="p">)</span>
+
+<span class="n">cov_YY</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cov</span><span class="p">(</span><span class="n">predict</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="mi">3</span><span class="p">),</span><span class="n">Y</span><span class="p">)</span>
+<span class="n">R2</span> <span class="o">=</span> <span class="n">cov_YY</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span><span class="o">/</span><span class="n">cov_YY</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;R2=</span><span class="si">%.3f</span><span class="s2">&quot;</span><span class="o">%</span><span class="p">(</span><span class="n">R2</span><span class="p">))</span>
+<span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">ya</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="mi">3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">ya</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">y_legend</span> <span class="o">=</span> <span class="s2">&quot;y=&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;+&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;x&quot;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="nb">round</span><span class="p">(</span><span class="n">w</span><span class="p">[</span><span class="mi">2</span><span class="p">],</span><span class="mi">3</span><span class="p">))</span><span class="o">+</span><span class="s2">&quot;x^2&quot;</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="n">y_legend</span><span class="p">,</span><span class="s2">&quot;observed-data&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Figure2&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[ 1.14996701e-02  1.05535056e+01 -3.17324025e+01  2.11628099e+01]
+R2=0.990
+</pre></div>
+</div>
+<img alt="_images/regression-02_5_1.png" src="_images/regression-02_5_1.png" />
+</div>
+</div>
+<p>បើយើងជ្រើសយកម៉ូឌែលជាទម្រង់ពហុធាដឺក្រេទី៩ នោះយើងនឹងបានលទ្ធផលដូចខាងក្រោម។</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.</span>  <span class="p">,</span>  <span class="mf">0.11</span><span class="p">,</span>  <span class="mf">0.25</span><span class="p">,</span>  <span class="mf">0.29</span><span class="p">,</span>  <span class="mf">0.41</span><span class="p">,</span>  <span class="mf">0.42</span><span class="p">,</span>  <span class="mf">0.43</span><span class="p">,</span>  <span class="mf">0.8</span> <span class="p">,</span>  <span class="mf">0.81</span><span class="p">,</span> <span class="mf">1.</span>  <span class="p">])</span>
+<span class="n">Y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span> <span class="mf">0.04</span><span class="p">,</span>  <span class="mf">0.75</span><span class="p">,</span>  <span class="mf">1.</span>  <span class="p">,</span>  <span class="mf">0.99</span><span class="p">,</span>  <span class="mf">0.31</span><span class="p">,</span>  <span class="mf">0.52</span><span class="p">,</span>  <span class="mf">0.38</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.99</span><span class="p">,</span> <span class="o">-</span><span class="mf">1.05</span><span class="p">,</span> <span class="mf">0.</span>  <span class="p">])</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;w=&quot;</span><span class="p">,</span><span class="n">w</span><span class="p">)</span>
+<span class="n">xa</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="nb">max</span><span class="p">(</span><span class="n">X</span><span class="p">),</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">ya</span> <span class="o">=</span> <span class="n">predict</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">w</span><span class="p">,</span><span class="mi">9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">X</span><span class="p">,</span><span class="n">Y</span><span class="p">,</span><span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xa</span><span class="p">,</span><span class="n">ya</span><span class="p">,</span><span class="s1">&#39;r-&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;y&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">([</span><span class="s2">&quot;model&quot;</span><span class="p">,</span><span class="s2">&quot;observed-data&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Figure3&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>w= [ 4.87395932e-02  1.98384029e+02 -4.47755792e+03  4.08986697e+04
+ -1.95961522e+05  5.43625437e+05 -9.03237557e+05  8.85913047e+05
+ -4.72733950e+05  1.05775053e+05]
+</pre></div>
+</div>
+<img alt="_images/regression-02_7_1.png" src="_images/regression-02_7_1.png" />
+</div>
+</div>
+<p>តាមការសង្កេត អ្នកអាចនឹងមើលឃើញថាប្រសិនបើយើងតម្លើងដឺក្រេនៃពហុធានោះកម្រិតនៃការពណ៌នារបស់ម៉ូឌែលលើទិន្នន័យនឹងមានការកើនឡើង។ ប៉ុន្តែការបង្ហាញម៉ូឌែលដែលមានភាពស្មុគស្មាញពេកអាចត្រឹមតែពណ៌នាលើទិន្នន័យដែលមានតែប៉ុណ្ណោះ ផ្ទុយទៅវិញវាមិនអាចទស្សន៍ទាយបានល្អឡើយចំពោះទិន្នន័យដែលមិនមានក្នុងដៃ។រូបភាពទី៥បង្ហាញករណីនេះ។</p>
+<p>ក្នុងរូបទី3នេះ បើយើងគណនា Coefficient of determination (<span class="math notranslate nohighlight">\(\pmb{R}^\mathbf{2}\)</span>)យើងនឹងបានតម្លៃ <span class="math notranslate nohighlight">\(1\)</span>
+ដែលជាតម្លៃយ៉ាងល្អក្នុងការពណ៌នាទិន្នន័យដែលមានក្នុងដៃ។ ប៉ុន្តែបើយើងសង្កេតលើគម្រូទិន្នន័យជាក់ស្តែង និងក្រាបនៃម៉ូឌែល តម្លៃនៃការទស្សន៍ទាយត្រង់តំបន់ដែលគ្មានទិន្នន័យ គឺគ្មានលំនឹង និងចេញផុតឆ្ងាយពីដែននៃទិន្នន័យដែលមានក្នុងដៃ។</p>
+<p>ហេតុនេះក្នុងការជ្រើសរើសម៉ូឌែល អ្នកគួរសង្កេតលើចរិតលក្ខណៈនៃទិន្នន័យព្រមទាំងភាពល្អប្រសើរនៃការពន្យល់របស់វាចំពោះទាំងទិន្នន័យដែលមានក្នុងដៃស្រាប់ និងទិន្នន័យដែលមិនមានពោលគឺភាពប្រសើរក្នុងការទស្សន៍ទាយឬប៉ាន់ស្មាននាពេលអនាគត។</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -255,7 +442,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="regression_01.html" title="previous page">ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)</a>
-    <a class='right-next' id="next-link" href="classification.html" title="next page">អំពីចំណោទចំណាត់ថ្នាក់ក្រុម Classification</a>
+    <a class='right-next' id="next-link" href="SGD.html" title="next page">វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">
