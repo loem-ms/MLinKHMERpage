@@ -8,4 +8,4 @@
 title                       : Machine Learning  # The title of the book. Will be placed in the left navbar.
 author                      : Mengsay LOEM  # The author of the book
 copyright                   : "2021"  # Copyright year to be placed in the footer
-logo                        : logo.jpg  # A path to the book logo
+logo                        : ml-icon.png  # A path to the book logo

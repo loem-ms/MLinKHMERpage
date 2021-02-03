@@ -6,6 +6,8 @@
   sections:
     - file: regression_01
     - file: regression-02
+    - file: SGD
+    - file: regularization
 - file: classification
   sections:
     - file: classification_01
