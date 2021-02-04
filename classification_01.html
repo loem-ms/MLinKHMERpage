@@ -281,6 +281,23 @@
    ការវាយតម្លៃ
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#spam-mail-classification">
+   អនុវត្តលើការធ្វើចំណាត់ថ្នាក់ពីរក្រុម : spam mail classification
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     រៀបចំទិន្នន័យ
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#logistic-regression-model-with-python">
+     Logistic Regression Model with Python
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
         </nav>
@@ -297,7 +314,7 @@
 <p>ក្រៅពីការសិក្សាពីទំនាក់ទំនងរវាងអថេរពីរឬច្រើនតាមរយៈម៉ូឌែលតម្រែតម្រង់ ការបែងចែកទិន្នន័យដោយផ្នែកលើអថេរពន្យល់របស់វាជាក្រុមហៅថាចំណាត់ថ្នាក់ក្រុម(classification)។ តាមពិតចំណាត់ថ្នាក់ក្រុម ក៏អាចបង្ហាញបានជាទម្រង់ម៉ូឌែលតម្រែតម្រង់ផងដែរ ដោយគ្រាន់តែតម្លៃនៃអថេរគោលដៅមិនយកតម្លៃទូលាយលើសំណុំចំនួនពិតឡើយ ផ្ទុយទៅវិញគឺយកតម្លៃដាច់ដូចជា{0,1}ជាដើម។</p>
 <p>ក្នុងអត្ថបទនេះយើងនឹងណែនាំករណីដែលអថេរគោលដៅយកតម្លៃតែពីរប្រភេទដែលយើងកំណត់ហៅថាចំណាត់ថ្នាក់២ក្រុម(binary classification)។ ឧទាហរណ៍នៃការអនុវត្តចំណាត់ថ្នាក់២ក្រុមក្នុងជីវភាពមានដូចជា៖ ការកំណត់អត្តសញ្ញាណសារអេឡិចត្រូនិចរំខាន(spam or not) ការវិភាគជម្ងឺតាមរយៈរោគសញ្ញា(មានជម្ងឺឬគ្មាន) ការទស្សន៍ទាយលទ្ធផលបោះឆ្នោត(ជាប់ឬធ្លាក់)ជាដើម។</p>
 <p>ជាឧទាហរណ៍យើងនឹងលើកយកការកំណត់អត្តសញ្ញាណសារអេឡិចត្រូនិចរំខាន(spam or not)មកបង្ហាញដើម្បីស្វែងយល់បន្ថែមពីដំណោះស្រាយក្នុងបញ្ហាចំណាត់ថ្នាក់ក្រុមតាមរយៈ machine learning ។ រូបទី១បង្ហាញពីដំណើរការនៃការកំណត់សាររំខាន។</p>
-<p><img alt="spam" src="images/spam-exampl.png" /></p>
+<p><img alt="spam" src="_images/spam-example.png" /></p>
 <p>ជាដំណោះស្រាយងាយបំផុតដែលអ្នកអាចប្រហែលជានឹងនឹកឃើញមុនគេគឺការកំណត់រកនូវពាក្យដែលច្រើនប្រើប្រាស់ក្នុងspam mail។ 
 ជាឧទាហរណ៍យើងអាចកំណត់ដូចទម្រង់ខាងក្រោម។</p>
 <div class="cell docutils container">
@@ -420,13 +437,15 @@ P\left(\hat{y}=1|\pmb{x}\right)&gt;0.5\Leftrightarrow\frac{1}{1+\exp{\left(-\pmb
 \pmb{w}=\left(\begin{matrix}\begin{matrix}\begin{matrix}-2&amp;1\\\end{matrix}&amp;\begin{matrix}1&amp;0\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;1\\\end{matrix}&amp;\begin{matrix}-1&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)^\top
 \end{split}\]</div>
 <p>ក្នុងករណីនេះ តម្លៃផលគុណស្កាលែរវាងវ៉ិចទ័រអថេរពន្យល់នៃទិន្នន័យ<span class="math notranslate nohighlight">\( \pmb{x} \)</span>និងប៉ារ៉ាម៉ែត្រអាច
-គណនានិងបកស្រាយជាទម្រង់ប្រូបាបដូចខាងក្រោម។
-$<span class="math notranslate nohighlight">\(
+គណនានិងបកស្រាយជាទម្រង់ប្រូបាបដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \pmb{x}^\top\pmb{w}=\left(\begin{matrix}\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}1&amp;1\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}0&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)\left(\begin{matrix}\begin{matrix}-2\\1\\\end{matrix}\\\vdots\\\begin{matrix}-1\\0\\\end{matrix}\\\end{matrix}\right)=3
-\)</span><span class="math notranslate nohighlight">\(
-\)</span><span class="math notranslate nohighlight">\(
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
 P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(3\right)=\frac{1}{1+\exp{\left(-3\right)}}=0.95
-\)</span>$</p>
+\]</div>
 <p>ចំពោះលទ្ធផលនេះយើងអាចបកស្រាយថា ចំពោះអត្ថបទសារដែលបានផ្តល់ ម៉ូឌែលបានប៉ាន់ស្មានថាជាspam mailដោយតម្លៃប្រូបាប0.95។តម្លៃនេះធំជាង0.5 ហេតុនេះយើងថាម៉ូឌែលទស្សន៍ទាយថាវាជាspam mail។</p>
 <p>ក្នុងការពិភាក្សាខាងលើមកដល់ត្រឹមនេះ ចំពោះទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{x}\)</span>និងប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w} \)</span> ដែលត្រូវបានផ្តល់ឲ្យការប៉ាន់ស្មានរបស់ម៉ូឌែលត្រូវបានគណនាតាមវិធីដែលបានរៀបរាប់ខាងលើ។ ពេលនេះយើងពិនិត្យករណីដែលប្រភេទទិន្នន័យត្រូវបានកំណត់ជាក់លាក់ តែប៉ារ៉ាម៉ែត្រអាចត្រូវបានផ្លាស់ប្តូរ។ នៅទីនេះ យើងសិក្សាលើកម្រិតសាកសមនៃទិន្នន័យដែលម៉ូឌែលប៉ាន់ស្មានបានដោយកំណត់ជាតម្លៃប្រូបាប<span class="math notranslate nohighlight">\({\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)\)</span>ដូចខាងក្រោម និងសន្មតហៅថា កម្រិតសាកសម Likelihood។ពោលគឺកម្រិតដែលម៉ូឌែលអាចប៉ាន់ស្មានបានត្រឹមត្រូវ(គិតជាភាគរយ)លើប្រភេទទិន្នន័យនិមួយៗ។</p>
 <div class="math notranslate nohighlight">
@@ -438,11 +457,12 @@ P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(3\right)=\frac{1}{1+\exp{\left(-3\ri
 \[
 P\left(\hat{y}=1|\pmb{x}\right)=0.95
 \]</div>
-<p>ហេតុនេះកម្រិតសាកសមLikelihood :
-$<span class="math notranslate nohighlight">\(
+<p>ហេតុនេះកម្រិតសាកសមLikelihood :</p>
+<div class="math notranslate nohighlight">
+\[
 {\hat{l}}_{\left(\pmb{x},1\right)}\left(\pmb{w}\right)=P\left(\hat{y}=1|\pmb{x}\right)=0.95
-\)</span>$
-ដែលមានន័យថា ម៉ូឌែលអាចបែងចែកថាជាspam mailបានត្រឹមត្រូវក្នុងកម្រិត95%(ប្រូបាប0.95)។ ផ្ទុយទៅវិញ ឧបមាថាយើងមានអត្ថបទសារមិនមែនspam mail មួយផ្សេង “Please submit your assignment file by tomorrow morning” ។ នោះវ៉ិចទ័រ</p>
+\]</div>
+<p>ដែលមានន័យថា ម៉ូឌែលអាចបែងចែកថាជាspam mailបានត្រឹមត្រូវក្នុងកម្រិត95%(ប្រូបាប0.95)។ ផ្ទុយទៅវិញ ឧបមាថាយើងមានអត្ថបទសារមិនមែនspam mail មួយផ្សេង “Please submit your assignment file by tomorrow morning” ។ នោះវ៉ិចទ័រ</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \pmb{x}=\left(\begin{matrix}\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}1&amp;0\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;0\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;0\\\end{matrix}&amp;\begin{matrix}0&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)^\top 
@@ -456,19 +476,24 @@ $<span class="math notranslate nohighlight">\(
 \[
 P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(-1\right)=\frac{1}{1+\exp{\left(1\right)}}=0.27
 \]</div>
-<p>ដោយចម្លើយពិតគឺមិនមែនជាspam mail (y=0) ហេតុនេះកម្រិតសាកសមLikelihood :
-$<span class="math notranslate nohighlight">\(
+<p>ដោយចម្លើយពិតគឺមិនមែនជាspam mail (y=0) ហេតុនេះកម្រិតសាកសមLikelihood :</p>
+<div class="math notranslate nohighlight">
+\[
 {\hat{l}}_{\left(\pmb{x},0\right)}\left(\pmb{w}\right)=P\left(\hat{y}=0|\pmb{x}\right)=1-P\left(\hat{y}=1|\pmb{x}\right)=1-0.27=0.73 
-\)</span>$
-ដែលមានន័យថាម៉ូឌែលអាចបែងចែកថាមិនមែនspam mailបានត្រឹមត្រូវក្នុងកម្រិត73%(ប្រូបាប0.73)។</p>
-<p>ចំពោះគ្រប់ប្រភេទទិន្នន័យ យើងអាចសរសេរកន្សោមកម្រិតសាកសមបានក្រោមទម្រង់
-$<span class="math notranslate nohighlight">\(
+\]</div>
+<p>ដែលមានន័យថាម៉ូឌែលអាចបែងចែកថាមិនមែនspam mailបានត្រឹមត្រូវក្នុងកម្រិត73%(ប្រូបាប0.73)។</p>
+<p>ចំពោះគ្រប់ប្រភេទទិន្នន័យ យើងអាចសរសេរកន្សោមកម្រិតសាកសមបានក្រោមទម្រង់</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 {\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)=P\left(\hat{y}=y|\pmb{x}\right)=\left\{\begin{matrix}
 P(\hat{y}=1|x)&amp; (y=1)\\ 
 P(\hat{y}=0|x)&amp; (y=0)
 \end{matrix}\right.   =π^{y}(1-π)^{1-y}
-\)</span><span class="math notranslate nohighlight">\(
-ដែល \)</span><span class="math notranslate nohighlight">\(\pi=P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)\)</span>$។</p>
+\end{split}\]</div>
+<p>ដែល</p>
+<div class="math notranslate nohighlight">
+\[\pi=P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)\]</div>
+<p>។</p>
 </div>
 <div class="section" id="maximum-likelihood">
 <h2>ការប៉ាន់ស្មានមេគុណតម្រែតម្រង់តាម Maximum Likelihood<a class="headerlink" href="#maximum-likelihood" title="Permalink to this headline">¶</a></h2>
@@ -517,11 +542,15 @@ P(\hat{y}=0|x)&amp; (y=0)
 \frac{\partial}{\partial a}\sigma\left(a\right)=\sigma\left(a\right)\left(1-\sigma\left(a\right)\right)
 \frac{\partial\pi}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}P\left(\hat{y}=1|\pmb{x}\right)=\frac{\partial}{\partial\pmb{w}}\sigma\left(\pmb{x}^\top\pmb{w}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)\left(1-\sigma\left(\pmb{x}^\top\pmb{w}\right)\right)=\pi\left(1-\pi\right)
 \]</div>
-<p>នៅទីនេះ <span class="math notranslate nohighlight">\(a=\pmb{x}^\top\pmb{w}\ ,\ \frac{\partial a}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}\left(\pmb{x}^\top\pmb{w}\right)=\pmb{x}\)</span>
-ហេតុនេះ
+<p>នៅទីនេះ
 $<span class="math notranslate nohighlight">\(
-\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial a}\frac{\partial a}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\pi\left(1-\pi\right)\pmb{x}
+a=\pmb{x}^\top\pmb{w}\ ,\ \frac{\partial a}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}\left(\pmb{x}^\top\pmb{w}\right)=\pmb{x}
 \)</span>$</p>
+<p>ហេតុនេះ</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial a}\frac{\partial a}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\pi\left(1-\pi\right)\pmb{x}
+\]</div>
 <div class="math notranslate nohighlight">
 \[
 \frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\left(y-\pi\right)\pmb{x}
@@ -579,6 +608,300 @@ $<span class="math notranslate nohighlight">\(
 <p>Accuracyគឺបង្ហាញពីអត្រានៃការទស្សន៍ទាយបានត្រឹមត្រូវរបស់ម៉ូឌែលដោយមិនបែងចែកចំណាត់ថ្នាក់ក្រុមរបស់ទិន្នន័យ។អត្រានេះដូចគ្នានិងពិន្ទុដែលអ្នកឆ្លើយសំណួរបានត្រឹមត្រូវក្នុងការប្រឡងណាមួយដែរ។</p>
 <p>Precisionគឺសំដៅដល់អត្រានៃករណីដែលពិតជានៅក្នុងក្រុម<span class="math notranslate nohighlight">\( y=1 \)</span>មែនក្នុងចំណោមករណីដែលម៉ូឌែលបានទស្សន៍ទាយថាស្ថិតក្នុងក្រុម<span class="math notranslate nohighlight">\(y=1\)</span>។ Recallសំដៅដល់អត្រានៃករណីដែលម៉ូឌែលបានទស្សន៍ទាយថាស្ថិតក្នុងក្រុម<span class="math notranslate nohighlight">\(y=1\)</span> ក្នុងចំណោមទិន្នន័យក្នុងក្រុម<span class="math notranslate nohighlight">\(y=1\)</span>សរុប។</p>
 <p>ជាទូទៅវាជាការលំបាកក្នុងការបង្កើតម៉ូឌែលដែលមានទាំងPrecisionនិងRecallខ្ពស់ដូចគ្នា(trade-off relation)។ហេតុនេះដើម្បីវាយតម្លៃរួមលើរង្វាស់ទាំងពីរនេះការធ្វើផលធៀបមធ្យមលើតម្លៃទាំងពីរត្រូវបានប្រើពោលគឺតម្លៃ F1-score។</p>
+</div>
+<div class="section" id="spam-mail-classification">
+<h2>អនុវត្តលើការធ្វើចំណាត់ថ្នាក់ពីរក្រុម : spam mail classification<a class="headerlink" href="#spam-mail-classification" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id3">
+<h3>រៀបចំទិន្នន័យ<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>យើងទាញយក Dataset ពី https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>wget https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>--2021-02-05 00:30:19--  https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Resolving archive.ics.uci.edu (archive.ics.uci.edu)... 128.195.10.252
+Connecting to archive.ics.uci.edu (archive.ics.uci.edu)|128.195.10.252|:443... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>connected.
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>HTTP request sent, awaiting response... 
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>200 OK
+Length: 203415 (199K) [application/x-httpd-php]
+Saving to: ‘smsspamcollection.zip.1’
+
+
+smsspamcollection.z   0%[                    ]       0  --.-KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smsspamcollection.z  11%[=&gt;                  ]  23.50K  34.1KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smsspamcollection.z  27%[====&gt;               ]  54.50K  53.1KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smsspamcollection.z  35%[======&gt;             ]  70.00K  57.1KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smsspamcollection.z  50%[=========&gt;          ] 101.00K  67.5KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smsspamcollection.z  66%[============&gt;       ] 132.00K  72.4KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smsspamcollection.z  74%[=============&gt;      ] 147.50K  72.1KB/s               
+</pre></div>
+</div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>smsspamcollection.z  97%[==================&gt; ] 194.00K  82.7KB/s               
+smsspamcollection.z 100%[===================&gt;] 198.65K  84.7KB/s    in 2.3s    
+
+2021-02-05 00:30:22 (84.7 KB/s) - ‘smsspamcollection.zip.1’ saved [203415/203415]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>unzip smsspamcollection.zip
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Archive:  smsspamcollection.zip
+replace SMSSpamCollection? [y]es, [n]o, [A]ll, [N]one, [r]ename: 
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">!</span>head SMSSpamCollection
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>ham	Go until jurong point, crazy.. Available only in bugis n great world la e buffet... Cine there got amore wat...
+ham	Ok lar... Joking wif u oni...
+spam	Free entry in 2 a wkly comp to win FA Cup final tkts 21st May 2005. Text FA to 87121 to receive entry question(std txt rate)T&amp;C&#39;s apply 08452810075over18&#39;s
+ham	U dun say so early hor... U c already then say...
+ham	Nah I don&#39;t think he goes to usf, he lives around here though
+spam	FreeMsg Hey there darling it&#39;s been 3 week&#39;s now and no word back! I&#39;d like some fun you up for it still? Tb ok! XxX std chgs to send, £1.50 to rcv
+ham	Even my brother is not like to speak with me. They treat me like aids patent.
+ham	As per your request &#39;Melle Melle (Oru Minnaminunginte Nurungu Vettam)&#39; has been set as your callertune for all Callers. Press *9 to copy your friends Callertune
+spam	WINNER!! As a valued network customer you have been selected to receivea £900 prize reward! To claim call 09061701461. Claim code KL341. Valid 12 hours only.
+spam	Had your mobile 11 months or more? U R entitled to Update to the latest colour mobiles with camera for Free! Call The Mobile Update Co FREE on 08002986030
+</pre></div>
+</div>
+</div>
+</div>
+<p>spam <span class="math notranslate nohighlight">\(\to\)</span> y=1</p>
+<p>ham  <span class="math notranslate nohighlight">\(\to\)</span> y=0</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tokenize</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39; &#39;</span><span class="p">)</span>
+    <span class="k">return</span> <span class="p">[</span><span class="n">t</span><span class="o">.</span><span class="n">rstrip</span><span class="p">(</span><span class="s1">&#39;.&#39;</span><span class="p">)</span> <span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="n">tokens</span><span class="p">]</span>
+
+<span class="n">D</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="s1">&#39;SMSSpamCollection&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fi</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">line</span> <span class="ow">in</span> <span class="n">fi</span><span class="p">:</span>
+        <span class="n">fields</span> <span class="o">=</span> <span class="n">line</span><span class="o">.</span><span class="n">strip</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\t</span><span class="s1">&#39;</span><span class="p">)</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">tokenize</span><span class="p">(</span><span class="n">fields</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+        <span class="n">y</span> <span class="o">=</span> <span class="mi">1</span> <span class="k">if</span> <span class="n">fields</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">==</span> <span class="s1">&#39;spam&#39;</span> <span class="k">else</span> <span class="mi">0</span>
+        <span class="n">D</span><span class="o">.</span><span class="n">append</span><span class="p">((</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Number of data N=&quot;</span><span class="p">,</span><span class="nb">len</span><span class="p">(</span><span class="n">D</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Example:&quot;</span><span class="p">,</span><span class="n">D</span><span class="p">[</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Number of data N= 5574
+Example: ([&quot;I&#39;m&quot;, &#39;gonna&#39;, &#39;be&#39;, &#39;home&#39;, &#39;soon&#39;, &#39;and&#39;, &#39;i&#39;, &quot;don&#39;t&quot;, &#39;want&#39;, &#39;to&#39;, &#39;talk&#39;, &#39;about&#39;, &#39;this&#39;, &#39;stuff&#39;, &#39;anymore&#39;, &#39;tonight,&#39;, &#39;k?&#39;, &quot;I&#39;ve&quot;, &#39;cried&#39;, &#39;enough&#39;, &#39;today&#39;], 0)
+</pre></div>
+</div>
+</div>
+</div>
+<p>រៀបចំទិន្នន័យសម្រាប់កំណត់ប៉ារ៉ាម៉ែត្រម៉ូឌែល(training data) និងសម្រាប់វាយតម្លៃ(test data)</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+<span class="n">random</span><span class="o">.</span><span class="n">shuffle</span><span class="p">(</span><span class="n">D</span><span class="p">)</span>
+<span class="n">Dtrain</span> <span class="o">=</span> <span class="n">D</span><span class="p">[:</span><span class="mi">5000</span><span class="p">]</span>
+<span class="n">Dtest</span> <span class="o">=</span> <span class="n">D</span><span class="p">[</span><span class="mi">5000</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="logistic-regression-model-with-python">
+<h3>Logistic Regression Model with Python<a class="headerlink" href="#logistic-regression-model-with-python" title="Permalink to this headline">¶</a></h3>
+<p>កំណត់តម្លៃដំបូងនៃប៉ារ៉ាម៉ែត្ររបស់ម៉ូឌែលដោយ 0. គ្រប់កំប៉ូសង់របស់វា</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">W</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Dtrain</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+        <span class="n">W</span><span class="o">.</span><span class="n">setdefault</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">score</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">):</span>
+  <span class="n">score_</span> <span class="o">=</span> <span class="mf">0.</span>
+  <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+    <span class="n">score_</span> <span class="o">+=</span> <span class="n">W</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">a</span><span class="p">,</span> <span class="mf">0.</span><span class="p">)</span>
+  <span class="k">return</span> <span class="n">score_</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">a</span><span class="p">):</span>
+    <span class="k">if</span> <span class="mi">0</span> <span class="o">&lt;=</span> <span class="n">a</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">a</span><span class="p">))</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="mf">1.</span> <span class="o">-</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">math</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">a</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>កំណត់តម្លៃប៉ារ៉ាម៉ែត្រដោយប្រើ SGD</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">eta</span> <span class="o">=</span> <span class="mf">0.1</span>
+<span class="k">for</span> <span class="n">t</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1000</span><span class="p">):</span>
+    <span class="n">loss</span> <span class="o">=</span> <span class="mf">0.</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Dtrain</span><span class="p">:</span>
+        <span class="n">pi</span> <span class="o">=</span> <span class="n">sigmoid</span><span class="p">(</span><span class="n">score</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">))</span>
+        <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">x</span><span class="p">:</span>
+            <span class="n">W</span><span class="p">[</span><span class="n">a</span><span class="p">]</span> <span class="o">+=</span> <span class="n">eta</span> <span class="o">*</span> <span class="p">(</span><span class="n">y</span> <span class="o">-</span> <span class="n">pi</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ប្រើ Accuracy ជារង្វាស់សម្រាប់វាយតម្លៃម៉ូឌែល</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">accuracy</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">Dtest</span><span class="p">):</span>
+    <span class="n">n</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">Dtest</span><span class="p">:</span>
+      <span class="k">if</span> <span class="n">score</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="n">y</span>
+      <span class="k">else</span><span class="p">:</span>
+        <span class="n">n</span> <span class="o">+=</span> <span class="mi">1</span><span class="o">-</span><span class="n">y</span>
+    <span class="k">return</span> <span class="n">n</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">Dtest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">accuracy</span><span class="p">(</span><span class="n">W</span><span class="p">,</span> <span class="n">Dtest</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.9616724738675958
+</pre></div>
+</div>
+</div>
+</div>
+<p>កំណត់ពាក្យដែលពិបាក និង ងាយស្រួល កំណត់សម្គាល់ spam mail តាមរយៈតម្លៃនៃប៉ារ៉ាម៉ែត្រ</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">W</span><span class="o">.</span><span class="n">items</span><span class="p">(),</span> <span class="n">key</span><span class="o">=</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span><span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>ពាក្យដែលងាយមិនងាយសម្គាល់បានថាជា​ spam mail</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="p">[:</span><span class="mi">20</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;Ok&#39;, -7.850464149800363),
+ (&#39;Yup&#39;, -6.647303189499743),
+ (&#39;Okie&#39;, -6.552620472841572),
+ (&#39;Then&#39;, -5.201949865544912),
+ (&#39;Where&#39;, -5.077692135719686),
+ (&#39;i&#39;, -5.07408731777865),
+ (&#39;later&#39;, -4.986244586221465),
+ (&#39;Thanx&#39;, -4.843196321039564),
+ (&quot;I&#39;ll&quot;, -4.809736559030836),
+ (&#39;So&#39;, -4.773825570502229),
+ (&#39;me&#39;, -4.765978598518484),
+ (&#39;him&#39;, -4.760745409151684),
+ (&#39;Anything&#39;, -4.7282829394267685),
+ (&#39;My&#39;, -4.652138035258698),
+ (&#39;Lmao!nice&#39;, -4.629257904623003),
+ (&#39;Waiting&#39;, -4.606084581075299),
+ (&#39;Anytime&#39;, -4.605794986139529),
+ (&#39;ALRITE&#39;, -4.582996285974457),
+ (&#39;Have&#39;, -4.572928829153986),
+ (&#39;Nite&#39;, -4.572050717229812)]
+</pre></div>
+</div>
+</div>
+</div>
+<p>ពាក្យដែលងាយងាយស្រួលក្នុងការសម្គាល់បានថាជា​ spam mail</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">F</span><span class="p">[</span><span class="o">-</span><span class="mi">20</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[(&#39;service&#39;, 4.077551196993116),
+ (&#39;Reply&#39;, 4.166776285628135),
+ (&#39;chat,&#39;, 4.239368657443364),
+ (&#39;To&#39;, 4.251458053219325),
+ (&#39;sexy?&#39;, 4.2516509960549165),
+ (&#39;look&#39;, 4.327654265491161),
+ (&#39;claim&#39;, 4.431248857833612),
+ (&#39;truly&#39;, 4.463883231380166),
+ (&#39;darling&#39;, 4.5044661596449584),
+ (&#39;mobile&#39;, 4.597679069869247),
+ (&#39;Call&#39;, 4.951530371819616),
+ (&#39;STOP&#39;, 5.068454928272032),
+ (&#39;txt&#39;, 5.284078476481917),
+ (&#39;07090201529&#39;, 5.385284517641132),
+ (&#39;Text&#39;, 5.7351749570158574),
+ (&#39;won&#39;, 5.849502227945829),
+ (&#39;&amp;&#39;, 5.936203404287587),
+ (&#39;Txt&#39;, 6.245675586789368),
+ (&#39;Luv&#39;, 6.512096774166162),
+ (&quot;let&#39;s&quot;, 6.867920108687071)]
+</pre></div>
+</div>
+</div>
+</div>
+</div>
 </div>
 </div>
 
