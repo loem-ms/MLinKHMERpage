@@ -327,22 +327,24 @@ P\left(\hat{y}=j|\pmb{x}\right)=\sigma\left(\pmb{a}\right)_j=\frac{\exp{\left(\p
 \[\begin{split}
 \pmb{\pi}=\left(\begin{matrix}\begin{matrix}\pi_0&amp;\pi_1\\\end{matrix}&amp;\begin{matrix}\cdots&amp;\pi_K\\\end{matrix}\\\end{matrix}\right)=\sigma\left(\pmb{x}^\top W\right)
 \end{split}\]</div>
-<p>ឧទាហរណ៍ថាចំពោះ ទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{x}\)</span> ប្រូបាបមានលក្ខខណ្ឌចំពោះក្រុមនិមួយៗត្រូវបានគណនានិងបានលទ្ធផល
-$<span class="math notranslate nohighlight">\(
+<p>ឧទាហរណ៍ថាចំពោះ ទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{x}\)</span> ប្រូបាបមានលក្ខខណ្ឌចំពោះក្រុមនិមួយៗត្រូវបានគណនានិងបានលទ្ធផល</p>
+<div class="math notranslate nohighlight">
+\[
 P\left(\hat{y}=0|\pmb{x}\right)=0.1,\ P\left(\hat{y}=1|\pmb{x}\right)=0.4,\ P\left(\hat{y}=2|\pmb{x}\right)=0.2,\ P\left(\hat{y}=3|\pmb{x}\right)=0.3 
-\)</span>$</p>
+\]</div>
 <p>នោះទិន្នន័យត្រូវបានទស្សន៍ទាយថាក្នុងចំណាត់ថ្នាក់ក្រុម<span class="math notranslate nohighlight">\(\hat{y}=1\)</span> ព្រោះប្រូបាប<span class="math notranslate nohighlight">\( P\left(\hat{y}=1|\pmb{x}\right) \)</span>មានតម្លៃខ្ពស់ជាងគេ។</p>
 <p>ដើម្បីងាយស្រួលក្នុងការសរសេរនិងគណនាកម្រិតនៃភាពសាកសមរបស់ទិន្នន័យ ភាគច្រើនចំណាត់ថ្នាក់ក្រុមរបស់ទិន្នន័យត្រូវបានបង្ហាញជាទម្រង់one-hot vector។ឧបមាថាទិន្នន័យ<span class="math notranslate nohighlight">\( \pmb{x} \)</span>ស្ថិតនៅក្នុងក្រុម1 នោះវ៉ិចទ័រតាងចំណាត់ថ្នាក់ក្រុមរបស់វាត្រូវបានសរសេរដោយ</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \pmb{y}=\left(\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;\cdots\\\end{matrix}&amp;0\\\end{matrix}\\\end{matrix}\right)^\top\end{split}\]</div>
-<p>ពោលគឺទិន្នន័យស្ថិតនៅក្រុម<span class="math notranslate nohighlight">\(j\)</span> ត្រូវបានសរសេរដោយវ៉ិចទ័រ<span class="math notranslate nohighlight">\( \pmb{y} \)</span>ដែលកំប៉ូសង់ទី<span class="math notranslate nohighlight">\(j\)</span>របស់វាកំណត់ដោយ1 និង0 ចំពោះកំប៉ូសង់ក្រៅពីនេះ។
-$<span class="math notranslate nohighlight">\(
+<p>ពោលគឺទិន្នន័យស្ថិតនៅក្រុម<span class="math notranslate nohighlight">\(j\)</span> ត្រូវបានសរសេរដោយវ៉ិចទ័រ<span class="math notranslate nohighlight">\( \pmb{y} \)</span>ដែលកំប៉ូសង់ទី<span class="math notranslate nohighlight">\(j\)</span>របស់វាកំណត់ដោយ1 និង0 ចំពោះកំប៉ូសង់ក្រៅពីនេះ។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 y_k=\left\{\begin{matrix}
 1&amp;  k=j\\
 0&amp;   k\neq j 
 \end{matrix}\right.
-\)</span>$</p>
+\end{split}\]</div>
 </div>
 <div class="section" id="likelihood">
 <h2>កម្រិតសាកសមនៃទិន្នន័យ Likelihood<a class="headerlink" href="#likelihood" title="Permalink to this headline">¶</a></h2>
@@ -354,9 +356,14 @@ y_k=\left\{\begin{matrix}
 \]</div>
 <p>ដោយប្រើទម្រង់one-hot vectorនៃចំណាត់ថ្នាក់ក្រុមរបស់ទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{y}\in\mathbb{R}^K\)</span>យើងអាចសរសេរដូចខាងក្រោម។</p>
 <div class="math notranslate nohighlight">
-\[
-{\hat{l}}_{\left(\pmb{x},\pmb{y}\right)}\left(W\right)=\pi_j=k=0Kπk  yk=11     yk=0=k=0Kπkyk
-\]</div>
+\[\begin{split}
+\hat{l}_{(x,y)}(W)=\pi_j=\prod_{k=0}^{K}{\left\{\begin{matrix}
+\pi_k &amp; (y_k=1) \\ 
+1 &amp; (y_k=0)
+\end{matrix}\right.}
+=
+\prod_{k=0}^{K}{\pi_k^{y_k}}
+\end{split}\]</div>
 <p>ចំពោះទិន្នន័យTrainingទាំងអស់<span class="math notranslate nohighlight">\( \mathcal{D} \)</span>ដែលមាន Likelihood អាចសរសេរបានក្រោមទម្រង់</p>
 <div class="math notranslate nohighlight">
 \[
@@ -396,14 +403,31 @@ W^{\left(t+1\right)}=W^{\left(t\right)}+\eta_t\left.\frac{\partial}{\partial W}\
 \[
 \frac{\partial}{\partial\pmb{w}_j}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(W\right)}=\frac{\partial}{\partial\pmb{w}_j}\sum_{k=0}^{K}{y_k\log{\pi_k}}=\sum_{k=0}^{K}\frac{y_k}{\pi_k}\frac{\partial\pi_k}{\partial\pmb{w}_\pmb{j}}
 \]</div>
-<p>នៅទីនេះយើងពិនិត្យលើអនុគមន៍បណ្តាក់  <span class="math notranslate nohighlight">\(\pi_k=\sigma\left(\pmb{a}\right)_k\ ,\ a_j=\pmb{x}^\top\pmb{w}_j\)</span></p>
+<p>នៅទីនេះយើងពិនិត្យលើអនុគមន៍បណ្តាក់</p>
 <div class="math notranslate nohighlight">
-\[ \begin{align}\begin{aligned}
+\[
+\pi_k=\sigma\left(\pmb{a}\right)_k\ ,\ a_j=\pmb{x}^\top\pmb{w}_j
+\]</div>
+<div class="math notranslate nohighlight">
+\[
 \frac{\partial}{\partial\pmb{w}_j}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(W\right)}=\sum_{k=0}^{K}\frac{y_k}{\pi_k}\frac{\partial\pi_k}{\partial\pmb{w}_j}\ =\sum_{k=0}^{K}\frac{y_k}{\pi_k}\frac{\partial\pi_k}{\partial a_j}\frac{\partial a_j}{\partial\pmb{w}_j}
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\sum_{k=0}^{K}\frac{y_k}{\pi_k}\left\{\pi_k\left(\delta_{kj}-\pi_j\right)\right\}\pmb{x}\ \ \ \ \ ,\ \ \ \ \ \delta_{kj}=1 k=j0  k≠j 
-\ \ \ \ \ \ \ \ \ \ \ =\pmb{x}\sum_{k=0}^{K}{y_k\left(\delta_{kj}-\pi_j\right)}
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ =\pmb{x}\left(\sum_{k=0}^{K}{y_k\delta_{kj}}-\sum_{k=0}^{K}{y_k\pi_j}\right)=\pmb{x}\left(y_j-\pi_j\right)\\\frac{\partial}{\partial\pmb{w}_j}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(W\right)}=\pmb{x}\left(y_j-\pi_j\right)
-\end{aligned}\end{align} \]</div>
+\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+=\sum_{k=0}^{K}\frac{y_k}{\pi_k}\left\{\pi_k\left(\delta_{kj}-\pi_j\right)\right\}\pmb{x}　 \delta_{kj}=\left\{\begin{matrix}
+1 &amp;(k=j) \\ 
+0 &amp;(k\neq j)
+\end{matrix}\right.
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\pmb{x}\sum_{k=0}^{K}{y_k\left(\delta_{kj}-\pi_j\right)}
+=\pmb{x}\left(\sum_{k=0}^{K}{y_k\delta_{kj}}-\sum_{k=0}^{K}{y_k\pi_j}\right)=\pmb{x}\left(y_j-\pi_j\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial\pmb{w}_j}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(W\right)}=\pmb{x}\left(y_j-\pi_j\right)
+\]</div>
 <p>ដូចនេះ តាមរយៈវិធីSGD តម្លៃនៃប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w}_j \)</span>នៃ<span class="math notranslate nohighlight">\(W\)</span>ដែលធ្វើបរមាកម្មលើតម្លៃកម្រិតសាកសមនៃទិន្នន័យត្រូវបានគណនាដោយផ្លាស់ប្តូរតម្លៃដូចខាងក្រោម។</p>
 <div class="math notranslate nohighlight">
 \[
@@ -413,11 +437,12 @@ W^{\left(t+1\right)}=W^{\left(t\right)}+\eta_t\left.\frac{\partial}{\partial W}\
 \[
 \pmb{w}_j^{\left(t+1\right)}=\pmb{w}_j^{\left(t\right)}+\eta_t\left(y_j-\pi_j^{\left(t\right)}\right)\pmb{x}
 \]</div>
-<p>នៅទីនេះ <span class="math notranslate nohighlight">\(\pi^{\left(t\right)} \)</span>ជាតម្លៃប្រូបាបដែលគណនាដោយម៉ូឌែលជាមួយតម្លៃប៉ារ៉ាម៉ែត្រនៅដំណាក់កាលt នៃការផ្លាស់ប្តូរតម្លៃប៉ារ៉ាម៉ែត្រ ពោលគឺ
-$<span class="math notranslate nohighlight">\(
+<p>នៅទីនេះ <span class="math notranslate nohighlight">\(\pi^{\left(t\right)} \)</span>　ជាតម្លៃប្រូបាបដែលគណនាដោយម៉ូឌែលជាមួយតម្លៃប៉ារ៉ាម៉ែត្រនៅដំណាក់កាលt នៃការផ្លាស់ប្តូរតម្លៃប៉ារ៉ាម៉ែត្រ ពោលគឺ</p>
+<div class="math notranslate nohighlight">
+\[
 \pi^{\left(t\right)}=\sigma\left(\pmb{x}^\top\pmb{w}^{\left(t\right)}\right)
-\)</span>$
-។</p>
+\]</div>
+<p>។</p>
 <p><span class="math notranslate nohighlight">\(\eta_t\)</span> ជាlearning-rate និង <span class="math notranslate nohighlight">\(y\)</span> ជាចំណាត់ថ្នាក់ក្រុមពិតប្រាកដនៃទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{x}\)</span>។</p>
 <p>ក្នុងករណីប្រើRidge Regularization កន្សោមខាងលើនឹងប្រែទៅជាទម្រង់ខាងក្រោម។</p>
 <div class="math notranslate nohighlight">
