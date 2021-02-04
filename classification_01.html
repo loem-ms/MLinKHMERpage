@@ -91,7 +91,7 @@
     <ul class="nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="intro.html">
-   អំពីវគ្គសិក្សា
+   អំពីវគ្គសិក្សា(គម្រោង)
   </a>
  </li>
 </ul>
@@ -224,10 +224,66 @@
 
         <!-- Launch buttons -->
 
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/classification_01.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
     </div>
 
     <!-- Table of contents -->
     <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   ចំណាត់ថ្នាក់២ក្រុមដោយម៉ូឌែលលីនេអ៊ែរ
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#logistic-logistic-regression">
+   តម្រែតម្រង់Logistic (Logistic Regression)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#likelihood">
+   កម្រិតសាកសមនៃទិន្នន័យ Likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-likelihood">
+   ការប៉ាន់ស្មានមេគុណតម្រែតម្រង់តាម Maximum Likelihood
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sgd">
+   ការដោះស្រាយតាមរយៈវិធី SGD
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   ការវាយតម្លៃ
+  </a>
+ </li>
+</ul>
+
+        </nav>
         
     </div>
 </div>
@@ -238,7 +294,292 @@
                 
   <div class="section" id="binary-classification">
 <h1>ចំណាត់ថ្នាក់២ក្រុម (Binary Classification)<a class="headerlink" href="#binary-classification" title="Permalink to this headline">¶</a></h1>
-<p>កំពុងរៀបចំ <span class="math notranslate nohighlight">\(\cdots\)</span></p>
+<p>ក្រៅពីការសិក្សាពីទំនាក់ទំនងរវាងអថេរពីរឬច្រើនតាមរយៈម៉ូឌែលតម្រែតម្រង់ ការបែងចែកទិន្នន័យដោយផ្នែកលើអថេរពន្យល់របស់វាជាក្រុមហៅថាចំណាត់ថ្នាក់ក្រុម(classification)។ តាមពិតចំណាត់ថ្នាក់ក្រុម ក៏អាចបង្ហាញបានជាទម្រង់ម៉ូឌែលតម្រែតម្រង់ផងដែរ ដោយគ្រាន់តែតម្លៃនៃអថេរគោលដៅមិនយកតម្លៃទូលាយលើសំណុំចំនួនពិតឡើយ ផ្ទុយទៅវិញគឺយកតម្លៃដាច់ដូចជា{0,1}ជាដើម។</p>
+<p>ក្នុងអត្ថបទនេះយើងនឹងណែនាំករណីដែលអថេរគោលដៅយកតម្លៃតែពីរប្រភេទដែលយើងកំណត់ហៅថាចំណាត់ថ្នាក់២ក្រុម(binary classification)។ ឧទាហរណ៍នៃការអនុវត្តចំណាត់ថ្នាក់២ក្រុមក្នុងជីវភាពមានដូចជា៖ ការកំណត់អត្តសញ្ញាណសារអេឡិចត្រូនិចរំខាន(spam or not) ការវិភាគជម្ងឺតាមរយៈរោគសញ្ញា(មានជម្ងឺឬគ្មាន) ការទស្សន៍ទាយលទ្ធផលបោះឆ្នោត(ជាប់ឬធ្លាក់)ជាដើម។</p>
+<p>ជាឧទាហរណ៍យើងនឹងលើកយកការកំណត់អត្តសញ្ញាណសារអេឡិចត្រូនិចរំខាន(spam or not)មកបង្ហាញដើម្បីស្វែងយល់បន្ថែមពីដំណោះស្រាយក្នុងបញ្ហាចំណាត់ថ្នាក់ក្រុមតាមរយៈ machine learning ។ រូបទី១បង្ហាញពីដំណើរការនៃការកំណត់សាររំខាន។</p>
+<p><img alt="spam" src="images/spam-exampl.png" /></p>
+<p>ជាដំណោះស្រាយងាយបំផុតដែលអ្នកអាចប្រហែលជានឹងនឹកឃើញមុនគេគឺការកំណត់រកនូវពាក្យដែលច្រើនប្រើប្រាស់ក្នុងspam mail។ 
+ជាឧទាហរណ៍យើងអាចកំណត់ដូចទម្រង់ខាងក្រោម។</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">checkSpam</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+    <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;search for friend&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;check my attached file for more photos&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span> 
+    <span class="k">if</span> <span class="n">text</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s1">&#39;Hey honey&#39;</span><span class="p">)</span> <span class="o">!=</span> <span class="o">-</span><span class="mi">1</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="c1"># and many conditions</span>
+    <span class="c1"># and many many conditions </span>
+    <span class="c1"># .....</span>
+    <span class="k">return</span> <span class="kc">False</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">checkSpam</span><span class="p">(</span><span class="s1">&#39;I am Mariya. I search for friend. Check my profile here!&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>True
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">checkSpam</span><span class="p">(</span><span class="s1">&#39;Please submit your abstract before 1st March&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>False
+</pre></div>
+</div>
+</div>
+</div>
+<p>ដូចដែលអ្នកអាចកត់សម្គាល់បាន ការកំណត់លក្ខខណ្ឌបែបនេះទាមទារពេលវេលានិងកម្លាំងច្រើនក្នុងការកំណត់យកពាក្យដែលសមស្រប។​ម្យ៉ាងទៀតវាមិនមានភាពបត់បែនខ្ពស់នោះឡើយ។ ជាដំណោះស្រាយយើងនឹងណែនាំអំពីវិធីសាស្រ្តធ្វើចំណាត់ថ្នាក់ក្រុមដោយប្រើMachine Learning។ នៅទីនេះធាតុចូលគឺជាអត្ថបទសាររីឯលទ្ធផលគឺជាការសន្និដ្ឋានថាតើជាspam mailឬយ៉ាងណា។</p>
+<div class="section" id="id1">
+<h2>ចំណាត់ថ្នាក់២ក្រុមដោយម៉ូឌែលលីនេអ៊ែរ<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>ម៉ូឌែលលីនេអ៊ែរនៃចំណាត់ថ្នាក់២ក្រុមគឺជាម៉ូឌែលដែលទស្សន៍ទាយប្រភេទនៃទិន្នន័យ
+<span class="math notranslate nohighlight">\(\hat{y}\in\left\{0,1\right\}\)</span>ដោយកំណត់តាមតម្លៃវិជ្ជមានឬអវិជ្ជមាននៃផលគុណស្កាលែរវាងធាតុចូល(input)<span class="math notranslate nohighlight">\(\pmb{x}\in\mathbb{R}^d \)</span> និងប៉ារ៉ាម៉ែត្រម៉ូឌែល<span class="math notranslate nohighlight">\(\pmb{w}\in\mathbb{R}^d \)</span>។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\hat{y}=\left\{\begin{matrix}
+1 &amp; \pmb{x}^{\top}\pmb{w}&gt;0\\ 
+0 &amp; \pmb{x}^{\top}\pmb{w}\leq 0
+\end{matrix}\right.
+\end{split}\]</div>
+<p>ក្នុងករណីការកំណត់spam mail យើងអាចកំណត់ជាទម្រង់ម៉ូឌែលលីនេអ៊ែរខាងលើបានដោយកំណត់យក \hat{y}=1 សម្គាល់spam mail និង \hat{y}=0សម្គាល់សារធម្មតា។
+ដើម្បីងាយស្រួលយល់ពីម៉ូឌែលនេះ យើងមកមើលឧទាហរណ៍ងាយមួយក្នុងការកំណត់spam mailដូចខាងក្រោម។</p>
+<p>សន្មតថា វ៉ិចទ័រធាតុចូល(អត្ថបទសារ)មានវិមាត្រ10។ យើងកំណត់វ៉ិចទ័រនេះបង្ហាញពីវត្តមាននៃពាក្យគន្លឹះចំនួន១០ ដោយយកតម្លៃ0 ឬ 1 ត្រង់ពាក្យគន្លឹះនិមួយៗប្រសិនបើពាក្យគន្លឹះនោះគ្មានឬមានវត្តមានក្នុងអត្ថបទសារ។</p>
+<p>ឧទាហរណ៍ ពាក្យគន្លឹះដែលរៀបចំទុកមាន “assignment”, “boy”, “file”, “hello”, “love”, “my”, “photo”, “password”, “school” , “text”។ ក្នុងករណីនេះ អត្ថបទសារ “Hello my boy, I sent you my photo in the attached file” អាចបង្ហាញជាទម្រង់វ៉ិចទ័រ <span class="math notranslate nohighlight">\(\pmb{x}\in\mathbb{R}^d\)</span> បានដូចខាងក្រោម</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pmb{x}=\left(\begin{matrix}\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}1&amp;1\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}0&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)^\top
+\end{split}\]</div>
+<p>ចំពោះការប៉ាន់ស្មានដោយម៉ូឌែលលីនេអ៊ែរខាងលើ ចំពោះប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w}=\left(\begin{matrix}w_1&amp;\cdots&amp;w_{10}\\\end{matrix}\right)^\top \)</span> ផលគុណស្កាលែក្នុងករណីអត្ថបទសារខាងលើត្រូវបានគណនាដូចខាងក្រោម។ក្នុងករណីនេះប្រសិនបើតម្លៃផលគុណស្កាលែនេះវិជ្ជមាននោះ អត្ថបទនេះត្រូវបានកំណត់ថាជាspam mail។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pmb{x}^\top\pmb{w}=\left(\begin{matrix}\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}1&amp;1\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}0&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)\left(\begin{matrix}\begin{matrix}w_1\\w_2\\\end{matrix}\\\vdots\\\begin{matrix}w_9\\w_{10}\\\end{matrix}\\\end{matrix}\right)=w_2+w_3+w_4+w_6+w_7
+\end{split}\]</div>
+<p>ប៉ុន្តែដូចដែលអ្នកកត់សម្គាល់បាន បញ្ហាសម្រាប់យើងគឺថា តើនឹងត្រូវកំណត់តម្លៃនៃប៉ារ៉ាម៉ែត្ររបស់ម៉ូឌែលដោយរបៀបណា។ មានវិធីសាស្រ្តជាច្រើនត្រូវបានប្រើ តែក្នុងអត្ថបទនេះយើងនឹងណែនាំម៉ូឌែលតម្រែតម្រង់Logistic។</p>
+</div>
+<div class="section" id="logistic-logistic-regression">
+<h2>តម្រែតម្រង់Logistic (Logistic Regression)<a class="headerlink" href="#logistic-logistic-regression" title="Permalink to this headline">¶</a></h2>
+<p>តម្រែតម្រង់Logisticគឺជាម៉ូឌែលលីនេអ៊ែរនៃចំណាត់ថ្នាក់២ក្រុមមួយប្រភេទ ដែលប្រូបាបមាន
+លក្ខខណ្ឌ<span class="math notranslate nohighlight">\(p\left(y|\pmb{x}\right)\)</span>ពោលគឺប្រូបាបដែលប្រភេទនៃទិន្នន័យyត្រូវបានទស្សន៍ទាយចំពោះអថេរពន្យល់<span class="math notranslate nohighlight">\( \pmb{x} \)</span>ត្រូវបានគណនាដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)=\frac{\exp{\left(\pmb{x}^\top\pmb{w}\right)}}{1+\exp{\left(\pmb{x}^\top\pmb{w}\right)}}=\frac{1}{1+\exp{\left(-\pmb{x}^\top\pmb{w}\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+P\left(\hat{y}=0|\pmb{x}\right)=1-P\left(\hat{y}=1|\pmb{x}\right)=1-\sigma\left(\pmb{x}^\top\pmb{w}\right)=\sigma\left(-\pmb{x}^\top\pmb{w}\right)
+\]</div>
+<p>នៅទីនេះ <span class="math notranslate nohighlight">\(\sigma\left(x\right)\)</span> ជាអនុគមន៍sigmaដែលត្រូវបានគណនាដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\sigma\left(x\right)=\frac{\exp{\left(x\right)}}{1+\exp{\left(x\right)}}=\frac{1}{1+\exp{\left(-x\right)}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sigmoid Function&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/classification_01_12_0.png" src="_images/classification_01_12_0.png" />
+</div>
+</div>
+<p>ចំពោះទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{x}\)</span> ក្នុងករណីដែលប្រូបាប<span class="math notranslate nohighlight">\(P\left(\hat{y}=1|\pmb{x}\right)&gt;0.5 \)</span>នោះទិន្នន័យត្រូវបានទស្សន៍ទាយថាក្នុងចំណាត់ថ្នាក់ក្រុម<span class="math notranslate nohighlight">\(\hat{y}=1 \)</span>។ការកំណត់បែបនេះគឺសមមូលគ្នានឹងលក្ខខណ្ឌផលគុណស្កាលែវិជ្ជមានដែលបានបង្ហាញខាងដើម។</p>
+<div class="math notranslate nohighlight">
+\[
+P\left(\hat{y}=1|\pmb{x}\right)&gt;0.5\Leftrightarrow\frac{1}{1+\exp{\left(-\pmb{x}^\top\pmb{w}\right)}}&gt;\frac{1}{2}\ \Leftrightarrow\exp{\left(-\pmb{x}^\top\pmb{w}\right)}&lt;1\ \Leftrightarrow\ \pmb{x}^\top\pmb{w}&gt;0
+\]</div>
+</div>
+<div class="section" id="likelihood">
+<h2>កម្រិតសាកសមនៃទិន្នន័យ Likelihood<a class="headerlink" href="#likelihood" title="Permalink to this headline">¶</a></h2>
+<p>ឧបមាថា ប៉ារ៉ាម៉ែត្រនៃម៉ូឌែលតម្រែតម្រង់Logisticត្រូវបានកំណត់ដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pmb{w}=\left(\begin{matrix}\begin{matrix}\begin{matrix}-2&amp;1\\\end{matrix}&amp;\begin{matrix}1&amp;0\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;1\\\end{matrix}&amp;\begin{matrix}-1&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)^\top
+\end{split}\]</div>
+<p>ក្នុងករណីនេះ តម្លៃផលគុណស្កាលែរវាងវ៉ិចទ័រអថេរពន្យល់នៃទិន្នន័យ<span class="math notranslate nohighlight">\( \pmb{x} \)</span>និងប៉ារ៉ាម៉ែត្រអាច
+គណនានិងបកស្រាយជាទម្រង់ប្រូបាបដូចខាងក្រោម។
+$<span class="math notranslate nohighlight">\(
+\pmb{x}^\top\pmb{w}=\left(\begin{matrix}\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}1&amp;1\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;1\\\end{matrix}&amp;\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}0&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)\left(\begin{matrix}\begin{matrix}-2\\1\\\end{matrix}\\\vdots\\\begin{matrix}-1\\0\\\end{matrix}\\\end{matrix}\right)=3
+\)</span><span class="math notranslate nohighlight">\(
+\)</span><span class="math notranslate nohighlight">\(
+P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(3\right)=\frac{1}{1+\exp{\left(-3\right)}}=0.95
+\)</span>$</p>
+<p>ចំពោះលទ្ធផលនេះយើងអាចបកស្រាយថា ចំពោះអត្ថបទសារដែលបានផ្តល់ ម៉ូឌែលបានប៉ាន់ស្មានថាជាspam mailដោយតម្លៃប្រូបាប0.95។តម្លៃនេះធំជាង0.5 ហេតុនេះយើងថាម៉ូឌែលទស្សន៍ទាយថាវាជាspam mail។</p>
+<p>ក្នុងការពិភាក្សាខាងលើមកដល់ត្រឹមនេះ ចំពោះទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{x}\)</span>និងប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w} \)</span> ដែលត្រូវបានផ្តល់ឲ្យការប៉ាន់ស្មានរបស់ម៉ូឌែលត្រូវបានគណនាតាមវិធីដែលបានរៀបរាប់ខាងលើ។ ពេលនេះយើងពិនិត្យករណីដែលប្រភេទទិន្នន័យត្រូវបានកំណត់ជាក់លាក់ តែប៉ារ៉ាម៉ែត្រអាចត្រូវបានផ្លាស់ប្តូរ។ នៅទីនេះ យើងសិក្សាលើកម្រិតសាកសមនៃទិន្នន័យដែលម៉ូឌែលប៉ាន់ស្មានបានដោយកំណត់ជាតម្លៃប្រូបាប<span class="math notranslate nohighlight">\({\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)\)</span>ដូចខាងក្រោម និងសន្មតហៅថា កម្រិតសាកសម Likelihood។ពោលគឺកម្រិតដែលម៉ូឌែលអាចប៉ាន់ស្មានបានត្រឹមត្រូវ(គិតជាភាគរយ)លើប្រភេទទិន្នន័យនិមួយៗ។</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)=P\left(\hat{y}=y|\pmb{x}\right)
+\]</div>
+<p>ឧទាហរណ៍ក្នុងករណីអត្ថបទសារខាងលើ សន្មតថាប្រភេទទិន្នន័យពិតគឺ<span class="math notranslate nohighlight">\(y=1\)</span> ។ចំពោះប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w}\)</span> ដែលត្រូវបានផ្តល់ឲ្យ ការប៉ាន់ស្មានរបស់ម៉ូឌែលខាងលើគឺ</p>
+<div class="math notranslate nohighlight">
+\[
+P\left(\hat{y}=1|\pmb{x}\right)=0.95
+\]</div>
+<p>ហេតុនេះកម្រិតសាកសមLikelihood :
+$<span class="math notranslate nohighlight">\(
+{\hat{l}}_{\left(\pmb{x},1\right)}\left(\pmb{w}\right)=P\left(\hat{y}=1|\pmb{x}\right)=0.95
+\)</span>$
+ដែលមានន័យថា ម៉ូឌែលអាចបែងចែកថាជាspam mailបានត្រឹមត្រូវក្នុងកម្រិត95%(ប្រូបាប0.95)។ ផ្ទុយទៅវិញ ឧបមាថាយើងមានអត្ថបទសារមិនមែនspam mail មួយផ្សេង “Please submit your assignment file by tomorrow morning” ។ នោះវ៉ិចទ័រ</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pmb{x}=\left(\begin{matrix}\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}1&amp;0\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;0\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;0\\\end{matrix}&amp;\begin{matrix}0&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)^\top 
+\end{split}\]</div>
+<p>។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\pmb{x}^\top\pmb{w}=\left(\begin{matrix}\begin{matrix}\begin{matrix}1&amp;0\\\end{matrix}&amp;\begin{matrix}1&amp;0\\\end{matrix}\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;0\\\end{matrix}&amp;\begin{matrix}\begin{matrix}0&amp;0\\\end{matrix}&amp;\begin{matrix}0&amp;0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)\left(\begin{matrix}\begin{matrix}-2\\1\\\end{matrix}\\\vdots\\\begin{matrix}-1\\0\\\end{matrix}\\\end{matrix}\right)=-1
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[
+P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(-1\right)=\frac{1}{1+\exp{\left(1\right)}}=0.27
+\]</div>
+<p>ដោយចម្លើយពិតគឺមិនមែនជាspam mail (y=0) ហេតុនេះកម្រិតសាកសមLikelihood :
+$<span class="math notranslate nohighlight">\(
+{\hat{l}}_{\left(\pmb{x},0\right)}\left(\pmb{w}\right)=P\left(\hat{y}=0|\pmb{x}\right)=1-P\left(\hat{y}=1|\pmb{x}\right)=1-0.27=0.73 
+\)</span>$
+ដែលមានន័យថាម៉ូឌែលអាចបែងចែកថាមិនមែនspam mailបានត្រឹមត្រូវក្នុងកម្រិត73%(ប្រូបាប0.73)។</p>
+<p>ចំពោះគ្រប់ប្រភេទទិន្នន័យ យើងអាចសរសេរកន្សោមកម្រិតសាកសមបានក្រោមទម្រង់
+$<span class="math notranslate nohighlight">\(
+{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)=P\left(\hat{y}=y|\pmb{x}\right)=\left\{\begin{matrix}
+P(\hat{y}=1|x)&amp; (y=1)\\ 
+P(\hat{y}=0|x)&amp; (y=0)
+\end{matrix}\right.   =π^{y}(1-π)^{1-y}
+\)</span><span class="math notranslate nohighlight">\(
+ដែល \)</span><span class="math notranslate nohighlight">\(\pi=P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)\)</span>$។</p>
+</div>
+<div class="section" id="maximum-likelihood">
+<h2>ការប៉ាន់ស្មានមេគុណតម្រែតម្រង់តាម Maximum Likelihood<a class="headerlink" href="#maximum-likelihood" title="Permalink to this headline">¶</a></h2>
+<p>នៅក្នុងម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ យើងបានកំណត់តម្លៃមេគុណតម្រែតម្រង់ដោយធ្វើអប្ប
+បរមាកម្មលើតម្លៃកម្រិតលម្អៀងរវាងតម្លៃប៉ាន់ស្មានដោយម៉ូឌែលនិងតម្លៃពិតប្រាកដនៃអថេរគោលដៅ។ស្រដៀងគ្នានេះ ក្នុងម៉ូឌែលតម្រែតម្រង់Logistic យើងអាចកំណត់តម្លៃនៃប៉ារ៉ាម៉ែត្ររបស់ម៉ូឌែលដោយធ្វើអតិបរមាកម្មលើកម្រិតសាកសករបស់ទិន្នន័យដែលម៉ូឌែលអាចប៉ាន់ស្មានបាន។ វិធីសាស្រ្តនេះត្រូវបានគេហៅថា Maximum Likelihood Estimation(MLE)។</p>
+<p>ចំពោះសំណុំទិន្នន័យទាំងអស់<span class="math notranslate nohighlight">\(\mathcal{D}\)</span>ដែលមានចំនួន<span class="math notranslate nohighlight">\(N\)</span> យើងកំណត់កម្រិតសាកសមនៃទិន្នន័យ(likelihood)ពោលគឺកម្រិតដែលម៉ូឌែលអាចប៉ាន់ស្មានបានត្រឹមត្រូវចំពោះគ្រប់ទិន្នន័យទាំងអស់ដោយកន្សោមខាងក្រោម។ នៅទីនេះយើងសន្មតថារបាយនៃគ្រប់ទិន្នន័យទាំងអស់គឺឯករាជ្យនិងមានឯកសណ្ឋានភាព(i.i.d : independent and identically dristributed)។</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat{L}}_\mathcal{D}\left(\pmb{w}\right)=\prod_{i=1}^{N}{{\hat{l}}_{\left(\pmb{x}_i,y_i\right)}\left(\pmb{w}\right)}
+\]</div>
+<p>ដោយសារ កម្រិតសាកសមនៃទិន្នន័យ(likelihood)គឺជាតម្លៃប្រូបាប ហេតុនេះតម្លៃរបស់វាតូចខ្លាំង ដែលធ្វើឱ្យតម្លៃផលគុណកាន់តែតូចខ្លាំងពេលចំនួនទិន្នន័យមានច្រើន។ ដើម្បីបញ្ចៀសនូវបញ្ហាតម្លៃតូចពេកក្នុងការគណនាជាមួយកុំព្យូទ័រ នៅទីនេះយើងសិក្សាបរមាកម្មលើតម្លៃលោការីតរបស់វា។ ការធ្វើបែបនេះមិនប៉ះពាល់ដល់ការធ្វើបរមាកម្មឡើយ ព្រោះអនុគមន៍លោការីតជាអនុគមន៍កើនដាច់ខាត។</p>
+<div class="math notranslate nohighlight">
+\[
+\log{{\hat{L}}_\mathcal{D}\left(\pmb{w}\right)}=\log{\prod_{i=1}^{N}{{\hat{l}}_{\left(\pmb{x}_i,y_i\right)}\left(\pmb{w}\right)}}=\sum_{i=1}^{N}\log{{\hat{l}}_{\left(\pmb{x}_i,y_i\right)}\left(\pmb{w}\right)}
+\]</div>
+<p>ដើម្បីងាយស្រួលក្នុងការដោះស្រាយបញ្ហាបរមាកម្ម យើងប្តូរពីការធ្វើអតិបរមាកម្មលើLikelihood ទៅជាការធ្វើអប្បបរមាកម្មដោយគុណកន្សោមខាងលើ -1 ។</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat{\mathcal{L}}}_\mathcal{D}\left(\pmb{w}\right)=-\log{{\hat{L}}_\mathcal{D}\left(\pmb{w}\right)}=-\sum_{i=1}^{N}\log{{\hat{l}}_{\left(\pmb{x}_i,y_i\right)}\left(\pmb{w}\right)}
+\]</div>
+<p>ក្នុងករណីយើងចង់សិក្សាបន្ថែមដោយបញ្ចូលផ្នែក Regularization (Ridge) ចូលក្នុងម៉ូឌែល Likehoodដែលត្រូវធ្វើបរមាកម្ម អាចប្តូរទៅសរសេរជាទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+{\hat{\mathcal{L}}}_\mathcal{D}\left(\pmb{w}\right)=-\log{{\hat{L}}_\mathcal{D}\left(\pmb{w}\right)}+\alpha\left||\pmb{w}|\right|_2^2=-\sum_{i=1}^{N}\log{\hat{l}_{(x_i,y_i)}w}+α\left||w|\right|_2^2   　(α&gt;0)
+\]</div>
+</div>
+<div class="section" id="sgd">
+<h2>ការដោះស្រាយតាមរយៈវិធី SGD<a class="headerlink" href="#sgd" title="Permalink to this headline">¶</a></h2>
+<p>ដើម្បីធ្វើអប្បបរមាកម្ម<span class="math notranslate nohighlight">\({\hat{\mathcal{L}}}_\mathcal{D}\left(\pmb{w}\right) \)</span>យើងនឹងប្រើប្រាស់វិធីSGDដែលបានសិក្សាក្នុងអត្ថបទមុន។
+ជាដំបូងយើងពិនិត្យលើអនុគមន៍ដេរីវេ <span class="math notranslate nohighlight">\(\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)} \)</span>។</p>
+<div class="math notranslate nohighlight">
+\[
+\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\log{\left(\pi^y\left(1-\pi\right)^{1-y}\right)}=y\log{\pi}+\left(1-y\right)\log{\left(1-\pi\right)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\frac{y}{\pi}\frac{\partial\pi}{\partial\pmb{w}}+\frac{1-y}{1-\pi}\times\left(-\frac{\partial\pi}{\partial\pmb{w}}\right)=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial\pmb{w}}
+\]</div>
+<p>បន្ទាប់ពីនេះ ដើម្បីគណនា <span class="math notranslate nohighlight">\(\frac{\partial\pi}{\partial\pmb{w}}\)</span> យើងពិនិត្យលើដេរីវេនៃអនុគមន៍Sigmoid។</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial a}\sigma\left(a\right)=\frac{\partial}{\partial a}\left\{\frac{1}{1+\exp{\left(-a\right)}}\right\}=-\frac{\frac{\partial}{\partial a}\exp{\left(-a\right)}}{\left(1+\exp{\left(-a\right)}\right)^2}=\frac{1}{1+\exp{\left(-a\right)}}\times\frac{\exp{\left(-a\right)}}{1+\exp{\left(-a\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial a}\sigma\left(a\right)=\sigma\left(a\right)\left(1-\sigma\left(a\right)\right)
+\frac{\partial\pi}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}P\left(\hat{y}=1|\pmb{x}\right)=\frac{\partial}{\partial\pmb{w}}\sigma\left(\pmb{x}^\top\pmb{w}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)\left(1-\sigma\left(\pmb{x}^\top\pmb{w}\right)\right)=\pi\left(1-\pi\right)
+\]</div>
+<p>នៅទីនេះ <span class="math notranslate nohighlight">\(a=\pmb{x}^\top\pmb{w}\ ,\ \frac{\partial a}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}\left(\pmb{x}^\top\pmb{w}\right)=\pmb{x}\)</span>
+ហេតុនេះ
+$<span class="math notranslate nohighlight">\(
+\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial a}\frac{\partial a}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\pi\left(1-\pi\right)\pmb{x}
+\)</span>$</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\left(y-\pi\right)\pmb{x}
+\]</div>
+<p>ដូចនេះ តាមរយៈវិធីSGD តម្លៃនៃប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\( \pmb{w} \)</span>ដែលធ្វើបរមាកម្មលើតម្លៃកម្រិតសាកសមនៃទិន្នន័យត្រូវបានគណនាដោយផ្លាស់ប្តូរតម្លៃដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{w}^{\left(t+1\right)}=\pmb{w}^{\left(t\right)}-\eta_t\left.\frac{\partial}{\partial\pmb{w}}\left\{-\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}\right\}\right|_{\pmb{w}=\pmb{w}^{\left(\pmb{t}\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\pmb{w}^{\left(t+1\right)}=\pmb{w}^{\left(t\right)}+\eta_t\left.\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}\right|_{\pmb{w}=\pmb{w}^{\left(\pmb{t}\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\pmb{w}^{\left(t+1\right)}=\pmb{w}^{\left(t\right)}+\eta_t\left(y-\pi^{\left(t\right)}\right)\pmb{x}
+\]</div>
+<p>នៅទីនេះ <span class="math notranslate nohighlight">\(\pi^{\left(t\right)}\)</span> ជាតម្លៃប្រូបាបដែលគណនាដោយម៉ូឌែលជាមួយតម្លៃប៉ារ៉ាម៉ែត្រនៅដំណាក់កាល<span class="math notranslate nohighlight">\(t\)</span> នៃការផ្លាស់ប្តូរតម្លៃប៉ារ៉ាម៉ែត្រ ពោលគឺ <span class="math notranslate nohighlight">\(\pi^{\left(t\right)}=\sigma\left(\pmb{x}^\top\pmb{w}^{\left(t\right)}\right)\)</span>។<span class="math notranslate nohighlight">\( \eta_t\)</span> ជាlearning-rate និង <span class="math notranslate nohighlight">\(y \)</span>ជាចំណាត់ថ្នាក់ក្រុមពិតប្រាកដនៃទិន្នន័យ<span class="math notranslate nohighlight">\(\pmb{x}\)</span>។</p>
+<p>ក្នុងករណីប្រើRidge Regularization កន្សោមខាងលើនឹងប្រែទៅជាទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{w}^{\left(t+1\right)}=\left(1-\frac{2\alpha\eta_t}{N}\right)\pmb{w}^{\left(t\right)}+\eta_t\left(y-\pi^{\left(t\right)}\right)\pmb{x}
+\]</div>
+</div>
+<div class="section" id="id2">
+<h2>ការវាយតម្លៃ<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>កាលពីសិក្សាម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ យើងវាយតម្លៃម៉ូឌែលតាមរយៈតម្លៃកម្រិតលម្អៀង ឬ
+មេគុណR^2 ។ នៅករណីម៉ូឌែលLogisticចំពោះបញ្ហាចំណាត់ថ្នាក់ក្រុមនេះ យើងអាចវាយតម្លៃតាមរយៈតម្លៃLikelihood បាន។ ប៉ុន្តែការសិក្សាលើតម្លៃLikelihood មានការពិបាកក្នុងការបកស្រាយភ្ជាប់នឹងជីវភាពរស់នៅរបស់យើង។ហេតុនេះក្នុងបញ្ហាចំណាត់ថ្នាក់ក្រុមរង្វាស់សម្រាប់រង្វាយតម្លៃលើម៉ូឌែលត្រូវបានគណនាដូចខាងក្រោម។</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(y=1\)</span></p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(y=0\)</span></p></th>
+<th class="head"><p>Total</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><span class="math notranslate nohighlight">\(\hat{y}=1\)</span></p></td>
+<td><p>TP<br>(true positive)</p></td>
+<td><p>FP<br>(false positive)</p></td>
+<td><p>ចំនួនករណីដែលត្រូវបានទស្សន៍ទាយថា<span class="math notranslate nohighlight">\(\hat{y}=1\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p><span class="math notranslate nohighlight">\(\hat{y}=0\)</span></p></td>
+<td><p>FN<br>(false negative)</p></td>
+<td><p>TN<br>(true negative)</p></td>
+<td><p>ចំនួនករណីដែលត្រូវបានទស្សន៍ទាយថា<span class="math notranslate nohighlight">\(\hat{y}=0\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>Total</p></td>
+<td><p>ចំនួនទិន្នន័យ<span class="math notranslate nohighlight">\(y=1\)</span></p></td>
+<td><p>ចំនួនទិន្នន័យ<span class="math notranslate nohighlight">\(y=0\)</span></p></td>
+<td><p>ចំនួនទិន្នន័យសរុប</p></td>
+</tr>
+</tbody>
+</table>
+<p>Accuracyគឺបង្ហាញពីអត្រានៃការទស្សន៍ទាយបានត្រឹមត្រូវរបស់ម៉ូឌែលដោយមិនបែងចែកចំណាត់ថ្នាក់ក្រុមរបស់ទិន្នន័យ។អត្រានេះដូចគ្នានិងពិន្ទុដែលអ្នកឆ្លើយសំណួរបានត្រឹមត្រូវក្នុងការប្រឡងណាមួយដែរ។</p>
+<p>Precisionគឺសំដៅដល់អត្រានៃករណីដែលពិតជានៅក្នុងក្រុម<span class="math notranslate nohighlight">\( y=1 \)</span>មែនក្នុងចំណោមករណីដែលម៉ូឌែលបានទស្សន៍ទាយថាស្ថិតក្នុងក្រុម<span class="math notranslate nohighlight">\(y=1\)</span>។ Recallសំដៅដល់អត្រានៃករណីដែលម៉ូឌែលបានទស្សន៍ទាយថាស្ថិតក្នុងក្រុម<span class="math notranslate nohighlight">\(y=1\)</span> ក្នុងចំណោមទិន្នន័យក្នុងក្រុម<span class="math notranslate nohighlight">\(y=1\)</span>សរុប។</p>
+<p>ជាទូទៅវាជាការលំបាកក្នុងការបង្កើតម៉ូឌែលដែលមានទាំងPrecisionនិងRecallខ្ពស់ដូចគ្នា(trade-off relation)។ហេតុនេះដើម្បីវាយតម្លៃរួមលើរង្វាស់ទាំងពីរនេះការធ្វើផលធៀបមធ្យមលើតម្លៃទាំងពីរត្រូវបានប្រើពោលគឺតម្លៃ F1-score។</p>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
