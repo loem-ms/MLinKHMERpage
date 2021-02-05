@@ -1,13 +1,13 @@
-អំពីវគ្គសិក្សា(គម្រោង)
+អំពីវគ្គសិក្សា
 ========
 
 
-1. 【02/04(7PM-9PM)】សេចក្តីផ្តើមនៃ Machine Learning
-2. 【02/05・08(7PM-9PM)】អំពីចំណោទ Regression
-3. 【02/11・12(7PM-9PM)】អំពីចំណោទ Classfication
-4. 【02/15・18(7PM-9PM)】អំពី Artificial Neural Network
-5. 【02/22(7PM-9PM)】អំពី Support Vector Machine
-6. 【02/25(7PM-9PM)】អំពី Clustering Analysis
+1. 【02/06】សេចក្តីផ្តើមនៃ Machine Learning
+2. 【02/09・11】អំពីចំណោទ Regression
+3. 【02/13・16】អំពីចំណោទ Classfication
+4. 【02/18・20・23】អំពី Artificial Neural Network
+5. 【02/25】អំពី Support Vector Machine
+6. 【02/27】អំពី Clustering Analysis
 
 [ទាញយកអត្ថបទបកស្រាយសង្ខេបជាPDF](https://github.com/loem-ms/MachineLearningINKHMER.git)
 
