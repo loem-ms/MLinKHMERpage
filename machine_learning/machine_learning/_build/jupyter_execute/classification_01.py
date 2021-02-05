@@ -9,7 +9,7 @@
 # 
 # ជាឧទាហរណ៍យើងនឹងលើកយកការកំណត់អត្តសញ្ញាណសារអេឡិចត្រូនិចរំខាន(spam or not)មកបង្ហាញដើម្បីស្វែងយល់បន្ថែមពីដំណោះស្រាយក្នុងបញ្ហាចំណាត់ថ្នាក់ក្រុមតាមរយៈ machine learning ។ រូបទី១បង្ហាញពីដំណើរការនៃការកំណត់សាររំខាន។
 # 
-# ![spam](/images/spam-exampl.png)
+# ![spam](/images/spam-example.png)
 # 
 
 # ជាដំណោះស្រាយងាយបំផុតដែលអ្នកអាចប្រហែលជានឹងនឹកឃើញមុនគេគឺការកំណត់រកនូវពាក្យដែលច្រើនប្រើប្រាស់ក្នុងspam mail។ 
@@ -129,9 +129,11 @@ plt.show()
 # 
 # ក្នុងករណីនេះ តម្លៃផលគុណស្កាលែរវាងវ៉ិចទ័រអថេរពន្យល់នៃទិន្នន័យ$ \pmb{x} $និងប៉ារ៉ាម៉ែត្រអាច
 # គណនានិងបកស្រាយជាទម្រង់ប្រូបាបដូចខាងក្រោម។
+# 
 # $$
 # \pmb{x}^\top\pmb{w}=\left(\begin{matrix}\begin{matrix}\begin{matrix}0&1\\\end{matrix}&\begin{matrix}1&1\\\end{matrix}\\\end{matrix}&\begin{matrix}\begin{matrix}0&1\\\end{matrix}&\begin{matrix}\begin{matrix}1&0\\\end{matrix}&\begin{matrix}0&0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)\left(\begin{matrix}\begin{matrix}-2\\1\\\end{matrix}\\\vdots\\\begin{matrix}-1\\0\\\end{matrix}\\\end{matrix}\right)=3
 # $$
+# 
 # $$
 # P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(3\right)=\frac{1}{1+\exp{\left(-3\right)}}=0.95
 # $$
@@ -150,14 +152,17 @@ plt.show()
 # P\left(\hat{y}=1|\pmb{x}\right)=0.95
 # $$
 # ហេតុនេះកម្រិតសាកសមLikelihood : 
+# 
 # $$
 # {\hat{l}}_{\left(\pmb{x},1\right)}\left(\pmb{w}\right)=P\left(\hat{y}=1|\pmb{x}\right)=0.95
 # $$
+# 
 # ដែលមានន័យថា ម៉ូឌែលអាចបែងចែកថាជាspam mailបានត្រឹមត្រូវក្នុងកម្រិត95%(ប្រូបាប0.95)។ ផ្ទុយទៅវិញ ឧបមាថាយើងមានអត្ថបទសារមិនមែនspam mail មួយផ្សេង “Please submit your assignment file by tomorrow morning” ។ នោះវ៉ិចទ័រ
 # 
 # $$
 # \pmb{x}=\left(\begin{matrix}\begin{matrix}\begin{matrix}1&0\\\end{matrix}&\begin{matrix}1&0\\\end{matrix}\\\end{matrix}&\begin{matrix}\begin{matrix}0&0\\\end{matrix}&\begin{matrix}\begin{matrix}0&0\\\end{matrix}&\begin{matrix}0&0\\\end{matrix}\\\end{matrix}\\\end{matrix}\\\end{matrix}\right)^\top 
 # $$
+# 
 # ។
 # 
 # $$
@@ -169,19 +174,27 @@ plt.show()
 # $$
 # 
 # ដោយចម្លើយពិតគឺមិនមែនជាspam mail (y=0) ហេតុនេះកម្រិតសាកសមLikelihood : 
+# 
 # $$
 # {\hat{l}}_{\left(\pmb{x},0\right)}\left(\pmb{w}\right)=P\left(\hat{y}=0|\pmb{x}\right)=1-P\left(\hat{y}=1|\pmb{x}\right)=1-0.27=0.73 
 # $$
+# 
 # ដែលមានន័យថាម៉ូឌែលអាចបែងចែកថាមិនមែនspam mailបានត្រឹមត្រូវក្នុងកម្រិត73%(ប្រូបាប0.73)។
 # 
 # ចំពោះគ្រប់ប្រភេទទិន្នន័យ យើងអាចសរសេរកន្សោមកម្រិតសាកសមបានក្រោមទម្រង់
+# 
 # $$
 # {\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)=P\left(\hat{y}=y|\pmb{x}\right)=\left\{\begin{matrix}
 # P(\hat{y}=1|x)& (y=1)\\ 
 # P(\hat{y}=0|x)& (y=0)
 # \end{matrix}\right.   =π^{y}(1-π)^{1-y}
 # $$
-# ដែល $$\pi=P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)$$។
+# 
+# ដែល 
+# 
+# $$\pi=P\left(\hat{y}=1|\pmb{x}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)$$
+# 
+# ។
 # 
 
 # ## ការប៉ាន់ស្មានមេគុណតម្រែតម្រង់តាម Maximum Likelihood
@@ -238,8 +251,13 @@ plt.show()
 # \frac{\partial\pi}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}P\left(\hat{y}=1|\pmb{x}\right)=\frac{\partial}{\partial\pmb{w}}\sigma\left(\pmb{x}^\top\pmb{w}\right)=\sigma\left(\pmb{x}^\top\pmb{w}\right)\left(1-\sigma\left(\pmb{x}^\top\pmb{w}\right)\right)=\pi\left(1-\pi\right)
 # $$
 # 
-# នៅទីនេះ $a=\pmb{x}^\top\pmb{w}\ ,\ \frac{\partial a}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}\left(\pmb{x}^\top\pmb{w}\right)=\pmb{x}$
+# នៅទីនេះ
+# $$
+# a=\pmb{x}^\top\pmb{w}\ ,\ \frac{\partial a}{\partial\pmb{w}}=\frac{\partial}{\partial\pmb{w}}\left(\pmb{x}^\top\pmb{w}\right)=\pmb{x}
+# $$
+# 
 # ហេតុនេះ
+# 
 # $$
 # \frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\frac{\partial\pi}{\partial a}\frac{\partial a}{\partial\pmb{w}}=\frac{y-\pi}{\pi\left(1-\pi\right)}\pi\left(1-\pi\right)\pmb{x}
 # $$
@@ -253,9 +271,11 @@ plt.show()
 # $$
 # \pmb{w}^{\left(t+1\right)}=\pmb{w}^{\left(t\right)}-\eta_t\left.\frac{\partial}{\partial\pmb{w}}\left\{-\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}\right\}\right|_{\pmb{w}=\pmb{w}^{\left(\pmb{t}\right)}}
 # $$
+# 
 # $$
 # \pmb{w}^{\left(t+1\right)}=\pmb{w}^{\left(t\right)}+\eta_t\left.\frac{\partial}{\partial\pmb{w}}\log{{\hat{l}}_{\left(\pmb{x},y\right)}\left(\pmb{w}\right)}\right|_{\pmb{w}=\pmb{w}^{\left(\pmb{t}\right)}}
 # $$
+# 
 # $$
 # \pmb{w}^{\left(t+1\right)}=\pmb{w}^{\left(t\right)}+\eta_t\left(y-\pi^{\left(t\right)}\right)\pmb{x}
 # $$
@@ -285,6 +305,167 @@ plt.show()
 # 
 # ជាទូទៅវាជាការលំបាកក្នុងការបង្កើតម៉ូឌែលដែលមានទាំងPrecisionនិងRecallខ្ពស់ដូចគ្នា(trade-off relation)។ហេតុនេះដើម្បីវាយតម្លៃរួមលើរង្វាស់ទាំងពីរនេះការធ្វើផលធៀបមធ្យមលើតម្លៃទាំងពីរត្រូវបានប្រើពោលគឺតម្លៃ F1-score។
 # 
+
+# ## អនុវត្តលើការធ្វើចំណាត់ថ្នាក់ពីរក្រុម : spam mail classification
+
+# In[5]:
+
+
+import math
+import random
+import numpy as np
+import matplotlib.pyplot as plt
+
+
+# ### រៀបចំទិន្នន័យ
+# 
+# យើងទាញយក Dataset ពី https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip
+
+# In[6]:
+
+
+get_ipython().system('wget https://archive.ics.uci.edu/ml/machine-learning-databases/00228/smsspamcollection.zip')
+
+
+# In[7]:
+
+
+get_ipython().system('unzip smsspamcollection.zip')
+
+
+# In[11]:
+
+
+get_ipython().system('head SMSSpamCollection')
+
+
+# spam $\to$ y=1
+# 
+# ham  $\to$ y=0
+
+# In[12]:
+
+
+def tokenize(s):
+    tokens = s.split(' ')
+    return [t.rstrip('.') for t in tokens]
+
+D = []
+
+with open('SMSSpamCollection') as fi:
+    for line in fi:
+        fields = line.strip('\n').split('\t')
+        x = tokenize(fields[1])
+        y = 1 if fields[0] == 'spam' else 0
+        D.append((x, y))
+
+print("Number of data N=",len(D))
+print("Example:",D[10])
+
+
+# រៀបចំទិន្នន័យសម្រាប់កំណត់ប៉ារ៉ាម៉ែត្រម៉ូឌែល(training data) និងសម្រាប់វាយតម្លៃ(test data)
+
+# In[13]:
+
+
+import random
+random.shuffle(D)
+Dtrain = D[:5000]
+Dtest = D[5000:]
+
+
+# ### Logistic Regression Model with Python
+
+# កំណត់តម្លៃដំបូងនៃប៉ារ៉ាម៉ែត្ររបស់ម៉ូឌែលដោយ 0. គ្រប់កំប៉ូសង់របស់វា
+
+# In[14]:
+
+
+W = {}
+for x, y in Dtrain:
+    for a in x:
+        W.setdefault(a, 0.)
+
+
+# In[15]:
+
+
+def score(W, x):
+  score_ = 0.
+  for a in x:
+    score_ += W.get(a, 0.)
+  return score_
+
+
+# In[16]:
+
+
+def sigmoid(a):
+    if 0 <= a:
+        return 1 / (1 + math.exp(-a))
+    else:
+        return 1. - 1 / (1 + math.exp(a))
+
+
+# កំណត់តម្លៃប៉ារ៉ាម៉ែត្រដោយប្រើ SGD 
+
+# In[17]:
+
+
+eta = 0.1
+for t in range(1000):
+    loss = 0.
+    for x, y in Dtrain:
+        pi = sigmoid(score(W, x))
+        for a in x:
+            W[a] += eta * (y - pi)
+
+
+# ប្រើ Accuracy ជារង្វាស់សម្រាប់វាយតម្លៃម៉ូឌែល
+
+# In[18]:
+
+
+def accuracy(W, Dtest):
+    n = 0
+    for x, y in Dtest:
+      if score(W, x) > 0:
+        n += y
+      else:
+        n += 1-y
+    return n / len(Dtest)
+
+
+# In[19]:
+
+
+accuracy(W, Dtest)
+
+
+# កំណត់ពាក្យដែលពិបាក និង ងាយស្រួល កំណត់សម្គាល់ spam mail តាមរយៈតម្លៃនៃប៉ារ៉ាម៉ែត្រ
+
+# In[24]:
+
+
+F = sorted(W.items(), key=lambda x:x[1])
+
+
+# 
+# ពាក្យដែលងាយមិនងាយសម្គាល់បានថាជា​ spam mail
+
+# In[25]:
+
+
+F[:20]
+
+
+# ពាក្យដែលងាយងាយស្រួលក្នុងការសម្គាល់បានថាជា​ spam mail
+
+# In[26]:
+
+
+F[-20:]
+
 
 # In[ ]:
 
