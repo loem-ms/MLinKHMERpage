@@ -12,4 +12,7 @@
   sections:
     - file: classification_01
     - file: classification_02
+- file: ANN
+  sections: 
+  - file: perceptron
 - file: homepage
