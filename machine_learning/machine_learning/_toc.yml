@@ -17,4 +17,5 @@
   - file: perceptron
   - file: FNN
   - file: learninginNN
+  - file: BP
 - file: homepage
