@@ -15,4 +15,5 @@
 - file: ANN
   sections: 
   - file: perceptron
+  - file: FNN
 - file: homepage

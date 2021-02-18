@@ -1,0 +1,691 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Feedforward Neural Network &#8212; Machine Learning</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ទៅកាន់ទំព័រដើម Mengsay LOEM" href="homepage.html" />
+    <link rel="prev" title="Perceptron" href="perceptron.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ml-icon.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   អំពីវគ្គសិក្សា
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html">
+   សេចក្តីផ្តើមអំពី Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#supervised-learning">
+   Supervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#unsuperivsed-learning">
+   Unsuperivsed Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="regression.html">
+   អំពីRegression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression_01.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression-02.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SGD.html">
+     វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regularization.html">
+     Regularization in Machine Learning
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="classification.html">
+   អំពីClassification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_01.html">
+     ចំណាត់ថ្នាក់២ក្រុម (Binary Classification)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_02.html">
+     ចំណាត់ថ្នាក់ច្រើនក្រុម (Multiclass Classification)
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="ANN.html">
+   Artificial Neural Network
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="perceptron.html">
+     Perceptron
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Feedforward Neural Network
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="homepage.html">
+   ទៅកាន់ទំព័រដើម Mengsay LOEM
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/FNN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/FNN.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   លទ្ធផលបញ្ជូនបន្តនៃណឺរ៉ូន
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#activation-function">
+   អនុគមន៍សកម្ម Activation Function
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#multilayer-network">
+   បណ្តាញច្រើនថ្នាក់ (Multilayer Network)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   ការកំណត់ទម្រង់ណឺរ៉ូននៅថ្នាក់លទ្ធផលនិងអនុគមន៍លម្អៀង
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#learning">
+     ប្រភេទនៃបញ្ហានិងវិធីសាស្រ្តរៀន(Learning)
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     ចំណោទតម្រែតម្រង់
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     ចំណោទធ្វើចំណាត់ថ្នាក់២ក្រុម
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     ចំណោទធ្វើចំណាត់ថ្នាក់ច្រើនក្រុម
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="feedforward-neural-network">
+<h1>Feedforward Neural Network<a class="headerlink" href="#feedforward-neural-network" title="Permalink to this headline">¶</a></h1>
+<p>ក្នុងអត្ថបទមុន យើងបានសិក្សាអំពីPerceptron ដែលជាម៉ូឌែលអាចបែងចែកទិន្នន័យបំណែងចែកលីនេអ៊ែរបានយ៉ាងងាយដោយការកំណត់តម្លៃប៉ារ៉ាម៉ែត្រសមស្រប។ លើសពីនេះ ក្នុងករណីទិន្នន័យមិនអាចបែងចែកលីនេអ៊ែរ ការបង្កើនចំនួនថ្នាក់នៃPerceptronត្រូវបានប្រើប្រាស់។ ម៉ូឌែលបែបនេះហៅថា Multilayer Perceptron។ ដោយការភ្ជាប់ណឺរ៉ូន (node) ច្រើនបន្តគ្នាជាច្រើនថ្នាក់ដែលស្រដៀងគ្នានឹងទម្រង់នៃប្រព័ន្ធប្រសាទរបស់ភាវៈរស់ផងនោះម៉ូឌែលបែបនេះក៏ត្រូវបានគេហៅថា Aritificial Neural Network ផងដែរ។</p>
+<div class="section" id="id1">
+<h2>លទ្ធផលបញ្ជូនបន្តនៃណឺរ៉ូន<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>Feedforward Neural Network (FNN) គឺជាទម្រង់មួយនៃArtificial Neural Network
+ដែលមានណឺរ៉ូន(node)ច្រើនតម្រៀបគ្នាជាថ្នាក់និងភ្ជាប់គ្នានិងគ្នារវាងថ្នាក់នៅជាប់បន្តបន្ទាប់គ្នាដោយទម្ងន់ផ្ទាល់ខ្លួន។ សញ្ញាណឬធាតុចូលនៃFNNត្រូវបានបញ្ជូនពីផ្នែកថ្នាក់ធាតុចូល(input layer) ទៅកាន់ផ្នែកនៃថ្នាក់លទ្ធផល(output layer)តាមទិសតែមួយ។ លទ្ធផលដែលបញ្ចេញដោយណឺរ៉ូននៅថ្នាក់លទ្ធផលត្រូវបានគណនាដូចក្នុងករណីPerceptronទម្រង់ធម្មតាដែរ ប៉ុន្តែនៅទីនេះលទ្ធផលមិនគ្រាន់តែប្រៀបធៀបផលបូកនៃធាតុចូលនិងកម្រិតកំណត់(threshold)នៃណឺរ៉ូនប៉ុណ្ណោះទេ តែអនុគមន៍មិនលីនេអ៊ែរត្រូវបានអនុវត្តលើលទ្ធផលនៃផលបូកនោះដើម្បីកំណត់នូវលទ្ធផលដែលត្រូវបញ្ជូនបន្ត។ អនុគមន៍ដែលអនុវត្តលើលទ្ធផលនៃផលបូកធាតុចូលនេះហៅថា អនុគមន៍សកម្ម(activation function)។ យើងនឹងធ្វើការបកស្រាយលម្អិតអំពីអនុគមន៍សកម្មនៅចំណុចបន្ទាប់។</p>
+<p>នៅពេលដែលធាតុចូល <span class="math notranslate nohighlight">\(x_1,x_2,\ldots,x_d\)</span> ត្រូវបានបញ្ជូនមកកាន់ណឺរ៉ូន(រូបទី១) ដែលមានទម្ងន់ផ្ទាល់នៃធាតុចូលរៀងគ្នា <span class="math notranslate nohighlight">\(w_1,w_2,\ldots,w_d\)</span> នោះ ផលបូកនៃធាតុចូលសរុបកំណត់ដោយ <span class="math notranslate nohighlight">\(u\)</span> និងលទ្ធផលបញ្ជូនបន្តនៃណឺរ៉ូននោះត្រូវបានកំណត់ដោយ <span class="math notranslate nohighlight">\(z\)</span> ដូចទម្រង់ខាងក្រោម។ នៅទីនេះ <span class="math notranslate nohighlight">\(b\)</span> ហៅថា bias ។</p>
+<div class="math notranslate nohighlight">
+\[
+u=w_1x_1+w_2x_2+\ldots+w_dx_d+b
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+z=f\left(u\right)=\ f\left(w_1x_1+w_2x_2+\ldots+w_dx_d+b\right)
+\]</div>
+<p><img alt="FNN-model" src="_images/fnn-1.png" /></p>
+<p>ក្នុងករណីទម្រង់2ថ្នាក់ដូចក្នុងរូបទី២ សញ្ញាណត្រូវបានបញ្ជូនបន្តបន្ទាប់។ សន្មតថានៅថ្នាក់ទី១មានណឺរ៉ូនចំនួន <span class="math notranslate nohighlight">\(d\)</span> និង នៅថ្នាក់ទី២មានណឺរ៉ូនចំនួន <span class="math notranslate nohighlight">\(k\)</span> នោះលទ្ធផលបញ្ជូនបន្តនៃណឺរ៉ុននៅថ្នាក់លទ្ធផលទី២ត្រូវបានបង្ហាញក្នុងទម្រង់ខាងក្រោម</p>
+<div class="math notranslate nohighlight">
+\[
+\left(i=1,2,\ldots,k\right)
+\]</div>
+<p>។</p>
+<div class="math notranslate nohighlight">
+\[
+u_i=\sum_{j=1}^{d}{w_{ij}x_j}+b_i
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+z_i=f\left(u_i\right)
+\]</div>
+<p>យើងក៏អាចបង្ហាញជាទម្រង់វ៉ិចទ័រនិងម៉ាទ្រីសដូចខាងក្រោមផងដែរ។</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{u}=\pmb{Wx}+\pmb{b}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\pmb{z}=\pmb{f}\left(\pmb{u}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[ \begin{align}\begin{aligned}\begin{split}
+\pmb{u}=\left[\begin{matrix}u_1\\\vdots\\u_k\\\end{matrix}\right]\ ,\ \pmb{x}=\left[\begin{matrix}x_1\\\vdots\\x_d\\\end{matrix}\right]\ ,\ \pmb{b}=\left[\begin{matrix}b_1\\\vdots\\b_k\\\end{matrix}\right]\ ,\ \pmb{z}=\left[\begin{matrix}z_1\\\vdots\\z_k\\\end{matrix}\right]\ ,\ \pmb{f}\left(\pmb{u}\right)=\left[\begin{matrix}f{(u}_1)\\\vdots\\f(u_k)\\\end{matrix}\right]\end{split}\\\begin{split}
+\pmb{W}=\left[\begin{matrix}w_{11}&amp;\cdots&amp;w_{1d}\\\vdots&amp;\ddots&amp;\vdots\\w_{k1}&amp;\cdots&amp;w_{kd}\\\end{matrix}\right]
+\end{split}\end{aligned}\end{align} \]</div>
+</div>
+<div class="section" id="activation-function">
+<h2>អនុគមន៍សកម្ម Activation Function<a class="headerlink" href="#activation-function" title="Permalink to this headline">¶</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>អនុគមន៍សកម្ម(activation function) គឺជាអនុគមន៍ដែលគ្រប់គ្រងលើកម្រិតនៃការបញ្ជូនបន្តនូវលទ្ធផលរបស់ណឺរ៉ូននិមួយៗ។ ជាទូទៅអនុគមន៍សកម្មមានទម្រង់ជាអនុគមន៍មិនលីនេអ៊ែរកើនដាច់ខាត។ មានទម្រង់ជាច្រើនត្រូវបានប្រើជាអនុគមន៍សកម្មដូចជា អនុគមន៍Sigmoid,អនុគមន៍Tanh,អនុគមន៍Softmax,អនុគមន៍ReLU(rectified linear function)ជាដើម។</p>
+<p>អនុគមន៍Sigmoid <span class="math notranslate nohighlight">\(\sigma\left(\bullet\right)\)</span> មានដែនកំណត់លើសំណុំចំនួនពិត<span class="math notranslate nohighlight">\(\left(-\infty,\infty\right)\)</span>និងយកសំណុំរូបភាពលើចន្លោះបើក<span class="math notranslate nohighlight">\(\left(0,1\right)\)</span>។ អនុគមន៍បែបនេះអាចផ្តល់នូវលទ្ធផលដែលយើងអាចបកស្រាយបានជាតម្លៃប្រូបាបនៃការបញ្ជូនបន្តឬមិនបញ្ជូនបន្ត<span class="math notranslate nohighlight">\((1/0)\)</span>។</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(u\right)=\sigma\left(u\right)=\frac{1}{1+e^{-u}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="mi">1</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">sigmoid</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;sigmoid&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Sigmoid Function&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/FNN_11_0.png" src="_images/FNN_11_0.png" />
+</div>
+</div>
+<p>អនុគមន៍Tanh <span class="math notranslate nohighlight">\(\tanh{\left(\bullet\right)}\)</span> មានដែនកំណត់លើសំណុំចំនួនពិត<span class="math notranslate nohighlight">\(\left(-\infty,\infty\right)\)</span> និងយកសំណុំរូបភាពលើចន្លោះបើក<span class="math notranslate nohighlight">\(\left(-1,1\right)\)</span>។ អនុគមន៍បែបនេះមានលក្ខណៈស្រដៀងនឹងអនុគមន៍Sigmoidដែរ ដែលអាចផ្តល់នូវលទ្ធផលដែលមានបម្រែបម្រួលតិចតួចក្បែរតម្លៃថេរនៅពេលដែលតម្លៃនៃធាតុចូលធំខ្លាំងដល់កម្រិតណាមួយ និងប្រែប្រួលខ្លាំងនៅពេលដែលធាតុចូលមានតម្លៃក្បែរ0។</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(u\right)=\tanh{\left(u\right)}=\frac{e^u-e^{-u}}{e^u+e^{-u}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span><span class="o">/</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">+</span><span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">x</span><span class="p">))</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">8</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">tanh</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;tanh&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">1.1</span><span class="p">,</span><span class="mf">1.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;Tanh Function&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/FNN_13_0.png" src="_images/FNN_13_0.png" />
+</div>
+</div>
+<p>អនុគមន៍Softmax <span class="math notranslate nohighlight">\(softmax\left(\bullet\right)\)</span> មានដែនកំណត់លើវ៉ិចទ័រចំនួនពិត<span class="math notranslate nohighlight">\(\mathbb{R}^d \)</span>និងយកសំណុំរូបភាពលើចន្លោះបើក<span class="math notranslate nohighlight">\(\left(0,1\right)^d\)</span>ដែលមានផលបូកគ្រប់កំប៉ូសង់ស្មើ 1។ អនុគមន៍បែបនេះអាចផ្តល់នូវលទ្ធផលដែលយើងអាចបកស្រាយបានជាតម្លៃប្រូបាបនៃលទ្ធផលដែលអាចចេញជាdប្រភេទផ្សេងៗគ្នាបាន។ក្នុងករណីd=2 អនុគមន៍នេះសមមូលនឹងអនុគមន៍Sigmoid។ចំពោះ <span class="math notranslate nohighlight">\(\pmb{u}=\left(\begin{matrix}u_1&amp;\cdots&amp;u_d\\\end{matrix}\right)^\top\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+f\left(\pmb{u}\right)=Softmax{\left(\pmb{u}\right)}=(Softmax(u_1)　\cdots　Softmax(u_d))^\top 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+Softmax\left(u_i\right)=\frac{e^{u_i}}{\sum_{j=1}^{d}e^{u_j}}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="n">exp_x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="n">x</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+  <span class="k">return</span> <span class="n">exp_x</span><span class="o">/</span><span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">exp_x</span><span class="p">)</span>
+
+<span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">])</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.9</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">])</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">softmax</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;input x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">a</span><span class="p">,</span><span class="n">y</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;output from Softmax Function&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/FNN_15_0.png" src="_images/FNN_15_0.png" />
+<img alt="_images/FNN_15_1.png" src="_images/FNN_15_1.png" />
+</div>
+</div>
+<p>អនុគមន៍rectifier <span class="math notranslate nohighlight">\(linear: ReLU{\left(\bullet\right)}\)</span> មានដែនកំណត់លើសំណុំចំនួនពិត<span class="math notranslate nohighlight">\(\left(-\infty,\infty\right)\)</span> និងយកសំណុំរូបភាពលើចន្លោះបើក<span class="math notranslate nohighlight">\(\left(0,\infty\right)\)</span>។ នៅពេលដែលធាតុចូលមានតម្លៃតូចជាងឬស្មើសូន្យ លទ្ធផលបញ្ជូនបន្តត្រូវបានកំណត់ដោយ 0 និងបញ្ជូនបន្តនូវតម្លៃដូចធាតុចូលដដែលបើធាតុចូលមានតម្លៃធំជាងឬស្មើសូន្យ។អនុគមន៍បែបនេះមានលក្ខណៈស្រដៀងនឹងអនុគមន៍ដឺក្រេទី១(លីនេអ៊ែរ)ដែរ ដែលអាចប្រើក្នុងករណីប៉ាន់ស្មានទាំងម៉ូឌែលលីនេអ៊ែរនិងមិនលីនេអ៊ែរបានល្អ។</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(u\right)=ReLU\left(u\right)=\max{\left(u,0\right)}
+\]</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">ReLU</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+  <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">maximum</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span><span class="n">x</span><span class="p">)</span>
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span><span class="mi">6</span><span class="p">,</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">ReLU</span><span class="p">(</span><span class="n">x</span><span class="p">),</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;ReLU&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">grid</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">([</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="mf">6.1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;ReLU&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/FNN_17_0.png" src="_images/FNN_17_0.png" />
+</div>
+</div>
+</div>
+<div class="section" id="multilayer-network">
+<h2>បណ្តាញច្រើនថ្នាក់ (Multilayer Network)<a class="headerlink" href="#multilayer-network" title="Permalink to this headline">¶</a></h2>
+<p>នៅចំណុចនេះយើងពិនិត្យលើករណីម៉ូឌែលដែលមានច្រើនថ្នាក់ដូចក្នុងរូបទី៥។ ព័ត៌មាន
+(សញ្ញាណឬធាតុចូល)ត្រូវបានបញ្ជូនតាមលំដាប់លំដោយពីថ្នាក់នៅខាងឆ្វេងទៅស្តាំ។ នៅទីនេះយើងកំណត់ហៅថ្នាក់និមួយៗដោយ<span class="math notranslate nohighlight">\(l=1,2,3,\ldots\)</span>។ ក្នុងរូបខាងលើថ្នាក់ <span class="math notranslate nohighlight">\(l=1\)</span>ពោលគឺថ្នាក់នៅខាងឆ្វេងបំផុតហៅថាថ្នាក់នៃធាតុចូល(input layer), ថ្នាក់<span class="math notranslate nohighlight">\(l=2\)</span> ហៅថាថ្នាក់នៃធាតុកណ្តាល(internal layer, hidden layer), ថ្នាក់l=3 ពោលគឺថ្នាក់នៅខាងស្តាំបំផុត ហៅថាថ្នាក់នៃលទ្ធផល(output layer) ។ លទ្ធផលនៅថ្នាក់និមួយៗអាចសរសេរជាទម្រង់ដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{u}^{\left(2\right)}=\pmb{W}^{\left(2\right)}\pmb{x}+\pmb{b}^{\left(2\right)}\ \ \ \ \ \ \ \ ,\ \ \pmb{z}^{\left(2\right)}=\pmb{f}\left(\pmb{u}^{\left(2\right)}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\pmb{u}^{\left(3\right)}=\pmb{W}^{\left(3\right)}\pmb{z}^{\left(2\right)}+\pmb{b}^{\left(3\right)}\ \ \ \ \ \ \ \ ,\ \ \pmb{z}^{\left(3\right)}=\pmb{f}\left(\pmb{u}^{\left(3\right)}\right)
+\]</div>
+<p>ជាទូទៅ លទ្ធផលនៅថ្នាក់កណ្តាលកំណត់ដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{u}^{\left(l+1\right)}=\pmb{W}^{\left(l+1\right)}\pmb{z}^{\left(l\right)}+\pmb{b}^{\left(l+1\right)}\ \ \ \ \ \ \ \ ,\ \ \pmb{z}^{\left(l+1\right)}=\pmb{f}\left(\pmb{u}^{\left(l+1\right)}\right)
+\]</div>
+<p>និង លទ្ធផលនៅថ្នាក់លទ្ធផលចុងក្រោយកំណត់ដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{y}\equiv\pmb{z}^{\left(l+1\right)}
+\]</div>
+<p><img alt="FNN-Multilayer Network" src="_images/fnn-2.png" /></p>
+<p>ដូចដែលបានឃើញក្នុងទម្រង់គណនាខាងលើ ក្នុងFNN សញ្ញាណត្រូវបានបញ្ជូនបន្តបន្ទាប់ដោយការគណនាក្នុងរបៀបដូចគ្នាពីមួយថ្នាក់ទៅមួយថ្នាក់។ នេះគឺជាប្រភពដែលម៉ូឌែលនេះត្រូវបានហៅថា feedforward ។ ទម្ងន់ផ្ទាល់នៃណឺរ៉ូនចំពោះធាតុចូលតាមថ្នាក់និមួយៗ<span class="math notranslate nohighlight">\(\pmb{W}^{\left(l\right)}\)</span> និង bias <span class="math notranslate nohighlight">\(\pmb{b}^{\left(l\right)}\)</span>ត្រូវបានហៅជារួមថាជា ប៉ារ៉ាម៉ែត្រនៃបណ្តាញ។ ក្នុងអត្ថបទនេះនិងបន្តបន្ទាប់យើងកំណត់ហៅដោយងាយនូវ បណ្តាញដែលមានប៉ារ៉ាម៉ែត្រ(ហៅជារួម)<span class="math notranslate nohighlight">\(\pmb{w}\)</span> និងធាតុចូល <span class="math notranslate nohighlight">\(\pmb{x}\)</span> ដោយ <span class="math notranslate nohighlight">\(\pmb{y}\left(\pmb{x};\pmb{w}\right)\)</span>។</p>
+</div>
+<div class="section" id="id2">
+<h2>ការកំណត់ទម្រង់ណឺរ៉ូននៅថ្នាក់លទ្ធផលនិងអនុគមន៍លម្អៀង<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="learning">
+<h3>ប្រភេទនៃបញ្ហានិងវិធីសាស្រ្តរៀន(Learning)<a class="headerlink" href="#learning" title="Permalink to this headline">¶</a></h3>
+<p>ដូចដែលបានរៀបរាប់ពីអត្ថបទមុននិងចំណុចខាងលើ បណ្តាញដែលបង្ហាញដោយទម្រង់
+នៃអនុគមន៍ច្រើនអថេរ<span class="math notranslate nohighlight">\(\pmb{y}\left(\pmb{x};\pmb{w}\right)\)</span>នឹងប្រែប្រួលនៅពេលដែលប៉ារ៉ាម៉ែត្ររបស់វាត្រូវបានផ្លាស់ប្តូរ។ ការជ្រើសរើសប៉ារ៉ាម៉ែត្របានល្អ នឹងធ្វើឱ្យបណ្តាញ(network)អាចបង្ហាញនូវអនុគមន៍ឬបញ្ហាដែលមានបានល្អប្រសើរ។</p>
+<p>សន្មតថា អនុគមន៍ឬបញ្ហាជាគោលដៅដែលយើងចង់បង្ហាញដោយNeural Network មិនប្រែប្រួលសណ្ឋានខាងក្នុងរបស់វាឡើយ ហើយទទួលធាតុចូល <span class="math notranslate nohighlight">\(\pmb{x}\)</span> និងបញ្ជូនចេញនូវលទ្ធផល <span class="math notranslate nohighlight">\(\pmb{t}\)</span> ។ គូនៃទិន្នន័យបែបនេះជាច្រើនត្រូវបានផ្តល់ឱ្យ
+<span class="math notranslate nohighlight">\(\left\{\left(\pmb{x}_1,\pmb{t}_1\right),\ldots,\left(\pmb{x}_N,\pmb{t}_N\right)\right\}\)</span> ។ នៅក្នុងអត្ថបទនេះ និងអត្ថបទបន្តបន្ទាប់ គូនិមួយៗហៅថាជាគម្រូសម្រាប់រៀន(training sample) ហើយសំណុំទាំងមូលហៅថា សំណុំទិន្នន័យសម្រាប់រៀន(training data)។</p>
+<p>ដោយធ្វើការកែសម្រួលនិងកំណត់នូវតម្លៃប៉ារ៉ាម៉ែត្រ យើងអាចធ្វើការបង្ហាញទំនាក់ទំនងដែលមានក្នុងទិន្នន័យឡើងវិញបានដោយបណ្តាញ(network)របស់យើង។ ពោលគឺចំពោះគម្រូសម្រាប់រៀន<span class="math notranslate nohighlight">\(\left(\pmb{x}_n,\pmb{t}_n\right)\)</span>និមួយៗ យើងចង់កំណត់នូវប៉ារ៉ាម៉ែត្រណាដែលធ្វើឱ្យយើងអាចទទួលបាន <span class="math notranslate nohighlight">\(\pmb{y}\left(\pmb{x}_n;\pmb{w}\right)\)</span> ដែលមានតម្លៃជិតបំផុតនៅនឹង<span class="math notranslate nohighlight">\(\pmb{t}_n\)</span>។ ដំណើរកំណត់រកនូវប៉ារ៉ាម៉ែត្រដោយប្រើសំណុំទិន្នន័យសម្រាប់រៀនបែបនេះសន្មតហៅថាជាដំណើរការរៀន(learning process)។</p>
+<p>ហេតុនេះការប្រៀបធៀបរវាងតម្លៃលទ្ធផល<span class="math notranslate nohighlight">\(\pmb{y}\left(\pmb{x}_n;\pmb{w}\right)\)</span> ដែលផ្តល់ដោយបណ្តាញនិងតម្លៃ<span class="math notranslate nohighlight">\(\pmb{t}_n\)</span>ត្រូវបានធ្វើឡើង។ ដើម្បីបង្ហាញពីកម្រិតជិតគ្នានៃតម្លៃទាំងពីរយើងកំណត់រង្វាស់សម្រាប់វាស់កម្រិតនេះ។ រង្វាស់នេះយើងសន្មតហៅថាជា អនុគមន៍កម្រិតលម្អៀង(error function,loss function)។ ការកំណត់ប្រភេទនៃអនុគមន៍កម្រិតលម្អៀងខុសគ្នាទៅតាមប្រភេទចំណោទបញ្ហាដែលយើងចង់ដោះស្រាយ។</p>
+</div>
+<div class="section" id="id3">
+<h3>ចំណោទតម្រែតម្រង់<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>ចំណោទតម្រែតម្រង់(Regression) គឺជាប្រភេទចំណោទដែលធ្វើការកំណត់នូវអនុគមន៍
+ដើម្បីបង្ហាញនូវទំនាក់ទំនងរវាងធាតុចូលនិងលទ្ធផលដែលមានទម្រង់ជាអថេរជាប់។ ហេតុនេះក្នុង
+ករណីនៃចំណោទតម្រែតម្រង់ យើងកំណត់យកអនុគមន៍សកម្ម(activation function)នៅថ្នាក់លទ្ធផលនៃបណ្តាញ(FNN)ដោយអនុគមន៍ដែលផ្តល់នូវសំណុំរូបភាពដូចដែននៃលទ្ធផលរបស់សំណុំទិន្នន័យសម្រាប់រៀន។ ឧទាហរណ៍ ក្នុងករណីដែលសំណុំទិន្នន័យសម្រាប់រៀនមានតម្លៃនៃលទ្ធផលលើចន្លោះ<span class="math notranslate nohighlight">\([-1,1]\)</span>នោះយើងជ្រើសយកអនុគមន៍tanhសម្រាប់ជាអនុគមន៍សកម្ម។</p>
+<p>ក្នុងករណីដែលសំណុំទិន្នន័យសម្រាប់រៀនមានតម្លៃនៃលទ្ធផលលើចន្លោះ<span class="math notranslate nohighlight">\(\left(-\infty,\infty\right)\)</span>នោះយើងជ្រើសយកអនុគមន៍ដែលផ្តល់តម្លៃដូចធាតុចូល Identity function សម្រាប់ជាអនុគមន៍សកម្ម។
+ក្នុងករណីចំណោទតម្រែតម្រង់នេះដើម្បីប្រៀបធៀបកម្រិតជិតគ្នារវាងលទ្ធផលនៃបណ្តាញនិងតម្លៃលទ្ធផលនៃគម្រូសម្រាប់រៀន យើងប្រើផលបូកការេនៃតម្លៃលម្អៀង(sum of squared residuals) រវាងតម្លៃ<span class="math notranslate nohighlight">\(\pmb{y}\left(\pmb{x}_n;\pmb{w}\right)\)</span> និង<span class="math notranslate nohighlight">\(\pmb{t}_n\)</span>ចំពោះគ្រប់គម្រូសម្រាប់រៀនក្នុងសំណុំទិន្នន័យសម្រាប់រៀនទាំងអស់។ ពោលគឺអនុគមន៍កម្រិតលម្អៀងសម្រាប់សំណុំទិន្នន័យសម្រាប់រៀនកំណត់ដោយ ។</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(\pmb{w}\right)=\frac{1}{2}\sum_{i=1}^{N}{\left||\pmb{t}-\pmb{y}(\pmb{x_n},\pmb{w})|\right|^2}
+\]</div>
+<p>នៅទីនេះការដាក់មេគុណ <span class="math notranslate nohighlight">\(\frac{1}{2}\)</span> គឺដើម្បីសម្រួលដល់ការគណនាដល់ការធ្វើដេរីវេនាពេលខាងមុខ។</p>
+<p>គោលដៅរបស់យើងគឺកំនត់ប៉ារ៉ាម៉ែត្រនៃបណ្តាញយ៉ាងណាដើម្បីឱ្យអនុគមន៍កម្រិតលម្អៀងខាងលើនេះមានតម្លៃអប្បបរមា។</p>
+</div>
+<div class="section" id="id4">
+<h3>ចំណោទធ្វើចំណាត់ថ្នាក់២ក្រុម<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>ក្នុងចំណោទធ្វើចំណាត់ថ្នាក់២ក្រុម ទិន្នន័យធាតុចូល <span class="math notranslate nohighlight">\(\pmb{x}\)</span> នឹងត្រូវបែងចែកទៅក្នុងក្រុមមួយ
+ក្នុងចំណោមពីរក្រុម។ ឧទាហរណ៍ករណីធាតុចូលជារូបថតមួយសន្លឹក។ នៅពេលនោះក្រោយពីទាញយកលក្ខណៈសម្គាល់របស់រូបថតនោះជាទម្រង់វ៉ិចទ័ររួច បណ្តាញនឹងទទួលយកវ៉ិចទ័រនោះជាធាតុចូលរួចធ្វើការបែងចែកថាជារូបមុខមនុស្សឬមិនមែន។</p>
+<p>ក្នុងករណីនេះ លទ្ធផលនៃទិន្នន័យសម្រាប់រៀន
+<span class="math notranslate nohighlight">\(t\)</span> យកតម្លៃជាអថេរដាច់<span class="math notranslate nohighlight">\(\{1\)</span>(មុខមនុស្ស) , <span class="math notranslate nohighlight">\(0\)</span>(មិនមែនមុខមនុស្ស)<span class="math notranslate nohighlight">\(\}\)</span>។ បែបនេះចំណោទចំណាត់ថ្នាក់២ក្រុមក៏ជាចំណោទដែលទទួលធាតុចូល<span class="math notranslate nohighlight">\(\pmb{x}\)</span> និងប៉ាន់ស្មានលទ្ធផល<span class="math notranslate nohighlight">\(t\)</span> ដូចតម្រែតម្រង់ដែរគ្រាន់តែប្រភេទនៃតម្លៃលទ្ធផលជាអថេរដាច់។</p>
+<p>ក្នុងករណីនេះ ដើម្បីប៉ាន់ស្មានតម្លៃលទ្ធផល យើងសិក្សាលើម៉ូឌែលប្រូបាប ពោលគឺសិក្សាលើប្រូបាបដែលថាលទ្ធផល<span class="math notranslate nohighlight">\( t=1\)</span>នៅពេលធាតុចូល<span class="math notranslate nohighlight">\( \pmb{x} \)</span>ត្រូវបានទទួល <span class="math notranslate nohighlight">\(p\left(t=1\middle|\pmb{x}\right) \)</span>។ គំនិតនៅទីនេះគឺថា បើប្រូបាបនេះមានតម្លៃធំជាង<span class="math notranslate nohighlight">\(0.5\)</span> នោះយើងសន្និដ្ឋានថាលទ្ធផលគឺ<span class="math notranslate nohighlight">\(t=1\)</span> និង សន្និដ្ឋានថាលទ្ធផលគឺ<span class="math notranslate nohighlight">\( t=0 \)</span>ក្នុងករណីផ្ទុយពីនេះ។</p>
+<p>ដោយពិនិត្យលើគំនិតបែបនេះ អ្នកអាចនឹកឃើញដល់លក្ខណៈនៃអនុគមន៍Sigmoid ដែលបានបង្ហាញខាងលើ។ បើយើងប្រើអនុគមន៍Sigmoid ជាអនុគមន៍សកម្មសម្រាប់បណ្តាញ FNN <span class="math notranslate nohighlight">\(\pmb{y}\left(\pmb{x};\pmb{w}\right)\)</span>  នោះយើងអាចបង្ហាញម៉ូឌែលប្រូបាបខាងលើដោយFNNបាន។</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(t=1\middle|\pmb{x}\right)\approx\pmb{y}\left(\pmb{x};\pmb{w}\right)
+\]</div>
+<p>ហេតុនេះដើម្បីកំណត់ប៉ារ៉ាម៉ែត្រនៃFNN យើងអាចសិក្សាពីសំណុំអថេរសម្រាប់រៀន(training data) <span class="math notranslate nohighlight">\(\left\{\left(\pmb{x}_n,t_n\right)\right\}_{n=1}^N\)</span>បានដោយកំណត់យកប៉ារ៉ាម៉ែត្រដែលធ្វើឱ្យបំណែងចែកប្រូបាប<span class="math notranslate nohighlight">\( p\left(t\middle|\pmb{x};\pmb{w}\right)\)</span> មានភាពប្រហាក់ប្រហែលគ្នាបំផុតជាមួយនឹងរបាយនៃសំណុំអថេរសម្រាប់រៀន។</p>
+<p>ក្នុងការកំណត់ប៉ារ៉ាម៉ែត្រនៃម៉ូឌែលប្រូបាបបែបនេះ យើងហៅថា ការប៉ាន់ស្មានកម្រិតសាកសមបំផុតនៃទិន្នន័យ (Maximum Likelihood Estimation, MLE)។</p>
+<p>ដោយប្រើតម្លៃនៃ<span class="math notranslate nohighlight">\(p\left(t=0\middle|\pmb{x};\pmb{w}\right),p\left(t=1\middle|\pmb{x};\pmb{w}\right) \)</span>យើងអាចបង្ហាញ <span class="math notranslate nohighlight">\(p\left(t\middle|\pmb{x};\pmb{w}\right)\)</span> ជារួមតាមទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(t\middle|\pmb{x};\pmb{w}\right)=p{\left(t=1\middle|\pmb{x};\pmb{w}\right)}^tp{\left(t=0\middle|\pmb{x};\pmb{w}\right)}^{1-t}
+\]</div>
+<p>ដោយការសន្មតខាងលើ <span class="math notranslate nohighlight">\(p\left(t=1\middle|\pmb{x}\right)=y\left(\pmb{x};\pmb{w}\right)\)</span> នោះ<span class="math notranslate nohighlight">\(p\left(t=1\middle|\pmb{x}\right)=1-y\left(\pmb{x};\pmb{w}\right)\)</span> ។ ក្រោមការសន្មតនៃម៉ូឌែលបែបនេះ ការប៉ាន់ស្មានកម្រិតសាកសមបំផុតនៃទិន្នន័យ MLE គឺជាការកំណត់នូវកម្រិតសាកសមនៃទិន្នន័យ(likelihood)សម្រាប់រៀនរបស់ប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w}\)</span> និងជ្រើសយកតម្លៃនៃ<span class="math notranslate nohighlight">\( \pmb{w} \)</span>ណាដែលធ្វើឱ្យកម្រិតសាកសមនោះមានតម្លៃអតិបរមា។ កម្រិតសាកសមនៃទិន្នន័យសម្រាប់រៀន(training data) របស់ប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w}\)</span> ត្រូវបានកំណត់ដូចទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\pmb{w}\right)=\prod_{n=1}^{N}{p\left(t_n\middle|\pmb{x};\pmb{w}\right)}=\prod_{n=1}^{N}{\left\{y\left(\pmb{x}_n;\pmb{w}\right)\right\}^{t_n}\left\{1-y\left(\pmb{x}_n;\pmb{w}\right)\right\}^{1-t_n}}
+\]</div>
+<p>ដើម្បីសម្រួលដល់ការធ្វើបរមាកម្ម យើងអនុវត្តអនុគមន៍លោការីតលើកន្សោមខាងលើ។ការធ្វើបែបនេះមិនប៉ះពាល់ដល់អថេរភាព(ភាពកើនចុះ)នៃអនុគមន៍ឡើយ។ ក្នុងករណីនេះ អនុគមន៍កម្រិតលម្អៀងនៃចំណោទចំណាត់ថ្នាក់២ក្រុមកំណត់ដោយ <span class="math notranslate nohighlight">\(E\left(\pmb{w}\right)\)</span> ដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(\pmb{w}\right)=-\log{L\left(\pmb{w}\right)}=-\sum_{n=1}^{N}\left\{t_n\log{y\left(\pmb{x}_n;\pmb{w}\right)}+\left(1-t_n\right)\log{\left(1-y\left(\pmb{x}_n;\pmb{w}\right)\right)}\right\}
+\]</div>
+<p>ដូចដែលបានបង្ហាញខាងលើ អនុគមន៍Sigmoidត្រូវបានប្រើសម្រាប់ជាអនុគមន៍សកម្មក្នុងថ្នាក់លទ្ធផលនៃFNN។ ចំណុចនេះអាចបកស្រាយដូចខាងក្រោម។</p>
+<p>ប្រូបាប<span class="math notranslate nohighlight">\( p\left(t=1\middle|\pmb{x}\right) \)</span>អាចសរសេរជាទម្រង់ប្រូបាបមានលក្ខខណ្ឌដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(t=1\middle|\pmb{x}\right)=\frac{p\left(\pmb{x};t=1\right)}{p\left(\pmb{x};t=0\right)+p\left(\pmb{x};t=1\right)}
+\]</div>
+<p>ដោយយក</p>
+<div class="math notranslate nohighlight">
+\[
+u\equiv\log{\frac{p\left(\pmb{x};t=1\right)}{p\left(\pmb{x};t=0\right)}}
+\]</div>
+<p>នោះយើងបាន
+$<span class="math notranslate nohighlight">\( 
+p\left(t=1\middle|\pmb{x}\right)=\frac{1}{1+\exp{\left(-u\right)}}=\sigma\left(u\right)
+\)</span>$
+ពោលគឺ ម៉ូឌែលប្រូបាប</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(t=1\middle|\pmb{x}\right) 
+\]</div>
+<p>ដែលសិក្សាខាងលើសមមូលទៅនឹងអនុគមន៍Sigmoid។</p>
+</div>
+<div class="section" id="id5">
+<h3>ចំណោទធ្វើចំណាត់ថ្នាក់ច្រើនក្រុម<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>ក្នុងចំណោទធ្វើចំណាត់ថ្នាក់ច្រើនក្រុម ទិន្នន័យធាតុចូល<span class="math notranslate nohighlight">\(\pmb{x}\)</span> នឹងត្រូវបែងចែកទៅក្នុងក្រុមមួយ
+ក្នុងចំណោមក្រុមមានកំណត់ច្រើន។ ឧទាហរណ៍ករណីធាតុចូលជារូបថតនៃលេខសរសេរដោយដៃមួយសន្លឹក។ នៅពេលនោះក្រោយពីទាញយកលក្ខណៈសម្គាល់របស់រូបថតនោះជាទម្រង់វ៉ិចទ័ររួចបណ្តាញនឹងទទួលយកវ៉ិចទ័រនោះជាធាតុចូលរួចធ្វើការបែងចែកថាជាលេខណាមួយក្នុងចំណោម 0 ដល់ 9។ ក្នុងករណីនេះ លទ្ធផលនៃទិន្នន័យសម្រាប់រៀន <span class="math notranslate nohighlight">\(t\)</span> យកតម្លៃជាអថេរដាច់ <span class="math notranslate nohighlight">\(\{0,1, ... , 9\}\)</span>។</p>
+<p>ក្នុងករណីនេះ ការប្រើបណ្តាញFNN សម្រាប់ចំណាត់ថ្នាក់ច្រើនក្រុម អាចធ្វើបានដោយកំណត់យកថ្នាក់លទ្ធផលមានចំនួនណឺរ៉ូនស្មើនឹងចំនួននៃក្រុមដែលត្រូវបែងចែក។ សន្មតថាចំនួនក្រុមដែលត្រូវបែងចែកក្នុងចំណោទមានK ។ នៅទីនេះ យើងប្រើបណ្តាញFNNដែលមានLថ្នាក់និងចំនួនណឺរ៉ូននៅថ្នាក់លទ្ធផលមានចំនួនK។ លទ្ធផលដែលផ្តល់ដោយណឺរ៉ូននិមួយៗក្នុងថ្នាក់លទ្ធផលអាចសរសេរដោយទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+y_k\equiv z_k^{\left(L\right)}=\frac{\exp{\left(u_k^{\left(L\right)}\right)}}{\sum_{i=1}^{K}\exp{\left(u_i^{\left(L\right)}\right)}}
+\]</div>
+<p>ដូចដែលបានបកស្រាយក្នុងចំណុចអនុគមន៍សកម្មខាងលើយើងអាចប្រើអនុគមន៍Sofmaxដើម្បីបម្លែងលទ្ធផលជាប្រូបាបនៃករណីបែងចែកចូលក្នុងក្រុមនិមួយៗ។ យើងនឹងពិនិត្យលើភាពត្រឹមត្រូវនៃការសន្មតនេះដោយប្រើម៉ូឌែលប្រូបាបដូចករណី២ក្រុមដែរ។</p>
+<p>សន្មតថាថ្នាក់និមួយៗនៃចំណោទខាងលើគឺ <span class="math notranslate nohighlight">\(\mathcal{C}_1,\mathcal{C}_2,\ldots,\mathcal{C}_K \)</span>លទ្ធផលនៃណឺរ៉ូនkនៅថ្នាក់លទ្ធផលចុងក្រោយនៃបណ្តាញFNN កំណត់ដោយ <span class="math notranslate nohighlight">\(y_k\left(=z_k^{\left(L\right)}\right) \)</span>ជាប្រូបាបនៃព្រឹត្តិការណ៍ដែលធាតុចូល <span class="math notranslate nohighlight">\(\pmb{x}\)</span> ត្រូវកំណត់ថានៅក្នុងក្រុម<span class="math notranslate nohighlight">\(\mathcal{C}_k\)</span> ។</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(\mathcal{C}_k|\pmb{x}\right)=y_k=z_k^{\left(L\right)}
+\]</div>
+<p>ជាលទ្ធផល ធាតុចូល <span class="math notranslate nohighlight">\(\pmb{x}\)</span> ត្រូវកំណត់ថានៅក្នុងក្រុម<span class="math notranslate nohighlight">\(\mathcal{C}_k\)</span>បើតម្លៃប្រូបាប<span class="math notranslate nohighlight">\(p\left(\mathcal{C}_k|\pmb{x}\right)\)</span> មានតម្លៃធំជាងគេក្នុងចំណោមក្រុមទាំងអស់។</p>
+<p>ក្នុងករណីចំណាត់ថ្នាក់ច្រើនក្រុមនេះ យើងកំណត់សរសេរលទ្ធផលពិត<span class="math notranslate nohighlight">\(\pmb{t}_n\)</span>នៃអថេរ<span class="math notranslate nohighlight">\(\pmb{x}_n\)</span>ដោយទម្រង់វ៉ិចទ័រ(one-hot vector)<span class="math notranslate nohighlight">\( \pmb{t}_n=\left[\begin{matrix}t_{n1}&amp;\cdots&amp;t_{nk}\\\end{matrix}\right]^\top\)</span>។
+ក្នុងករណីចំណាត់ថ្នាក់រូបថតលេខសរសេរដោយដៃខាងលើនោះ<span class="math notranslate nohighlight">\(K=10\)</span>។</p>
+<p>បើ<span class="math notranslate nohighlight">\(\pmb{x}_n\)</span> ជាលេខ0 ដែលស្ថិតនៅក្នុងក្រុម<span class="math notranslate nohighlight">\(\mathcal{C}_1\)</span>នោះ <span class="math notranslate nohighlight">\(\pmb{t}_n=\left[1\ \ 0\ \ 0\ \ 0\ \ 0\ \ 0\ \ 0\ \ 0\ \ 0\ \ 0\ \right]^\top\)</span> និងបើ<span class="math notranslate nohighlight">\( \pmb{x}_n \)</span>ជាលេខ5 ដែលស្ថិតនៅក្នុងក្រុម<span class="math notranslate nohighlight">\(\mathcal{C}_6\)</span> នោះ <span class="math notranslate nohighlight">\(\pmb{t}_n=\left[0\ \ 0\ \ 0\ \ 0\ \ 0\ \ 1\ \ 0\ \ 0\ \ 0\ \ 0\ \right]^\top\)</span>។</p>
+<p>ដោយសន្មតសរសេរបែបនេះ យើងអាចបង្ហាញ <span class="math notranslate nohighlight">\(p\left(\pmb{t}\middle|\pmb{x}\right)\)</span> ជារួមតាមទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(\pmb{t}\middle|\pmb{x}\right)=\prod_{k=1}^{K}{p\left(\mathcal{C}_k|\pmb{x}\right)^{t_k}}
+\]</div>
+<p>ហេតុនេះចំពោះសំណុំទិន្នន័យសម្រាប់រៀន <span class="math notranslate nohighlight">\(\left\{\left(\pmb{x}_n,\pmb{t}_n\right)\right\}_{n=1}^N\)</span> កម្រិតសាកសមនៃទិន្នន័យសម្រាប់រៀន(training data) របស់ប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\pmb{w}\)</span> ត្រូវបានកំណត់ដូចទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+L\left(\pmb{w}\right)=\prod_{n=1}^{N}{p\left(\pmb{t}_n\middle|\pmb{x}_n;\pmb{w}\right)}=\prod_{n=1}^{N}\prod_{k=1}^{K}{p\left(\mathcal{C}_k|\pmb{x}\right)^{t_{nk}}}=\prod_{n=1}^{N}\prod_{k=1}^{K}\left(y_k\left(\pmb{x}_n;\pmb{w}\right)\right)^{t_{nk}}
+\]</div>
+<p>ដើម្បីសម្រួលដល់ការធ្វើបរមាកម្ម យើងអនុវត្តអនុគមន៍លោការីតលើកន្សោមខាងលើ។ ក្នុងករណីនេះ អនុគមន៍កម្រិតលម្អៀងនៃចំណោទចំណាត់ថ្នាក់ច្រើនក្រុមកំណត់ដោយ <span class="math notranslate nohighlight">\(E\left(\pmb{w}\right)\)</span> ដូចខាងក្រោម។ អនុគមន៍កម្រិតលម្អៀងបែបនេះហៅថា cross entropy ។</p>
+<div class="math notranslate nohighlight">
+\[
+E\left(\pmb{w}\right)=-\log{L\left(\pmb{w}\right)}=-\sum_{n=1}^{N}\sum_{k=1}^{K}{t_{nk}\log{y_k\left(\pmb{x}_n;\pmb{w}\right)}}
+\]</div>
+<p>ការប្រើអនុគមន៍Softmax សម្រាប់ជាម៉ូឌែលនៃបំណែងចែកច្រើនថ្នាក់នេះអាចបកស្រាយដូចខាងក្រោម។
+ប្រូបាបដែលធាតុចូល <span class="math notranslate nohighlight">\(\pmb{x}\)</span> ត្រូវកំណត់ថានៅក្នុងក្រុម<span class="math notranslate nohighlight">\(\mathcal{C}_k\)</span> អាចគណនាដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(\mathcal{C}_k|\pmb{x}\right)=\frac{p\left(\pmb{x}|\mathcal{C}_k\right)}{\sum_{i=1}^{K}p\left(\pmb{x}|\mathcal{C}_k\right)}
+\]</div>
+<p>នៅទីនេះដោយតាង <span class="math notranslate nohighlight">\(u_k=\log{\left(p\left(\pmb{x},\mathcal{C}_k\right)\right)}\)</span> នោះ <span class="math notranslate nohighlight">\(p\left(\pmb{x},\mathcal{C}_k\right)=\exp{\left(u_k\right)} \)</span> ហេតុនេះ</p>
+<div class="math notranslate nohighlight">
+\[
+p\left(\mathcal{C}_k|\pmb{x}\right)=\frac{\exp{\left(u_k\right)}}{\sum_{i=1}^{K}\exp{\left(u_i\right)}}
+\]</div>
+<p>កន្សោម<span class="math notranslate nohighlight">\(p\left(\mathcal{C}_k|\pmb{x}\right)\)</span> ដែលទាញបានខាងលើនេះដូចគ្នាទៅនឹងអនុគមន៍Softmaxដែរ។</p>
+<p>ដូច្នេះភាពត្រឹមត្រូវនៃការប្រើប្រាស់អនុគមន៍Softmax ជាអនុគមន៍សកម្មសម្រាប់ចំណោទចំណាត់ថ្នាក់ច្រើនក្រុមដោយFNNត្រូវបានផ្ទៀងផ្ទាត់។</p>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="perceptron.html" title="previous page">Perceptron</a>
+    <a class='right-next' id="next-link" href="homepage.html" title="next page">ទៅកាន់ទំព័រដើម Mengsay LOEM</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mengsay LOEM<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
