@@ -16,4 +16,5 @@
   sections: 
   - file: perceptron
   - file: FNN
+  - file: learninginNN
 - file: homepage
