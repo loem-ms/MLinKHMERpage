@@ -14,8 +14,8 @@
     - file: classification_02
 - file: ANN
   sections: 
-  - file: perceptron
-  - file: FNN
-  - file: learninginNN
-  - file: BP
+    - file: perceptron
+    - file: FNN
+    - file: learninginNN
+    - file: BP
 - file: homepage
