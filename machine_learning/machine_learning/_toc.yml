@@ -23,8 +23,9 @@
 - file: SVM-md
   sections: 
     - file: SVM
+    - file: SVMsample
 - file: Clustering-md
   sections: 
     - file: Clustering
-
+    - file: Clusteringsample
 - file: homepage

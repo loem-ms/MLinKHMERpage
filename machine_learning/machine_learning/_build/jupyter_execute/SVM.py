@@ -183,10 +183,6 @@
 
 # ![SVM-10](images/SVM-10.png)
 
-# ## Sample Code with Python
-
-# [Link to Notebook](https://colab.research.google.com/drive/1jMeNfhqQJIpOzmaS6kwD9VuYWdB9cpkA?usp=sharing)
-
 # In[ ]:
 
 
