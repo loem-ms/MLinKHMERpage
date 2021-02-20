@@ -527,7 +527,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 1.0
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.995
 Test score: 1.0
 </pre></div>
 </div>
@@ -554,8 +554,8 @@ Test score: 1.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.892004758550971
-Test score: 0.8744792918053743
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.8895432087948243
+Test score: 0.8785927092105129
 </pre></div>
 </div>
 <img alt="_images/SVMsample_12_1.png" src="_images/SVMsample_12_1.png" />
@@ -564,7 +564,9 @@ Test score: 0.8744792918053743
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lg_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">SGDClassifier</span>
+
+<span class="n">lg_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
 <span class="n">lg_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train score:&quot;</span><span class="p">,</span><span class="n">lg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score:&quot;</span><span class="p">,</span><span class="n">lg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span><span class="n">ytest</span><span class="p">))</span>
@@ -579,18 +581,12 @@ Test score: 0.8744792918053743
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">988</span><span class="n">f7a47d56f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lg_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">lg_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train score:&quot;</span><span class="p">,</span><span class="n">lg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score:&quot;</span><span class="p">,</span><span class="n">lg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span><span class="n">ytest</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-
-<span class="ne">NameError</span>: name &#39;SGDClassifier&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 1.0
+Test score: 1.0
 </pre></div>
 </div>
+<img alt="_images/SVMsample_13_1.png" src="_images/SVMsample_13_1.png" />
+<img alt="_images/SVMsample_13_2.png" src="_images/SVMsample_13_2.png" />
 </div>
 </div>
 </div>
@@ -662,19 +658,19 @@ Test score: 0.8744792918053743
 </div>
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.94
-Test score: 0.91
+Test score: 0.93
 </pre></div>
 </div>
 <img alt="_images/SVMsample_16_1.png" src="_images/SVMsample_16_1.png" />
 <img alt="_images/SVMsample_16_2.png" src="_images/SVMsample_16_2.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.6768477097519081
-Test score: 0.6166406196707522
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.6608751152545949
+Test score: 0.6804937812816911
 </pre></div>
 </div>
 <img alt="_images/SVMsample_16_4.png" src="_images/SVMsample_16_4.png" />
 <img alt="_images/SVMsample_16_5.png" src="_images/SVMsample_16_5.png" />
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.91
-Test score: 0.89
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.92
+Test score: 0.96
 </pre></div>
 </div>
 <img alt="_images/SVMsample_16_7.png" src="_images/SVMsample_16_7.png" />
@@ -722,8 +718,8 @@ Test score: 0.89
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.98
-Test score: 0.91
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.96
+Test score: 0.98
 </pre></div>
 </div>
 <img alt="_images/SVMsample_19_1.png" src="_images/SVMsample_19_1.png" />
