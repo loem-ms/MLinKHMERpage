@@ -175,6 +175,8 @@ plt.show()
 # In[9]:
 
 
+from sklearn.linear_model import SGDClassifier
+
 lg_model = SGDClassifier(loss='log')
 lg_model.fit(Xtrain,ytrain)
 print("Train score:",lg_model.score(Xtrain,ytrain))
@@ -190,7 +192,7 @@ plt.show()
 
 # ### Support Vector Machine on Linear Non-Seperable Data
 
-# In[ ]:
+# In[10]:
 
 
 Xtrain, ytrain = twoData(100, 2, 1)
@@ -207,7 +209,7 @@ plt.title("Test Data")
 plt.show()
 
 
-# In[ ]:
+# In[11]:
 
 
 from sklearn.svm import SVC,LinearSVC
@@ -255,7 +257,7 @@ plt.show()
 
 
 
-# In[ ]:
+# In[12]:
 
 
 Xtrain, ytrain = circle(100, 2)
@@ -272,7 +274,7 @@ plt.title("Test Data")
 plt.show()
 
 
-# In[ ]:
+# In[13]:
 
 
 from sklearn.svm import SVC
