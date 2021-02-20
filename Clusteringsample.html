@@ -57,6 +57,8 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ទៅកាន់ទំព័រដើម Mengsay LOEM" href="homepage.html" />
+    <link rel="prev" title="Clustering" href="Clustering.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -93,7 +95,7 @@
   </a>
  </li>
 </ul>
-<ul class="nav sidenav_l1">
+<ul class="current nav sidenav_l1">
  <li class="toctree-l1">
   <a class="reference internal" href="introML.html">
    សេចក្តីផ្តើមអំពី Machine Learning
@@ -215,14 +217,19 @@
   <i class="fas fa-chevron-down">
   </i>
  </li>
- <li class="toctree-l1 collapsible-parent">
+ <li class="toctree-l1 current active collapsible-parent">
   <a class="reference internal" href="Clustering-md.html">
    Clustering
   </a>
-  <ul class="collapse-ul">
+  <ul class="current collapse-ul">
    <li class="toctree-l2">
     <a class="reference internal" href="Clustering.html">
      Clustering
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Example
     </a>
    </li>
   </ul>
@@ -322,19 +329,26 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-preparation">
-   Data Preparation
+  <a class="reference internal nav-link" href="#clustering">
+   Clustering
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#k-means-algorithm">
-   K-means Algorithm
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#gaussian-mixture-models">
-   Gaussian Mixture Models
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-preparation">
+     Data Preparation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#k-means-algorithm">
+     K-means Algorithm
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#gaussian-mixture-models">
+     Gaussian Mixture Models
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -349,8 +363,10 @@
                 
   <div class="section" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="clustering">
+<h2>Clustering<a class="headerlink" href="#clustering" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="data-preparation">
-<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<h3>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">make_blobs</span>
@@ -369,12 +385,12 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Clusteringsample_3_0.png" src="_images/Clusteringsample_3_0.png" />
+<img alt="_images/Clusteringsample_4_0.png" src="_images/Clusteringsample_4_0.png" />
 </div>
 </div>
 </div>
 <div class="section" id="k-means-algorithm">
-<h2>K-means Algorithm<a class="headerlink" href="#k-means-algorithm" title="Permalink to this headline">¶</a></h2>
+<h3>K-means Algorithm<a class="headerlink" href="#k-means-algorithm" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.cluster</span> <span class="kn">import</span> <span class="n">KMeans</span>
@@ -397,7 +413,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Clusteringsample_6_0.png" src="_images/Clusteringsample_6_0.png" />
+<img alt="_images/Clusteringsample_7_0.png" src="_images/Clusteringsample_7_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -445,8 +461,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Clusteringsample_7_0.png" src="_images/Clusteringsample_7_0.png" />
-<img alt="_images/Clusteringsample_7_1.png" src="_images/Clusteringsample_7_1.png" />
+<img alt="_images/Clusteringsample_8_0.png" src="_images/Clusteringsample_8_0.png" />
+<img alt="_images/Clusteringsample_8_1.png" src="_images/Clusteringsample_8_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -499,13 +515,13 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Clusteringsample_8_0.png" src="_images/Clusteringsample_8_0.png" />
-<img alt="_images/Clusteringsample_8_1.png" src="_images/Clusteringsample_8_1.png" />
+<img alt="_images/Clusteringsample_9_0.png" src="_images/Clusteringsample_9_0.png" />
+<img alt="_images/Clusteringsample_9_1.png" src="_images/Clusteringsample_9_1.png" />
 </div>
 </div>
 </div>
 <div class="section" id="gaussian-mixture-models">
-<h2>Gaussian Mixture Models<a class="headerlink" href="#gaussian-mixture-models" title="Permalink to this headline">¶</a></h2>
+<h3>Gaussian Mixture Models<a class="headerlink" href="#gaussian-mixture-models" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.mixture</span> <span class="kn">import</span> <span class="n">GaussianMixture</span>
@@ -523,7 +539,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/Clusteringsample_10_0.png" src="_images/Clusteringsample_10_0.png" />
+<img alt="_images/Clusteringsample_11_0.png" src="_images/Clusteringsample_11_0.png" />
+</div>
 </div>
 </div>
 </div>
@@ -557,6 +574,8 @@
     
     <div class='prev-next-bottom'>
         
+    <a class='left-prev' id="prev-link" href="Clustering.html" title="previous page">Clustering</a>
+    <a class='right-next' id="next-link" href="homepage.html" title="next page">ទៅកាន់ទំព័រដើម Mengsay LOEM</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

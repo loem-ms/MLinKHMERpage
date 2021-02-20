@@ -227,6 +227,11 @@
      Clustering
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="Clusteringsample.html">
+     Example
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -324,19 +329,26 @@
         <nav id="bd-toc-nav">
             <ul class="nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#data-preparation">
-   Data Preparation
+  <a class="reference internal nav-link" href="#support-vector-machine">
+   Support Vector Machine
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#support-vector-machine-on-linear-seperable-data">
-   Support Vector Machine on Linear Seperable Data
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#support-vector-machine-on-linear-non-seperable-data">
-   Support Vector Machine on Linear Non-Seperable Data
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#data-preparation">
+     Data Preparation
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#support-vector-machine-on-linear-seperable-data">
+     Support Vector Machine on Linear Seperable Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#support-vector-machine-on-linear-non-seperable-data">
+     Support Vector Machine on Linear Non-Seperable Data
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -351,8 +363,10 @@
                 
   <div class="section" id="example">
 <h1>Example<a class="headerlink" href="#example" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="support-vector-machine">
+<h2>Support Vector Machine<a class="headerlink" href="#support-vector-machine" title="Permalink to this headline">¶</a></h2>
 <div class="section" id="data-preparation">
-<h2>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h2>
+<h3>Data Preparation<a class="headerlink" href="#data-preparation" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -401,8 +415,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/SVMsample_4_0.png" src="_images/SVMsample_4_0.png" />
-<img alt="_images/SVMsample_4_1.png" src="_images/SVMsample_4_1.png" />
+<img alt="_images/SVMsample_5_0.png" src="_images/SVMsample_5_0.png" />
+<img alt="_images/SVMsample_5_1.png" src="_images/SVMsample_5_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -416,7 +430,7 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/SVMsample_5_0.png" src="_images/SVMsample_5_0.png" />
+<img alt="_images/SVMsample_6_0.png" src="_images/SVMsample_6_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -471,7 +485,7 @@
 </div>
 </div>
 <div class="section" id="support-vector-machine-on-linear-seperable-data">
-<h2>Support Vector Machine on Linear Seperable Data<a class="headerlink" href="#support-vector-machine-on-linear-seperable-data" title="Permalink to this headline">¶</a></h2>
+<h3>Support Vector Machine on Linear Seperable Data<a class="headerlink" href="#support-vector-machine-on-linear-seperable-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xtrain</span><span class="p">,</span> <span class="n">ytrain</span> <span class="o">=</span> <span class="n">twoData</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
@@ -490,8 +504,8 @@
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/SVMsample_9_0.png" src="_images/SVMsample_9_0.png" />
-<img alt="_images/SVMsample_9_1.png" src="_images/SVMsample_9_1.png" />
+<img alt="_images/SVMsample_10_0.png" src="_images/SVMsample_10_0.png" />
+<img alt="_images/SVMsample_10_1.png" src="_images/SVMsample_10_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -517,13 +531,15 @@
 Test score: 1.0
 </pre></div>
 </div>
-<img alt="_images/SVMsample_10_1.png" src="_images/SVMsample_10_1.png" />
-<img alt="_images/SVMsample_10_2.png" src="_images/SVMsample_10_2.png" />
+<img alt="_images/SVMsample_11_1.png" src="_images/SVMsample_11_1.png" />
+<img alt="_images/SVMsample_11_2.png" src="_images/SVMsample_11_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lr_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LinearRegression</span>
+
+<span class="n">lr_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
 <span class="n">lr_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train score:&quot;</span><span class="p">,</span><span class="n">lr_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score:&quot;</span><span class="p">,</span><span class="n">lr_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span><span class="n">ytest</span><span class="p">))</span>
@@ -538,18 +554,12 @@ Test score: 1.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">8</span><span class="o">-</span><span class="mi">4</span><span class="n">af3c011dd21</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lr_model</span> <span class="o">=</span> <span class="n">LinearRegression</span><span class="p">()</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">lr_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train score:&quot;</span><span class="p">,</span><span class="n">lr_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score:&quot;</span><span class="p">,</span><span class="n">lr_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span><span class="n">ytest</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> 
-
-<span class="ne">NameError</span>: name &#39;LinearRegression&#39; is not defined
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.892004758550971
+Test score: 0.8744792918053743
 </pre></div>
 </div>
+<img alt="_images/SVMsample_12_1.png" src="_images/SVMsample_12_1.png" />
+<img alt="_images/SVMsample_12_2.png" src="_images/SVMsample_12_2.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -569,17 +579,23 @@ Test score: 1.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 1.0
-Test score: 1.0
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">NameError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">9</span><span class="o">-</span><span class="mi">988</span><span class="n">f7a47d56f</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="n">lg_model</span> <span class="o">=</span> <span class="n">SGDClassifier</span><span class="p">(</span><span class="n">loss</span><span class="o">=</span><span class="s1">&#39;log&#39;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">lg_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Train score:&quot;</span><span class="p">,</span><span class="n">lg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Test score:&quot;</span><span class="p">,</span><span class="n">lg_model</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">Xtest</span><span class="p">,</span><span class="n">ytest</span><span class="p">))</span>
+<span class="g g-Whitespace">      </span><span class="mi">5</span> 
+
+<span class="ne">NameError</span>: name &#39;SGDClassifier&#39; is not defined
 </pre></div>
 </div>
-<img alt="_images/SVMsample_12_1.png" src="_images/SVMsample_12_1.png" />
-<img alt="_images/SVMsample_12_2.png" src="_images/SVMsample_12_2.png" />
 </div>
 </div>
 </div>
 <div class="section" id="support-vector-machine-on-linear-non-seperable-data">
-<h2>Support Vector Machine on Linear Non-Seperable Data<a class="headerlink" href="#support-vector-machine-on-linear-non-seperable-data" title="Permalink to this headline">¶</a></h2>
+<h3>Support Vector Machine on Linear Non-Seperable Data<a class="headerlink" href="#support-vector-machine-on-linear-non-seperable-data" title="Permalink to this headline">¶</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">Xtrain</span><span class="p">,</span> <span class="n">ytrain</span> <span class="o">=</span> <span class="n">twoData</span><span class="p">(</span><span class="mi">100</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
@@ -598,8 +614,8 @@ Test score: 1.0
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/SVMsample_14_0.png" src="_images/SVMsample_14_0.png" />
-<img alt="_images/SVMsample_14_1.png" src="_images/SVMsample_14_1.png" />
+<img alt="_images/SVMsample_15_0.png" src="_images/SVMsample_15_0.png" />
+<img alt="_images/SVMsample_15_1.png" src="_images/SVMsample_15_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -649,20 +665,20 @@ Test score: 1.0
 Test score: 0.91
 </pre></div>
 </div>
-<img alt="_images/SVMsample_15_1.png" src="_images/SVMsample_15_1.png" />
-<img alt="_images/SVMsample_15_2.png" src="_images/SVMsample_15_2.png" />
+<img alt="_images/SVMsample_16_1.png" src="_images/SVMsample_16_1.png" />
+<img alt="_images/SVMsample_16_2.png" src="_images/SVMsample_16_2.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.6768477097519081
 Test score: 0.6166406196707522
 </pre></div>
 </div>
-<img alt="_images/SVMsample_15_4.png" src="_images/SVMsample_15_4.png" />
-<img alt="_images/SVMsample_15_5.png" src="_images/SVMsample_15_5.png" />
+<img alt="_images/SVMsample_16_4.png" src="_images/SVMsample_16_4.png" />
+<img alt="_images/SVMsample_16_5.png" src="_images/SVMsample_16_5.png" />
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Train score: 0.91
 Test score: 0.89
 </pre></div>
 </div>
-<img alt="_images/SVMsample_15_7.png" src="_images/SVMsample_15_7.png" />
-<img alt="_images/SVMsample_15_8.png" src="_images/SVMsample_15_8.png" />
+<img alt="_images/SVMsample_16_7.png" src="_images/SVMsample_16_7.png" />
+<img alt="_images/SVMsample_16_8.png" src="_images/SVMsample_16_8.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -683,8 +699,8 @@ Test score: 0.89
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="_images/SVMsample_17_0.png" src="_images/SVMsample_17_0.png" />
-<img alt="_images/SVMsample_17_1.png" src="_images/SVMsample_17_1.png" />
+<img alt="_images/SVMsample_18_0.png" src="_images/SVMsample_18_0.png" />
+<img alt="_images/SVMsample_18_1.png" src="_images/SVMsample_18_1.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -710,8 +726,9 @@ Test score: 0.89
 Test score: 0.91
 </pre></div>
 </div>
-<img alt="_images/SVMsample_18_1.png" src="_images/SVMsample_18_1.png" />
-<img alt="_images/SVMsample_18_2.png" src="_images/SVMsample_18_2.png" />
+<img alt="_images/SVMsample_19_1.png" src="_images/SVMsample_19_1.png" />
+<img alt="_images/SVMsample_19_2.png" src="_images/SVMsample_19_2.png" />
+</div>
 </div>
 </div>
 </div>

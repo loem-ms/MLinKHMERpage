@@ -17,28 +17,28 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply['content'])
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-lr_model = LinearRegression()
-lr_model.fit(Xtrain,ytrain)
-print("Train score:",lr_model.score(Xtrain,ytrain))
-print("Test score:",lr_model.score(Xtest,ytest))
+lg_model = SGDClassifier(loss='log')
+lg_model.fit(Xtrain,ytrain)
+print("Train score:",lg_model.score(Xtrain,ytrain))
+print("Test score:",lg_model.score(Xtest,ytest))
 
-plot_decision_regions(Xtrain,ytrain,classifier=lr_model)
+plot_decision_regions(Xtrain,ytrain,classifier=lg_model)
 plt.title("Train Data")
 plt.show()
-plot_decision_regions(Xtest,ytest,classifier=lr_model)
-plt.title("Linear Regression : Test Data Acc %.2f"%(lr_model.score(Xtest,ytest)))
+plot_decision_regions(Xtest,ytest,classifier=lg_model)
+plt.title("Logistic Regression : Test Data Acc %.2f"%(lg_model.score(Xtest,ytest)))
 plt.show()
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
 [0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m<ipython-input-8-4af3c011dd21>[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mlr_model[0m [0;34m=[0m [0mLinearRegression[0m[0;34m([0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m[1;32m      2[0m [0mlr_model[0m[0;34m.[0m[0mfit[0m[0;34m([0m[0mXtrain[0m[0;34m,[0m[0mytrain[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      3[0m [0mprint[0m[0;34m([0m[0;34m"Train score:"[0m[0;34m,[0m[0mlr_model[0m[0;34m.[0m[0mscore[0m[0;34m([0m[0mXtrain[0m[0;34m,[0m[0mytrain[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[1;32m      4[0m [0mprint[0m[0;34m([0m[0;34m"Test score:"[0m[0;34m,[0m[0mlr_model[0m[0;34m.[0m[0mscore[0m[0;34m([0m[0mXtest[0m[0;34m,[0m[0mytest[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0;32m<ipython-input-9-988f7a47d56f>[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mlg_model[0m [0;34m=[0m [0mSGDClassifier[0m[0;34m([0m[0mloss[0m[0;34m=[0m[0;34m'log'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mlg_model[0m[0;34m.[0m[0mfit[0m[0;34m([0m[0mXtrain[0m[0;34m,[0m[0mytrain[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      3[0m [0mprint[0m[0;34m([0m[0;34m"Train score:"[0m[0;34m,[0m[0mlg_model[0m[0;34m.[0m[0mscore[0m[0;34m([0m[0mXtrain[0m[0;34m,[0m[0mytrain[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0mprint[0m[0;34m([0m[0;34m"Test score:"[0m[0;34m,[0m[0mlg_model[0m[0;34m.[0m[0mscore[0m[0;34m([0m[0mXtest[0m[0;34m,[0m[0mytest[0m[0;34m)[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
 [1;32m      5[0m [0;34m[0m[0m
 
-[0;31mNameError[0m: name 'LinearRegression' is not defined
-NameError: name 'LinearRegression' is not defined
+[0;31mNameError[0m: name 'SGDClassifier' is not defined
+NameError: name 'SGDClassifier' is not defined
 
