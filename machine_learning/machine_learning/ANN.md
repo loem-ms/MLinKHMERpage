@@ -1,4 +1,2 @@
 Artificial Neural Network
 =========================
-
-កំពុងរៀបចំ...
