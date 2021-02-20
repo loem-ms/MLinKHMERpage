@@ -1,2 +1,2 @@
-[ទៅកាន់ទំព័រដើម Mengsay LOEM](https://loem-ms.github.io/loem-ms/)
+[Mengsay LOEM](https://loem-ms.github.io/loem-ms/)
 ==============================================================
