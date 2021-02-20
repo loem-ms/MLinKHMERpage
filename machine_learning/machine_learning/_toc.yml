@@ -18,4 +18,13 @@
     - file: FNN
     - file: learninginNN
     - file: BP
+    - file: learningANN
+    - file: CNN
+- file: SVM-md
+  sections: 
+    - file: SVM
+- file: Clustering-md
+  sections: 
+    - file: Clustering
+
 - file: homepage

@@ -57,7 +57,7 @@
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="ទៅកាន់ទំព័រដើម Mengsay LOEM" href="homepage.html" />
+    <link rel="next" title="Technique in Learning Process" href="learningANN.html" />
     <link rel="prev" title="Learning Process in Neural Network" href="learninginNN.html" />
 
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -184,6 +184,30 @@
      Backpropagation (BP)
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="learningANN.html">
+     Technique in Learning Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="CNN.html">
+     Convolutional Neural Network
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="SVM-md.html">
+   Support Vector Machine
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="SVM.html">
+     Support Vector Machine
+    </a>
+   </li>
   </ul>
   <i class="fas fa-chevron-down">
   </i>
@@ -268,6 +292,37 @@
    ភាពលំបាកក្នុងការគណនា gradient
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#backpropagation-fnn">
+   ការគណនាតាម backpropagation ករណីFNNមានប៉ារ៉ាម៉ែត្រពីរថ្នាក់(ណឺរ៉ូន៣ថ្នាក់)
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fnn">
+   ករណីទូទៅ៖ FNNច្រើនថ្នាក់
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#delta-j-left-l-right">
+   ការគណនា
+   <span class="math notranslate nohighlight">
+    \(\delta_j^{\left(L\right)}\)
+   </span>
+   នៃថ្នាក់លទ្ធផលចុងក្រោយ
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#regression">
+     ករណីចំណោទតម្រែតម្រង់ Regression
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#classificaiton">
+     ករណីចំណោទចំណាត់ថ្នាក់ក្រុម Classificaiton
+    </a>
+   </li>
+  </ul>
+ </li>
 </ul>
 
         </nav>
@@ -284,6 +339,280 @@
 <p>ក្នុងអត្ថបទមុនយើងបានសិក្សាអំពីដំណើរការរៀនដើម្បីកំណត់តម្លៃប៉ារ៉ាម៉ែត្រនៃFNNតាមរយៈវិធីសាស្រ្ត stochastic gradient descend(SGD)។ ដូចដែលអ្នកអាចចាប់អារម្មណ៍បានក្នុងSGD ការគណនាgradientឬដេរីវេនៃអនុគមន៍កម្រិតលម្អៀងត្រូវបានធ្វើឡើង។ ជាទូទៅការគណនានេះអាចធ្វើបានតាមរយៈការគណនាតម្លៃប្រហែលនៃដេរីវេដោយប្រើតម្លៃអនុគមន៍ផ្ទាល់។ ប៉ុន្តែការគណនាបែបនេះចំណាយពេលច្រើន។ ដើម្បីគណនាgradientឬដេរីវេនៃអនុគមន៍ប្រកបដោយប្រសិទ្ធភាព វិធីសាស្រ្តគណនាgradientដោយប្រើ backpropagation ត្រូវបានប្រើប្រាស់ជាទូទៅ។</p>
 <div class="section" id="gradient">
 <h2>ភាពលំបាកក្នុងការគណនា gradient<a class="headerlink" href="#gradient" title="Permalink to this headline">¶</a></h2>
+<p>នៅក្នុង stochastic gradient descend ការគណនាតម្លៃ gradient  នៃអនុគមន៍កម្រិត
+លម្អៀង <span class="math notranslate nohighlight">\((\nabla E\left(\pmb{w}\right)=\partial E\left(\pmb{w}\right)/\partial\pmb{w})\)</span>គឺជាដំណាក់កាលដ៏សំខាន់។ ចំពោះFNNច្រើនថ្នាក់ ការគណនា gradient ចំពោះប៉ារ៉ាម៉ែត្រមានភាពស្មុគស្មាញខ្លាំង។
+ជាឧទាហរណ៍តម្លៃកម្រិតលម្អៀងចំពោះគម្រូទិន្នន័យសម្រាប់រៀន <span class="math notranslate nohighlight">\(\pmb{x}_n\)</span> នៃចំណោទតម្រែតម្រង់(regression) កំណត់ដោយ <span class="math notranslate nohighlight">\(E_n=\frac{1}{2}||x_n-t_n||^2\)</span>។ យើងសាកល្បងគណនាដេរីវេធៀបនឹងប៉ារ៉ាម៉ែត្រទំងន់ផ្ទាល់ <span class="math notranslate nohighlight">\(w_{ji}^{\left(l\right)}\)</span> នៃថ្នាក់ទី <span class="math notranslate nohighlight">\(l\)</span>។</p>
+<p>ដំបូងយើងពិនិត្យឃើញថា</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}=\left(\pmb{y}\left(\pmb{x}_n\right)-\pmb{t}_n\right)^\top\frac{\partial\pmb{y}}{\partial w_{ji}^{\left(l\right)}}
+\]</div>
+<p>បន្ទាប់មកទៀតយើងត្រូវគណនាដេរីវេ</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\pmb{y}}{\partial w_{ji}^{\left(l\right)}}
+\]</div>
+<p>ដោយលទ្ធផលនៃFNN <span class="math notranslate nohighlight">\(\pmb{y}\left(\pmb{x}\right)\)</span> កំណត់ដោយទម្រង់ខាងក្រោម នោះយើងអាចមើលឃើញបានថាការគណនាដេរីវេតាមវិធីបែបនេះមិនមានប្រសិទ្ធភាពឡើយ ពោលគឺត្រូវចំណាយពេលច្រើនក្នុងការគណនាដោយប្រើProgramming។</p>
+<div class="math notranslate nohighlight">
+\[
+\pmb{y}\left(\pmb{x}\right)=\pmb{f}\left(\pmb{u}^{\left(L\right)}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\pmb{f}\left(\pmb{W}^{\left(L\right)}\pmb{z}^{\left(L-1\right)}+\pmb{b}^{\left(L\right)}\right) 
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\pmb{f}\left(\pmb{W}^{\left(L\right)}\pmb{f}\left(\pmb{W}^{\left(L-1\right)}\pmb{z}^{\left(L-2\right)}+\pmb{b}^{\left(L-1\right)}\right)+\pmb{b}^{\left(L\right)}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\pmb{f}\left(\pmb{W}^{\left(L\right)}\pmb{f}\left(\pmb{W}^{\left(L\right)}\pmb{f}(\cdots\pmb{f}(\pmb{W}^{\left(l\right)}\pmb{z}^{\left(l-1\right)}+\pmb{b}^{\left(l\right)}\right)\cdots))+\pmb{b}^{\left(L\right)}\right)
+\]</div>
+<p>វិធីសាស្រ្ត backpropagation អាចជួយដោះស្រាយបញ្ហាគណនាដេរីវេនៃអនុគមន៍បណ្តាក់ច្រើនជាន់បែបនេះបាន។ នៅក្នុងការបង្ហាញខាងក្រោម ដើម្បីសម្រួលដល់ការសរសេរ យើងកំណត់សរសេរតួ bias ជាផ្នែកមួយនៃប៉ារ៉ាម៉ែត្រទំងន់ផ្ទាល់នៃណឺរ៉ូនដែរ ពោលគឺ <span class="math notranslate nohighlight">\(w_{0j}^{\left(l\right)}=b_j^{\left(l\right)}\)</span>។ ហេតុនេះដោយកំណត់ណឺរ៉ូនទី0នៃថ្នាក់<span class="math notranslate nohighlight">\((l-1)\)</span> ឱ្យបញ្ចេញនូវលទ្ធផល <span class="math notranslate nohighlight">\(z_0^{\left(l-1\right)}=1\)</span> ជានិច្ចនោះយើងអាចសរសេរលទ្ធផលនៃណឺរ៉ូនដោយទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+u_j^{\left(l\right)}=\sum_{i=1}^{k}{w_{ji}^{\left(l\right)}z_i^{\left(l-1\right)}}+b_j=\sum_{i=0}^{k}{w_{ji}^{\left(l\right)}z_i^{\left(l-1\right)}}
+\]</div>
+<p><img alt="BP-1" src="_images/BP-1.png" /></p>
+</div>
+<div class="section" id="backpropagation-fnn">
+<h2>ការគណនាតាម backpropagation ករណីFNNមានប៉ារ៉ាម៉ែត្រពីរថ្នាក់(ណឺរ៉ូន៣ថ្នាក់)<a class="headerlink" href="#backpropagation-fnn" title="Permalink to this headline">¶</a></h2>
+<p>រូបខាងលើបង្ហាញទម្រង់នៃFNNមានប៉ារ៉ាម៉ែត្រពីរថ្នាក់(ណឺរ៉ូន៣ថ្នាក់)នៃចំណោទតម្រែតម្រង់
+(regression)។ អនុគមន៍សកម្ម(activation function) នៃថ្នាក់លទ្ធផលចុងក្រោយកំណត់ដោយអនុគមន៍identity <span class="math notranslate nohighlight">\(\left(f\left(x\right)=x\right)\)</span>។</p>
+<p>សន្មតធាតុចូលនៃបណ្តាញនេះដោយ <span class="math notranslate nohighlight">\(\pmb{x}=\left[x_1\ x_2\ x_3\ x_4\right]^\top\)</span>។ លទ្ធផលនៃថ្នាក់ណឺរ៉ូនទីមួយពោលថ្នាក់ធាតុចូលគឺ <span class="math notranslate nohighlight">\(z_i^{\left(1\right)}=x_i\)</span> និងលទ្ធផលនៃថ្នាក់កណ្តាល<span class="math notranslate nohighlight">\(z_j^{\left(2\right)}\)</span> ព្រមទាំងលទ្ធផលនៃថ្នាក់លទ្ធផលចុងក្រោយ<span class="math notranslate nohighlight">\(y_j\left(\pmb{x}\right)=\ z_j^{\left(3\right)}\)</span> កំណត់ដោយទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+z_j^{\left(2\right)}=f\left(u_j^{\left(2\right)}\right)=f\left(\sum_{i}{w_{ji}^{(2)}z_i^{\left(1\right)}}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y_j\left(\pmb{x}\right)=z_j^{\left(3\right)}=u_j^{\left(3\right)}=\sum_{i}{w_{ji}^{(3)}z_i^{\left(2\right)}}
+\]</div>
+<p>សន្មតយកផលបូកការេនៃលម្អៀងជាអនុគមន៍កម្រិតលម្អៀងនៃបណ្តាញនេះ។</p>
+<div class="math notranslate nohighlight">
+\[
+E_n=\frac{1}{2}||y_j(\pmb{x}_n)-t_n||^2=\frac{1}{2}\sum_j {\left(y_j(\pmb{x}_n)-t_n\right)^2}
+\]</div>
+<p>ពេលនេះយើងពិនិត្យលើការគណនាដេរីវេនៃអនុគមន៍នេះធៀបនឹងប៉ារ៉ាម៉ែត្ររបស់វា។</p>
+<p>ដំបូងយើងគណនាដេរីវេធៀបប៉ារ៉ាម៉ែត្រនៃផ្នែកថ្នាក់លទ្ធផលចុងក្រោយនៃបណ្តាញ</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(3\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(3\right)}}=\frac{\partial}{\partial w_{ji}^{\left(3\right)}}\left\{\frac{1}{2}||y(\pmb{x}_n)-t_n||^2\right\}=(y(\pmb{x}_n)-t_n)^\top \frac{\partial y}{\partial w_{ji}^{\left(3\right)}}
+\]</div>
+<p>ដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+y_j\left(\pmb{x}\right)=z_j^{\left(3\right)}=u_j^{\left(3\right)}=\sum_{i}{w_{ji}^{(3)}z_i^{\left(2\right)}}
+\]</div>
+<p>នោះ</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial\pmb{y}}{\partial w_{ji}^{\left(3\right)}}=\left[0\cdots0\ z_i^{\left(2\right)}\ 0\cdots0\right]^\top
+\]</div>
+<p>ដូច្នេះ</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(3\right)}}=\left(\pmb{y}\left(\pmb{x}_n\right)-\pmb{t}_n\right)^\top\frac{\partial\pmb{y}}{\partial w_{ji}^{\left(3\right)}}=\left(y_j\left(\pmb{x}_n\right)-t_{nj}\right)z_i^{\left(2\right)}
+\]</div>
+<p>បន្ទាប់ពីនេះ យើងពិនិត្យលើថ្នាក់កណ្តាល <span class="math notranslate nohighlight">\(\frac{\partial E_n}{\partial w_{ji}^{\left(2\right)}}\)</span></p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(2\right)}}=\frac{\partial E_n}{\partial u_j^{\left(2\right)}}\frac{\partial u_j^{\left(2\right)}}{\partial w_{ji}^{\left(2\right)}}
+\]</div>
+<p>ដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+u_j^{\left(2\right)}=\sum_{i}{w_{ji}^{\left(2\right)}z_i^{\left(1\right)}}
+\]</div>
+<p>នោះយើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u_j^{\left(2\right)}}{\partial w_{ji}^{\left(2\right)}}=z_i^{\left(1\right)}
+\]</div>
+<p>ម្យ៉ាងទៀត បើយក <span class="math notranslate nohighlight">\(k\)</span> ជាចំនួនណឺរ៉ូននៅ ថ្នាក់លទ្ធផលចុងក្រោយនោះ <span class="math notranslate nohighlight">\(E_n\)</span> មាន <span class="math notranslate nohighlight">\(u_1^{\left(3\right)},\cdots,u_k^{\left(3\right)}\)</span> ជាអថេរដែលយើងអាចសរសេរអនុគមន៍ដេរីវេដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial u_j^{\left(2\right)}}=\sum_{k}\frac{\partial E_n}{\partial u_k^{\left(3\right)}}
+\frac{\partial u_k^{\left(3\right)}}{\partial u_j^{\left(2\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial u_k^{\left(3\right)}}=\frac{\partial}{\partial u_k^{\left(3\right)}}\left\{\frac{1}{2}\sum_{j}\left(y_j\left(\pmb{x}_n\right)-\pmb{t}_n\right)^2\right\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\frac{\partial}{\partial u_k^{\left(3\right)}}\left\{\frac{1}{2}\sum_{j}\left(u_j^{\left(3\right)}-\pmb{t}_n\right)^2\right\}=u_k^{\left(3\right)}-t_{nk}
+\]</div>
+<p>ដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial u_k^{\left(3\right)}}{\partial u_j^{\left(2\right)}}=\frac{\partial}{\partial u_j^{\left(2\right)}}\left\{\sum_{i}{w_{ki}^{\left(3\right)}z_i^{\left(2\right)}}\right\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\frac{\partial}{\partial u_j^{\left(2\right)}}\left\{\sum_{i}{w_{ki}^{\left(3\right)}f\left(u_j^{\left(2\right)}\right)}\right\}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=w_{kj}^{\left(3\right)}f^\prime\left(u_j^{\left(2\right)}\right)
+\]</div>
+<p>ហេតុនេះ យើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(2\right)}}=\left(f^\prime\left(u_j^{\left(2\right)}\right)\sum_{k}{w_{kj}^{\left(3\right)}\left(u_k^{\left(3\right)}-t_{nk}\right)}\right)z_i^{\left(1\right)}
+\]</div>
+</div>
+<div class="section" id="fnn">
+<h2>ករណីទូទៅ៖ FNNច្រើនថ្នាក់<a class="headerlink" href="#fnn" title="Permalink to this headline">¶</a></h2>
+<p><img alt="BP-2" src="_images/BP-2.png" /></p>
+<p>ដំបូង យើងពិនិត្យលើប៉ារ៉ាម៉ែត្រ <span class="math notranslate nohighlight">\(w_{ji}^{\left(l\right)}\)</span> នៃថ្នាក់ទី <span class="math notranslate nohighlight">\(l\)</span> ។</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}=\frac{\partial E_n}{\partial u_j^{\left(l\right)}}\frac{\partial u_j^{\left(l\right)}}{\partial w_{ji}^{\left(l\right)}}
+\]</div>
+<p>ដោយពិនិត្យរូបឆ្វេង បម្រែបម្រួលនៃ<span class="math notranslate nohighlight">\(u_j^{\left(l\right)}\)</span> ជះឥទ្ធិពលលើតម្លៃនៃ<span class="math notranslate nohighlight">\(E_n\)</span> តាមរយៈតម្លៃនៃ<span class="math notranslate nohighlight">\(z_j^{\left(l\right)}\)</span> និងតម្លៃលទ្ធផលនៃណឺរ៉ូននៅថ្នាក់ទី<span class="math notranslate nohighlight">\(\left(l+1\right)\)</span>។ ហេតុនេះយើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial u_j^{\left(l\right)}}=\sum_{k}{\frac{\partial E_n}{\partial u_k^{\left(l+1\right)}}\frac{\partial u_k^{\left(l+1\right)}}{\partial u_j^{\left(l\right)}}}
+\]</div>
+<p>ដោយពិនិត្យលើកន្សោមខាងលើ យើងឃើញថា <span class="math notranslate nohighlight">\(\partial E_n/\partial u_j^{\left(\bullet\right)}\)</span> បង្ហាញនៅអង្គទាំងសង្ខាង។ នៅទីនេះយើងសន្មតតាង</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_j^{\left(l\right)}\equiv\frac{\partial E_n}{\partial u_j^{\left(l\right)}}
+\]</div>
+<p>ដោយប្រើទំនាក់ទំនង</p>
+<div class="math notranslate nohighlight">
+\[
+u_k^{\left(l+1\right)}=\sum_{j}{w_{kj}^{\left(l+1\right)}z_j^{\left(l\right)}}=\sum_{j}{w_{kj}^{\left(l+1\right)}f\left(u_j^{\left(l\right)}\right)}
+\]</div>
+<p>យើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+\partial u_k^{\left(l+1\right)}/\partial u_j^{\left(l\right)}=
+w_{kj}^{\left(l+1\right)}f^\prime\left(u_j^{\left(l\right)}\right)
+\]</div>
+<p>។ ហេតុនេះ</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_j^{\left(l\right)}=\frac{\partial E_n}{\partial u_j^{\left(l\right)}}=\sum_{k}{\frac{\partial E_n}{\partial u_k^{\left(l+1\right)}}\frac{\partial u_k^{\left(l+1\right)}}{\partial u_j^{\left(l\right)}}}=\sum_{k}{\delta_k^{\left(l+1\right)}\left(w_{kj}^{\left(l+1\right)}f\left(u_j^{\left(l\right)}\right)\right)}
+\]</div>
+<p>តាមទំនាក់ទំនងនេះបង្ហាញថាយើងអាចគណនា <span class="math notranslate nohighlight">\(\delta_j^{\left(l\right)}\)</span>បានដោយប្រើតម្លៃនៃ<span class="math notranslate nohighlight">\(\delta_k^{\left(l+1\right)}\ \left(k=1,2,\ldots\right)\)</span>។មានន័យថា បើយើងដឹងតម្លៃ<span class="math notranslate nohighlight">\(\delta\)</span> របស់ថ្នាក់ខាងលើពោលគឺ<span class="math notranslate nohighlight">\((l+1)\)</span>  នោះយើងអាចគណនាតម្លៃ <span class="math notranslate nohighlight">\(\delta\)</span> នៅថ្នាក់ក្រោមបន្តបន្ទាប់តាមទំនាក់ទំនងនេះ។ រូបស្តាំ បង្ហាញពីដំណើរការនៃការគណនា<span class="math notranslate nohighlight">\(\delta\)</span> ពីថ្នាក់លើឆ្ពោះទៅថ្នាក់ក្រោមបែបនេះ។ ទំនាក់ទំនងខាងលើនេះពិតជានិច្ចចំពោះគ្រប់ថ្នាក់ទាំងអស់នៃបណ្តាញ។</p>
+<p>ដូច្នេះបើ <span class="math notranslate nohighlight">\(\delta\)</span> នៅថ្នាក់លទ្ធផលចុងក្រោយត្រូវបានគណនា នោះ យើងអាចគណនា <span class="math notranslate nohighlight">\(\delta\)</span> ពោលគឺដេរីវេនៃប៉ារ៉ាម៉ែត្រនៅថ្នាក់ក្រោមជាបន្តបន្ទាប់បានដោយអនុវត្តតាមទំនាក់ទំនងងាយខាងលើ។ ដោយសារតែលំដាប់នៃការគណនា <span class="math notranslate nohighlight">\(\delta\)</span> នៅទីនេះមានទិសដៅផ្ទុយពីទិសដៅបញ្ជូនសញ្ញាណក្នុងការប៉ាន់ស្មានលទ្ធផលរបស់បណ្តាញ ដូចនេះទើបគេហៅឈ្មោះវិធីសាស្រ្តនេះថាជា backpropagation។</p>
+<p>ត្រលប់មកផ្នែកនៅសល់នៃ <span class="math notranslate nohighlight">\(\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}=\frac{\partial E_n}{\partial u_j^{\left(l\right)}}\frac{\partial u_j^{\left(l\right)}}{\partial w_{ji}^{\left(l\right)}}\)</span></p>
+<p>ដោយ
+<span class="math notranslate nohighlight">\(\frac{\partial E_n}{\partial u_j^{\left(l\right)}}\)</span> អាចគណនាបានដោយគណនា <span class="math notranslate nohighlight">\(\delta\)</span> ដូច្នេះ យើងពិនិត្យលើ <span class="math notranslate nohighlight">\(\frac{\partial u_j^{\left(l\right)}}{\partial w_{ji}^{\left(l\right)}}\)</span></p>
+<p>តាមទំនាក់ទំនង <span class="math notranslate nohighlight">\(u_j^{\left(l\right)}=\sum_{i=0}^{k}{w_{ji}^{\left(l\right)}z_i^{\left(l-1\right)}}\)</span> នោះ <span class="math notranslate nohighlight">\(\frac{\partial u_j^{\left(l\right)}}{\partial w_{ji}^{\left(l\right)}}=z_i^{\left(l-1\right)}\)</span> ហេតុនេះយើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}=\delta_j^{\left(l\right)}z_i^{\left(l-1\right)}
+\]</div>
+<p>ដូចបង្ហាញក្នុងទំនាក់ទំនងដែលទាញបាននេះ ការគណនាដេរីវេដោយផ្នែកនៃអនុគមន៍កម្រិតលម្អៀងធៀបប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(w_{ji}^{\left(l\right)}\)</span>ដែលភ្ជាប់ណឺរ៉ូនទី <span class="math notranslate nohighlight">\(i\)</span> នៃថ្នាក់ទី<span class="math notranslate nohighlight">\(\left(l-1\right)\)</span>និងណឺរ៉ូនទី <span class="math notranslate nohighlight">\(j\)</span> នៃថ្នាក់ទី<span class="math notranslate nohighlight">\((l)\)</span> អាចគណនាបានយ៉ាងងាយដោយប្រើ <span class="math notranslate nohighlight">\(\delta_j^{\left(l\right)}\)</span> នៃណឺរ៉ូនទី<span class="math notranslate nohighlight">\(j\)</span> នៃថ្នាក់ទី<span class="math notranslate nohighlight">\((l)\)</span> និងលទ្ធផល<span class="math notranslate nohighlight">\(z_i^{\left(l-1\right)}\)</span>នៃណឺរ៉ូនទី <span class="math notranslate nohighlight">\(i\)</span> នៃថ្នាក់ទី<span class="math notranslate nohighlight">\(\left(l-1\right)\)</span>។ ដូចបានបញ្ជាក់ខាងលើ <span class="math notranslate nohighlight">\(\delta_j^{\left(l\right)} \)</span>អាចគណនាបានដោយគណនាជាបន្តបន្ទាប់ពីថ្នាក់ខាងលើតាមទំនាក់ទំនងដែលបានទាញពីខាងដើម។ ក្នុងករណីនេះ <span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}\)</span>នៃថ្នាក់ខាងលើបំផុត(ថ្នាក់លទ្ធផលចុងក្រោយ)អាចកំណត់បានដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_j^{\left(L\right)}=\frac{\partial E_n}{\partial u_j^{\left(L\right)}}
+\]</div>
+<p>ដែលការគណនាជាក់ស្តែងប្រែប្រួលទៅតាមប្រភេទនៃអនុគមន៍កម្រិតលម្អៀង(ទៅតាមចំណោទ)។</p>
+<p>ដោយបូកសរុបការគណនាខាងលើ នៅពេលដែលគម្រូទិន្នន័យសម្រាប់រៀន<span class="math notranslate nohighlight">\(\left(\pmb{x}_n,\pmb{t}_n\right)\)</span> ត្រូវបានផ្តល់ gradientឬដេរីវេនៃអនុគមន៍កម្រិតលម្អៀងអាចគណនាបានតាមលំដាប់លំដោយខាងក្រោម។ ក្នុងករណីនៃការរៀនជាក្រុមតូច(minibatch) ផលបូកនៃgradient បានមកពីការគណនា
+ចំពោះគម្រូទិន្នន័យនិមួយៗត្រូវបានយកជាgradientនៃក្រុមតូចនោះ</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{\partial E}{\partial w_{ji}^{\left(l\right)}}=\sum_{n}\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}
+\]</div>
+<p>Input : គម្រូទិន្នន័យសម្រាប់រៀន <span class="math notranslate nohighlight">\(\left(\pmb{x}_n,\pmb{t}_n\right)\)</span></p>
+<p>Output : gradientឬដេរីវេនៃអនុគមន៍កម្រិតលម្អៀង <span class="math notranslate nohighlight">\(\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}\ \ \left(l=2,\ldots,L\right)\)</span></p>
+<ol class="simple">
+<li><p>ដោយយក <span class="math notranslate nohighlight">\(\pmb{z}^{\left(1\right)}=\pmb{x}\)</span>  គណនាតម្លៃនៃ <span class="math notranslate nohighlight">\(\pmb{u}^{\left(l\right)},\pmb{z}^{\left(l\right)}\ \ \left(l=2,\ldots,L\right)\)</span>តាមលំដាប់</p></li>
+<li><p>គណនា <span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}\)</span>(តាមធម្មតាវាត្រូវបានកំណត់ដោយ<span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}=z_j-t_j\)</span>)</p></li>
+<li><p>ចំពោះថ្នាក់កណ្តាល<span class="math notranslate nohighlight">\(\left(l=L-1,\ L-2,\cdots,2\right)\)</span> គណនាតម្លៃ<span class="math notranslate nohighlight">\(\delta_j^{\left(l\right)}\)</span>
+តាមលំដាប់ដោយ<span class="math notranslate nohighlight">\(\delta_j^{\left(l\right)}=\sum_{k}{\delta_k^{\left(l+1\right)}\left(w_{kj}^{\left(l+1\right)}f\left(u_j^{\left(l\right)}\right)\right)}\)</span></p></li>
+<li><p>ចំពោះថ្នាក់ទី <span class="math notranslate nohighlight">\(l\ \left(l=2,\cdots,L\right)\)</span> គណនាតម្លៃ<span class="math notranslate nohighlight">\(\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}\)</span> ដោយ<span class="math notranslate nohighlight">\(\frac{\partial E_n}{\partial w_{ji}^{\left(l\right)}}=\delta_j^{\left(l\right)}z_i^{\left(l-1\right)}\)</span></p></li>
+</ol>
+</div>
+<div class="section" id="delta-j-left-l-right">
+<h2>ការគណនា<span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}\)</span>នៃថ្នាក់លទ្ធផលចុងក្រោយ<a class="headerlink" href="#delta-j-left-l-right" title="Permalink to this headline">¶</a></h2>
+<p>ដូចបានបង្ហាញខាងលើ ការគណនា <span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}\)</span> នៃថ្នាក់លទ្ធផលចុងក្រោយអាស្រ័យនឹងប្រភេទអនុគមន៍កម្រិតលម្អៀងដែលប្រើ ពោលគឺអាស្រ័យនឹងប្រភេទនៃចំណោទ។</p>
+<div class="section" id="regression">
+<h3>ករណីចំណោទតម្រែតម្រង់ Regression<a class="headerlink" href="#regression" title="Permalink to this headline">¶</a></h3>
+<p>ក្នុងករណីចំណោទតម្រែតម្រង់អនុគមន៍កម្រិតលម្អៀងគឺជាផលបូកការេនៃលម្អៀងលើគម្រូ
+ទិន្នន័យនិមួយៗ។</p>
+<div class="math notranslate nohighlight">
+\[
+E_n=\frac{1}{2}||y(x_n)-t_n||^2=\frac{1}{2}\sum_j(y_j-t_j)^2
+\]</div>
+<p>ក្នុងករណីនេះ អនុគមន៍សកម្ម(activation)នៃថ្នាក់លទ្ធផលចុងក្រោយនៃFNNគឺជាអនុគមន៍identity:</p>
+<div class="math notranslate nohighlight">
+\[
+y_j=z_j^{\left(L\right)}=u_j^{\left(L\right)}
+\]</div>
+<p>។ ហេតុនេះ <span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}\)</span> នៃថ្នាក់លទ្ធផលចុងក្រោយគឺ</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_j^{\left(L\right)}=u_j^{\left(L\right)}-t_{nj}=z_j^{\left(L\right)}-t_j=y_j-t_j
+\]</div>
+<p>ពោលគឺគម្លាតរវាងតម្លៃលទ្ធផលនៃបណ្តាញ(ណឺរ៉ូន)និងលទ្ធផលក្នុងទិន្នន័យសម្រាប់រៀន។</p>
+</div>
+<div class="section" id="classificaiton">
+<h3>ករណីចំណោទចំណាត់ថ្នាក់ក្រុម Classificaiton<a class="headerlink" href="#classificaiton" title="Permalink to this headline">¶</a></h3>
+<p>ក្នុងចំណោទចំណាត់ថ្នាក់២ក្រុម អនុគមន៍កម្រិតលម្អៀងត្រូវបានកំណត់ដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+E_n=-t\log{y}-\left(1-t\right)\log{\left(1-y\right)}
+\]</div>
+<p>ក្នុងករណីនេះ អនុគមន៍សកម្មនៃថ្នាក់លទ្ធផលចុងក្រោយនៃFNNគឺជាអនុគមន៍ sigmoid ហេតុនេះ</p>
+<div class="math notranslate nohighlight">
+\[
+y=\frac{1}{1+\exp{\left(-u\right)}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\frac{dy}{du}=-\frac{\exp{\left(-u\right)}}{\left(1+\exp{\left(-u\right)}\right)^2}=y\left(1-y\right)
+\]</div>
+<p>ដូច្នេះយើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_j^{\left(L\right)}=-\frac{t}{y}\times\frac{dy}{du}-\frac{1-t}{1-y}\left(-\frac{dy}{du}\right)
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=-t\left(1-y\right)-\left(1-t\right)y=y-t
+\]</div>
+<p>ក្នុងចំណោទចំណាត់ថ្នាក់ច្រើនក្រុម អនុគមន៍កម្រិតលម្អៀងត្រូវបានកំណត់ដោយ</p>
+<div class="math notranslate nohighlight">
+\[
+E_n=-\sum_{k}{t_k\log{y_k}}=-\sum_{k}{t_k\log{\left(\frac{\exp{\left(u_k^{\left(L\right)}\right)}}{\sum_{i}\exp{\left(u_i^{\left(L\right)}\right)}}\right)}}
+\]</div>
+<p>ក្នុងករណីនេះ អនុគមន៍សកម្មនៃថ្នាក់លទ្ធផលចុងក្រោយនៃFNNគឺជាអនុគមន៍ softmax ហេតុនេះ</p>
+<div class="math notranslate nohighlight">
+\[
+y=\frac{\exp{\left(u_k^{\left(L\right)}\right)}}{\sum_{i}\exp{\left(u_i^{\left(L\right)}\right)}}
+\]</div>
+<p>ដូច្នេះយើងបាន</p>
+<div class="math notranslate nohighlight">
+\[
+\delta_j^{\left(L\right)}=-\sum_{k}{t_k\frac{1}{y_k}\times\frac{\partial y_k}{\partial u_j^{\left(L\right)}}}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=-t_j\left(1-y_j\right)-\sum_{k\neq j}{t_k\left(-y_j\right)}
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=\left(y_j-t_j\right)\sum_{k} t_k
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+=y_j-t_j\ \left(\because\sum_{k} t_k=1\ (one-hot\ vector)\right)
+\]</div>
+<p>តាមលទ្ធផលខាងលើ ទាំងករណីចំណោទតម្រែតម្រង់ ទាំងករណីចំណោទចំណាត់ថ្នាក់
+ក្រុម <span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}\)</span> នៃថ្នាក់លទ្ធផលចុងក្រោយគឺ
+<span class="math notranslate nohighlight">\(\delta_j^{\left(L\right)}=y_j-t_j\)</span>
+ពោលគឺគម្លាតរវាងតម្លៃលទ្ធផលនៃបណ្តាញ(ណឺរ៉ូន)និងលទ្ធផលក្នុងទិន្នន័យសម្រាប់រៀន។</p>
+</div>
 </div>
 </div>
 
@@ -316,7 +645,7 @@
     <div class='prev-next-bottom'>
         
     <a class='left-prev' id="prev-link" href="learninginNN.html" title="previous page">Learning Process in Neural Network</a>
-    <a class='right-next' id="next-link" href="homepage.html" title="next page">ទៅកាន់ទំព័រដើម Mengsay LOEM</a>
+    <a class='right-next' id="next-link" href="learningANN.html" title="next page">Technique in Learning Process</a>
 
     </div>
     <footer class="footer mt-5 mt-md-0">

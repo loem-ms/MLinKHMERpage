@@ -1,0 +1,543 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Support Vector Machine &#8212; Machine Learning</title>
+    
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/language_data.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/x-mathjax-config">MathJax.Hub.Config({"tex2jax": {"inlineMath": [["\\(", "\\)"]], "displayMath": [["\\[", "\\]"]], "processRefs": false, "processEnvironments": false}})</script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="&lt;no title&gt;" href="Clustering-md.html" />
+    <link rel="prev" title="Support Vector Machine" href="SVM-md.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="index.html">
+  
+  <img src="_static/ml-icon.png" class="logo" alt="logo">
+  
+  
+  <h1 class="site-logo" id="site-title">Machine Learning</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="intro.html">
+   អំពីវគ្គសិក្សា
+  </a>
+ </li>
+</ul>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html">
+   សេចក្តីផ្តើមអំពី Machine Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#supervised-learning">
+   Supervised Learning
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="introML.html#unsuperivsed-learning">
+   Unsuperivsed Learning
+  </a>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="regression.html">
+   អំពីRegression
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression_01.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(១)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regression-02.html">
+     ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរ(២)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="SGD.html">
+     វិធីសាស្រ្តបរមាកម្មតាមរយៈ SGD
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="regularization.html">
+     Regularization in Machine Learning
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="classification.html">
+   អំពីClassification
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_01.html">
+     ចំណាត់ថ្នាក់២ក្រុម (Binary Classification)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="classification_02.html">
+     ចំណាត់ថ្នាក់ច្រើនក្រុម (Multiclass Classification)
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 collapsible-parent">
+  <a class="reference internal" href="ANN.html">
+   Artificial Neural Network
+  </a>
+  <ul class="collapse-ul">
+   <li class="toctree-l2">
+    <a class="reference internal" href="perceptron.html">
+     Perceptron
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="FNN.html">
+     Feedforward Neural Network
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="learninginNN.html">
+     Learning Process in Neural Network
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="BP.html">
+     Backpropagation (BP)
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="learningANN.html">
+     Technique in Learning Process
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="CNN.html">
+     Convolutional Neural Network
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1 current active collapsible-parent">
+  <a class="reference internal" href="SVM-md.html">
+   Support Vector Machine
+  </a>
+  <ul class="current collapse-ul">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Support Vector Machine
+    </a>
+   </li>
+  </ul>
+  <i class="fas fa-chevron-down">
+  </i>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="homepage.html">
+   ទៅកាន់ទំព័រដើម Mengsay LOEM
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/SVM.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.ipynb</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
+        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
+    <div class="dropdown-buttons">
+        
+        <a class="binder-button" href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/SVM.ipynb"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Launch Binder" data-toggle="tooltip"
+                data-placement="left"><img class="binder-button-logo"
+                    src="_static/images/logo_binder.svg"
+                    alt="Interact on binder">Binder</button></a>
+        
+        
+        
+        
+    </div>
+</div>
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   ចំណាត់ថ្នាក់២ក្រុម
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#linear-seperable">
+   ករណីទិន្នន័យដែលអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន(Linear Seperable)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id2">
+     ករណីទិន្នន័យដែលអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន(Linear Seperable)
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#kernel-support-vector-machine">
+   Kernel Support Vector Machine
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#sample-code-with-python">
+   Sample Code with Python
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <div class="section" id="support-vector-machine">
+<h1>Support Vector Machine<a class="headerlink" href="#support-vector-machine" title="Permalink to this headline">¶</a></h1>
+<p>ក្នុងអត្ថបទមុនៗ យើងបានណែនាំអំពីការធ្វើចំណាត់ថ្នាក់ទិន្នន័យ២ឬច្រើនក្រុមដោយប្រើម៉ូឌែលតម្រែតម្រង់(Linear regression, Logistic regression)។
+ប៉ុន្តែមានចំណុចខ្សោយសំខាន់ពីរកើតមានឡើងក្នុងការប្រើប្រាស់ម៉ូឌែលតម្រែតម្រង់ក្នុងការធ្វើចំណាត់ថ្នាក់ក្រុមទិន្នន័យ
+ដូចបង្ហាញក្នុងរូបទី១ខាងក្រោម។ ក្នុងរូបខាងឆ្វេង ដោយសារមានទិន្នន័យប្រមូលផ្តុំច្រើននៅផ្នែកខាងក្រុមក្រហម ម៉ូឌែលតម្រែតម្រង់លីនេអ៊ែរនឹងផ្តល់ឱ្យនូវបន្ទាត់ព្រំដែនដែលខិតទៅជិតក្រុមក្រហមខ្លាំង (បន្ទាត់ខៀវ)។ ប៉ុន្តែតាមពិតបន្ទាត់ព្រំដែនទឹកក្រូចអាចមើលឃើញថាល្អប្រសើរជាង។ ក្នុងករណីរូបកណ្តាលនិងរូបខាងស្តាំ ច្បាស់ណាស់ថា ទិន្នន័យទាំងនេះមិនអាចធ្វើការបែងចែកដោយបន្ទាត់ត្រង់បានឡើយ ពោលគឺជាប្រភេទដែលមិនអាចបែងចែកលីនេអ៊ែរ(linear non-seperable data)។</p>
+<p>ដើម្បីដោះស្រាយបញ្ហាទាំងនេះ ការធ្វើចំណាត់ថ្នាក់ក្រុមទិន្នន័យដោយប្រើSupport Vector Machineត្រូវបានប្រើ។ ក្នុងអត្ថបទនេះយើងនឹងណែនាំអំពីដំណើរការគណិតវិទ្យាក្នុងការដោះស្រាយបញ្ហាធ្វើចំណាត់ថ្នាក់ក្រុម២ឬច្រើនក្រុមដោយប្រើSupport Vector Machine។ យើងនឹងពិនិត្យទាំងករណីទិន្នន័យដែលអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន(Linear Seperable) និងមិនបាន(Linear Non- Seperable)។</p>
+<p><img alt="SVM-1" src="_images/SVM-1.png" /></p>
+<div class="section" id="id1">
+<h2>ចំណាត់ថ្នាក់២ក្រុម<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>នៅទីនេះយើងសិក្សាលើទិន្នន័យពីរក្រុម<span class="math notranslate nohighlight">\((+1,-1)\)</span>  <span class="math notranslate nohighlight">\(\mathcal{D}=\left\{\left(\pmb{x}_\pmb{i},y_i\right)\right\}_{i=1}^N\)</span> ដែល <span class="math notranslate nohighlight">\(\pmb{x}_\pmb{i}\in\mathbb{R}^d\ ,\ 
+y_i\in\left\{+1,-1\right\} \)</span>។ យើងចង់បង្កើតម៉ូឌែលចំណាត់ថ្នាក់ក្រុមមួយដែលធ្វើការបែងចែកតាមម៉ូឌែលលីនេអ៊ែរដែលតាងដោយទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\mathcal{M}=\left\{sign\left(f\left(\pmb{x}\right)\right)\ |\ f\left(\pmb{x}\right)=\pmb{w}^\top\pmb{x}+b\ ,\ \pmb{w}\in\mathbb{R}^d,b\in\mathbb{R}\right\}
+\]</div>
+<p>ក្នុងករណីដែលមាន <span class="math notranslate nohighlight">\(m\left(\pmb{x}\right)=sign\left(\pmb{w}^\top\pmb{x}+b\right)\)</span> ដែលផ្ទៀងផ្ទាត់ <span class="math notranslate nohighlight">\(m\left(\pmb{x}_i\right)=y_i  ∀ i=1,2,…,N \)</span> នោះ ទិន្នន័យដែលមានហៅថា អាចធ្វើបំណែងចែកលីនេអ៊ែរបាន(Linear Seperable)។ ពោលគឺយើងអាចកំណត់បន្ទាត់ឬប្លង់ព្រំដែនដើម្បីបែងចែកទិន្នន័យទាំងពីរប្រភេទបានច្បាស់លាស់ដោយគ្មានកំហុសចំពោះគ្រប់ទិន្នន័យ។ ផ្ទុយទៅវិញ ករណីដែលមិនអាចរកបានម៉ូឌែលណាដែលផ្ទៀងផ្ទាត់លក្ខខណ្ឌខាងលើ យើងហៅថា មិនអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន(Linear Non-Seperable)។</p>
+<p><img alt="SVM-2" src="_images/SVM-2.png" /></p>
+</div>
+<div class="section" id="linear-seperable">
+<h2>ករណីទិន្នន័យដែលអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន(Linear Seperable)<a class="headerlink" href="#linear-seperable" title="Permalink to this headline">¶</a></h2>
+<p>ក្នុងករណីទិន្នន័យដែលអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន ចំពោះទិន្នន័យ <span class="math notranslate nohighlight">\(\mathcal{D}=\left\{\left(\pmb{x}_\pmb{i},y_i\right)\right\}_{i=1}^N\)</span> យើងអាចសរសេរទំនាក់ទំនងខាងក្រោមបាន</p>
+<div class="math notranslate nohighlight">
+\[
+y_i=+1\ \Longrightarrow\ \ \pmb{w}^\top\pmb{x}_i+b&gt;0
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+y_i=-1\ \Longrightarrow\ \ \pmb{w}^\top\pmb{x}_i+b&lt;0
+\]</div>
+<p>ឬ ជារួម</p>
+<div class="math notranslate nohighlight">
+\[
+y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)&gt;0\ \ \left(i=1,2,\ldots,N\right)
+\]</div>
+<p>ជាទូទៅ តម្លៃនៃប៉ារ៉ាម៉ែត្រ <span class="math notranslate nohighlight">\(\left(\pmb{w},b\right)\)</span> ដែលផ្ទៀងផ្ទាត់លក្ខខណ្ឌខាងលើមានច្រើនលើសពីមួយ។ ក្នុងចំណោមនោះ ដើម្បីជ្រើសបានប៉ារ៉ាម៉ែត្រដែលប្រសើរ គោលគំនិតក្នុង Support Vector Machine គឺកំណត់យកករណីដែលតម្រឹម(margin)នៃទិន្នន័យនិងព្រំដែនមានទំហំធំបំផុត។
+ការកំណត់តម្រឹម(margin)ដែលធំបំផុតនៅទីនេះ គឺសំដៅដល់ការយកប៉ារ៉ាម៉ែត្រណាដែលធ្វើឱ្យចន្លោះរវាងទិន្នន័យទាំងពីរក្រុមនិងបន្ទាត់(ឬប្លង់)ព្រំដែនមានគម្លាតឆ្ងាយពីគ្នាបំផុត(រូបទី៣)។</p>
+<p><img alt="SVM-3" src="_images/SVM-3.png" /></p>
+<p>យើងនឹងបង្ហាញបញ្ហាខាងលើជាទម្រង់គណិតវិទ្យា។
+សន្មតបន្ទាត់ឬប្លង់ព្រំដែនមានទម្រង់ដូចម៉ូឌែលខាងលើ <span class="math notranslate nohighlight">\(\pmb{w}^\top\pmb{x}+b=0\)</span> ។ ចម្ងាយពីចំណុច <span class="math notranslate nohighlight">\(\pmb{x}_0\in\mathbb{R}^d\)</span> ទៅព្រំដែនអាចកំណត់បានដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\frac{|\pmb{w}^\top \pmb{x}_0 + b|}{||\pmb{w}||}
+\]</div>
+<p>ហេតុនេះ ការកំណត់ប៉ារ៉ាម៉ែត្រ<span class="math notranslate nohighlight">\(\left(\pmb{w},b\right)\)</span> ដែលធ្វើឱ្យតម្រឹមអតិបរមាអាចកំណត់បានជាចំណោទបរមាដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\pmb{w}\in\mathbb{R}^d, b\in\mathbb{R}}{\max} \underset{\{i=1,\cdots,N\}}{\min}\frac{|\pmb{w}^\top \pmb{x}_i+b|}{\left \| \pmb{w} \right \|}
+\]</div>
+<p>ក្រោមលក្ខខណ្ឌ</p>
+<div class="math notranslate nohighlight">
+\[
+y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)&gt;0\ \ \left(i=1,2,\ldots,N\right)
+\]</div>
+<p>ចំណោទបរមាខាងលើអាចសរសេរជាទម្រង់សមមូលបែបងាយដូចខាងក្រោមបានដោយសារតែអនុគមន៍គោលដៅដែលត្រូវធ្វើបរមាកម្មមិនប្រែប្រួលតម្លៃឡើយពេល <span class="math notranslate nohighlight">\(\pmb{w},b\)</span>  ត្រូវបានគុណនឹងចំនួនថេរក៏ដោយ។</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\{i=1,\cdots,N\}}{\min}\frac{\left \| \pmb{w} \right \|^2}{2}
+\]</div>
+<p>ក្រោមលក្ខខណ្ឌ</p>
+<div class="math notranslate nohighlight">
+\[
+y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)&gt;0\ \ \left(i=1,2,\ldots,N\right)
+\]</div>
+<p>អនុគមន៍គោលដៅខាងលើមានទម្រង់ជាអនុគមន៍ប៉ោងដឺក្រេទី២ ហើយលក្ខខណ្ឌរបស់វាដែលត្រូវផ្ទៀងផ្ទាត់មានទម្រង់ជាលីនេអ៊ែរ។ ចំណោទបរមាបែបនេះហៅថាចំណោទប្រូក្រាមលំដាប់២(QP:Quadratic Programming)។ ក្នុងការដោះស្រាយចំណោទបែបនេះមានalgorithmដែលមានប្រសិទ្ធិភាពខ្ពស់ជាច្រើនត្រូវបានស្រាវជ្រាវ។នៅទីនេះយើងនឹងមិនធ្វើការបកស្រាយលំអិតឡើយ។ សន្មតថាចម្លើយនៃចំណោទបរមាខាងលើគឺ <span class="math notranslate nohighlight">\(\hat{\pmb{w}}\in\mathbb{R}^d,\hat{b}\in\mathbb{R} \)</span>នោះការធ្វើចំណាត់ថ្នាក់ក្រុមទិន្នន័យអាចធ្វើបានដោយគណនាតាមទម្រង់ខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{m}\left(\pmb{x}\right)=sign\left({\hat{\pmb{w}}}^\top\pmb{x}+\hat{b}\right)
+\]</div>
+<p>ជាមួយPython អ្នកអាចប្រើ sklearn.svm packageបានប្រើSupport Vector Machine Model។</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span><span class="p">,</span><span class="n">LinearSVC</span>
+<span class="n">sv_model</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;linear&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sv_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="SVM-4" src="_images/SVM-4.png" /></p>
+<div class="section" id="id2">
+<h3>ករណីទិន្នន័យដែលអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន(Linear Seperable)<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>ក្នុងករណីដែលទិន្នន័យមិនអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន ចំណោទបរមាខាងលើគ្មាន
+តម្លៃប៉ារ៉ាម៉ែត្រណាដែលផ្ទៀងផ្ទាត់លក្ខខណ្ឌឡើយ។ ហេតុនេះដើម្បីដោះស្រាយបញ្ហាបំណែងចែកបែបនេះករណីកំហុស(មិនបំពេញលក្ខខណ្ឌ <span class="math notranslate nohighlight">\(y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)&gt;0 \left(i=1,2,\ldots,N\right)\)</span>)ក្នុងបំណែងចែកខ្លះត្រូវបានលើកលែង។ដំណោះស្រាយបែបនេះហៅថា Soft Support Vector Machine។</p>
+<p>នៅទីនេះដោយប្រើម៉ូឌែលបំណែងចែក<span class="math notranslate nohighlight">\(m\left(\pmb{x}\right)=sign\left(\pmb{w}^\top\pmb{x}+b\right)\)</span>  ករណីទិន្នន័យ<span class="math notranslate nohighlight">\(\left(\pmb{x}_i,y_i\right)\)</span> តម្លៃនៃការពិន័យ(Loss)លើកំហុសនៃចំណាត់ថ្នាក់ក្រុមត្រូវបានកំណត់ដូចខាងក្រោម។</p>
+<ol class="simple">
+<li><p>ចំពោះ <span class="math notranslate nohighlight">\(y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)\geq1\)</span> យើងសន្មតថាម៉ូឌែលអាចបែងចែកបានល្អ ដោយកំណត់តម្លៃពិន័យ<span class="math notranslate nohighlight">\( 0 \)</span></p></li>
+<li><p>ចំពោះ <span class="math notranslate nohighlight">\(y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)&lt;1\)</span> យើងសន្មតថាម៉ូឌែលអាចបែងចែកមិនបានល្អដោយកំណត់តម្លៃនៃ
+ពិន័យ <span class="math notranslate nohighlight">\(1-y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)&gt;0\)</span></p></li>
+</ol>
+<p>ក្នុងករណីនេះដើម្បីកំណត់ប៉ារ៉ាម៉ែត្រដែលប្រសើរសម្រាប់ធ្វើចំណាត់ថ្នាក់ក្រុមជាមួយSoft Support Vector Machine យើងនឹងកំណត់តម្លៃប៉ារ៉ាម៉ែត្រណាដែលធ្វើឱ្យតម្រឹមធំបំផុត តែកម្រិតពិន័យ (Loss)តូចបំផុត។ យើងអាចបង្ហាញបញ្ហានេះជាទម្រង់ចំណោទបរមាបានដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\pmb{w}\in\mathbb{R}^d,b\in\mathbb{R}}{\min}{\frac{C}{N}\sum_{i=1}^{N}\max{\left\{1-y_i\left(\pmb{w}^\top\pmb{x}_i+b\right)\ ,\ 0\right\}}+\frac{1}{2}}||w||^2
+\]</div>
+<p><span class="math notranslate nohighlight">\(C\)</span> ជាតម្លៃសម្រាប់កំណត់កម្រិតនៃការផ្តោតលើបរមាកម្មរវាងតម្រឹម(margin)និងពិន័យ(loss)។
+នៅទីនេះដូចដែលអ្នកអាចចាប់អារម្មណ៍បាន ការកំណត់តម្លៃ<span class="math notranslate nohighlight">\(C\)</span>ជារឿងពិបាក។ វិធីដែលច្រើនអនុវត្តគឺការធ្វើ Cross-validation ។ យើងនឹងមិនលំអិតលើវិធីសាស្រ្តនេះឡើយនៅទីនេះ។</p>
+<p><img alt="SVM-7" src="_images/SVM-7.png" /></p>
+<p><img alt="SVM-8" src="_images/SVM-8.png" /></p>
+<p>តាមលទ្ធផលក្នុងរូបខាងលើ យើងអាចផ្ទៀងផ្ទាត់ពីការធ្វើបំណែងចែកក្រុមបានល្អប្រសើរក្នុងករណីប្រើSoft Support Vector Machine ប្រើប្រៀបធៀបទៅនឹងម៉ូឌែលតម្រែតម្រង់ដែលបានសិក្សាកន្លងមក។ប៉ុន្តែទោះជាយ៉ាងណា ករណីទិន្នន័យដែលមិនអាចធ្វើបំណែងចែកលីនេអ៊ែរបាន កម្រិតត្រឹមត្រូវនៃការធ្វើចំណាត់ថ្នាក់ក្រុមនៅមានកម្រិតទោះបីជាប្រើSoft Support Vector Machineក្តី។</p>
+</div>
+</div>
+<div class="section" id="kernel-support-vector-machine">
+<h2>Kernel Support Vector Machine<a class="headerlink" href="#kernel-support-vector-machine" title="Permalink to this headline">¶</a></h2>
+<p>ក្នុងករណីដែលទិន្នន័យមិនអាចបែងចែកលីនេអ៊ែរបាន ការប្រើKernelជាជំនួយត្រូវបាន
+អនុវត្តជាទូទៅ។ ជាមួយការប្រើប្រាស់Kernel សមត្ថភាពនៃការបង្ហាញលក្ខណៈពិសេសរបស់ទិន្នន័យនឹងត្រូវបានបង្កើន។ កាលពីសិក្សាពីម៉ូឌែលតម្រែតម្រង់ យើងបានលើកឡើងអំពីការប្រើអនុគមន៍គោលដែលជាអនុគមន៍មិនលីនេអ៊ែរដើម្បីបង្ហាញលក្ខណៈពិសេសរបស់ទិន្នន័យមួយចំនួន។</p>
+<p>ស្រដៀងគ្នានេះជាមួយគោលគំនិតក្នុងការប្រើKernel  ឧបមាថាយើងមានអនុគមន៍គោល <span class="math notranslate nohighlight">\(\varphi_1\left(\pmb{x}\right),\varphi_2\left(\pmb{x}\right),\ldots,\varphi_D\left(\pmb{x}\right) \)</span> នោះអនុគមន៍Kernel ត្រូវបានកំណត់ដូចខាងក្រោម ដែលនៅទីនេះ<span class="math notranslate nohighlight">\(\Phi\left(\pmb{x}\right)=\left(\begin{matrix}\varphi_1\left(\pmb{x}\right)&amp;\cdots&amp;\varphi_D\left(\pmb{x}\right)\\\end{matrix}\right)^\top\)</span> ។</p>
+<div class="math notranslate nohighlight">
+\[
+k\left(\pmb{x},\pmb{x}^\prime\right)=\sum_{d=1}^{D}{\varphi_d\left(\pmb{x}\right)\varphi_d\left(\pmb{x}\prime\right)}=\Phi\left(\pmb{x}\right)^\top\Phi\left(\pmb{x}\prime\right)
+\]</div>
+<p>ក្នុងករណីនេះ ទម្រង់នៃ ម៉ូឌែលចំណាត់ថ្នាក់ក្រុមនិងបន្ទាត់ឬប្លង់ព្រំដែនអាចបង្ហាញដូចទម្រង់ខាងក្រោម ដោយសន្មតយក
+<span class="math notranslate nohighlight">\(\pmb{\beta}=\left(\begin{matrix}\beta_1&amp;\cdots&amp;\beta_n\\\end{matrix}\right)^\top\)</span> ជំនួស<span class="math notranslate nohighlight">\( \pmb{w} \)</span>។</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(\pmb{x}\right)=\pmb{w}^\top\Phi\left(\pmb{x}\right)+b
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+f\left(\pmb{x}\right)=\sum_{i=1}^{N}{\beta_ik\left(\pmb{x},\pmb{x}_i\right)}+b
+\]</div>
+<p>ដូចគ្នានឹងករណីទូទៅនៃSupport Vector Machine ដែរ ក្នុងករណី Kernel Support Vector Machine បញ្ហាខាងលើអាចបង្ហាញជាទម្រង់ចំណោទបរមាដូចខាងក្រោម។</p>
+<div class="math notranslate nohighlight">
+\[
+\underset{\pmb{\beta},b}{\min}{\frac{C}{N}\sum_{i=1}^{N}\max{\left\{1-y_if\left(\pmb{x}_i\right)\ ,\ 0\right\}}+\frac{1}{2}}\pmb{\beta}^\top K\pmb{\beta}
+\]</div>
+<p>ក្រោមលក្ខខណ្ឌ</p>
+<div class="math notranslate nohighlight">
+\[
+f\left(\pmb{x}_i\right)=\sum_{j=1}^{N}{\beta_iK_{ij}}+b\ \ \left(i=1,2,\ldots,N\right)
+\]</div>
+<p>ដែល <span class="math notranslate nohighlight">\(K_{ij}=k\left(\pmb{x}_i,\pmb{x}_j\right)\)</span> ។</p>
+<p>ជាមួយPython អ្នកអាចជ្រើសរើសប្រភេទ Kernel ដែលនិយមប្រើដូចជា: លីនេអ៊ែរ linear , ពហុធា poly , Gaussian Kernel: rbf , Sigmoid Kernel: sigmoid ។</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.svm</span> <span class="kn">import</span> <span class="n">SVC</span>
+
+<span class="n">sv_model</span> <span class="o">=</span> <span class="n">SVC</span><span class="p">(</span><span class="n">kernel</span><span class="o">=</span><span class="s2">&quot;rbf&quot;</span><span class="p">,</span> <span class="n">C</span><span class="o">=</span><span class="mf">1.0</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">sv_model</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">Xtrain</span><span class="p">,</span><span class="n">ytrain</span><span class="p">)</span>
+
+</pre></div>
+</div>
+<p><img alt="SVM-9" src="_images/SVM-9.png" /></p>
+<p><img alt="SVM-10" src="_images/SVM-10.png" /></p>
+</div>
+<div class="section" id="sample-code-with-python">
+<h2>Sample Code with Python<a class="headerlink" href="#sample-code-with-python" title="Permalink to this headline">¶</a></h2>
+<p><a class="reference external" href="https://colab.research.google.com/drive/1jMeNfhqQJIpOzmaS6kwD9VuYWdB9cpkA?usp=sharing">Link to Notebook</a></p>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="SVM-md.html" title="previous page">Support Vector Machine</a>
+    <a class='right-next' id="next-link" href="Clustering-md.html" title="next page">&lt;no title&gt;</a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Mengsay LOEM<br/>
+        
+            &copy; Copyright 2021.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
