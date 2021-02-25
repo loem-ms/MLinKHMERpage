@@ -1,6 +1,5 @@
-អំពីវគ្គសិក្សា
+មាតិកា
 ========
-
 
 1. សេចក្តីផ្តើមនៃ Machine Learning
 2. អំពីចំណោទ Regression
@@ -12,5 +11,3 @@
 [ទាញយកអត្ថបទបកស្រាយសង្ខេបជាPDF](https://github.com/loem-ms/MachineLearningINKHMER.git)
 
 [មេរៀនខ្លីៗអំពីPython](https://colab.research.google.com/drive/1oQ_aSeUIzl27GkmlR4n4QB_FKOKnL6EE?usp=sharing)
-
-

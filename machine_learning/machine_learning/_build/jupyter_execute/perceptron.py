@@ -24,8 +24,8 @@ import matplotlib.pyplot as plt
 # 
 # $$
 # y=\left\{\begin{matrix}
-# 1 & (w_1x_1+w_2x_2\geq \theta)\\ 
-# 0 & (w_1x_1+w_2x_2 < \theta)
+# 1 & (w_1x_1+w_2x_2​​ > \theta)\\ 
+# 0 & (w_1x_1+w_2x_2 \leq \theta)
 # \end{matrix}\right.
 # $$
 # 
