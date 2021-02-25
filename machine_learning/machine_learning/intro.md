@@ -2,12 +2,12 @@
 ========
 
 
-1. 【02/06】សេចក្តីផ្តើមនៃ Machine Learning
-2. 【02/09・11】អំពីចំណោទ Regression
-3. 【02/13・16】អំពីចំណោទ Classfication
-4. 【02/18・20・23】អំពី Artificial Neural Network
-5. 【02/25】អំពី Support Vector Machine
-6. 【02/27】អំពី Clustering Analysis
+1. សេចក្តីផ្តើមនៃ Machine Learning
+2. អំពីចំណោទ Regression
+3. អំពីចំណោទ Classfication
+4. អំពី Artificial Neural Network
+5. អំពី Support Vector Machine
+6. អំពី Clustering Analysis
 
 [ទាញយកអត្ថបទបកស្រាយសង្ខេបជាPDF](https://github.com/loem-ms/MachineLearningINKHMER.git)
 
