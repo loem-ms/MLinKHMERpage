@@ -406,6 +406,13 @@
 <p>រូបខាងក្រោមបង្ហាញអំពីPerceptronដែលទទួលសញ្ញាណឬធាតុចូល(input) 2។ រង្វង់ដែលមានក្នុងរូបហៅថាណឺរ៉ូន(neuron) ឬnode។
 <span class="math notranslate nohighlight">\(x_1,x_2\)</span> ជាសញ្ញាណឬធាតុចូល ឯ<span class="math notranslate nohighlight">\(y\)</span> គឺជាលទ្ធផលនៃណឺរ៉ូននោះ។ <span class="math notranslate nohighlight">\(w_1, w_2\)</span> ជាទម្ងន់ផ្ទាល់នៃណឺរ៉ូនចំពោះធាតុចូលនិមួយៗ ពោលគឺតម្លៃដែលបង្ហាញនូវកម្រិតឥទ្ធិពលនៃធាតុចូលនិមួយៗទៅលើលទ្ធផល។ តម្លៃនៃទម្ងន់កាន់តែធំបង្ហាញពីកម្រិតសំខាន់នៃធាតុចូលនោះ។</p>
 <p>នៅពេលដែលណឺរ៉ូនមួយទទួលបាននូវសញ្ញាណឬធាតុចូល នោះផលគុណរវាងតម្លៃនៃធាតុចូលនោះនិងតម្លៃនៃទម្ងន់ផ្ទាល់របស់ណឺរ៉ូននោះ<span class="math notranslate nohighlight">\((w_1x_1,w_2x_2)\)</span>ត្រូវបានគណនា។ លទ្ធផលដែលណឺរ៉ូននោះត្រូវផ្តល់គឺអាស្រ័យនឹងផលបូកនៃគ្រប់ធាតុចូលទាំងអស់ ដោយកំណត់តាមលក្ខខណ្ឌខាងក្រោម។ លក្ខខណ្ឌនេះគឺ ណឺរ៉ូននឹងបញ្ចេញលទ្ធផល 1 បើផលបូកនៃផលគុណធាតុចូលនិងទម្ងន់របស់វាធំជាងតម្លៃនៃកម្រិតកំណត់របស់ណឺរ៉ូន ឬ បញ្ចេញលទ្ធផល 0 បើតូចជាង។ តម្លៃនៃកម្រិតកំណត់របស់ណឺរ៉ូនហៅថា Threshold។ នៅទីនេះ <span class="math notranslate nohighlight">\(\theta\)</span> ជាតម្លៃThreshold ។</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+y=\left\{\begin{matrix}
+1 &amp; (w_1x_1+w_2x_2\geq \theta)\\ 
+0 &amp; (w_1x_1+w_2x_2 &lt; \theta)
+\end{matrix}\right.
+\end{split}\]</div>
 <p><img alt="perceptron" src="_images/perceptron-1.png" /></p>
 <p>ក្នុងការអនុវត្តភាគច្រើន គេច្រើនបម្លែងទម្រង់ខាងលើជាទម្រង់ដែលមានកម្រិតកំណត់នៃណឺរ៉ូនស្មើ០ ដោយហៅតម្លៃ<span class="math notranslate nohighlight">\( \theta \)</span>ដែលត្រូវបានបញ្ជូនទៅអង្គទី១<span class="math notranslate nohighlight">\(\left(b=-\theta\right)\)</span> ដោយ bias ។</p>
 <div class="math notranslate nohighlight">
